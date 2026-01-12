@@ -1,0 +1,13 @@
+# Utility Scripts
+
+This directory contains utility scripts for the PIV skeleton.
+
+Scripts may include:
+- Setup automation
+- Validation helpers
+- Template generation
+- Development utilities
+
+## Scripts
+
+No scripts are currently included. This directory is reserved for future automation tools.

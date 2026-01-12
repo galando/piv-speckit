@@ -1,0 +1,17 @@
+{
+  "name": "test-nodejs-project",
+  "version": "1.0.0",
+  "description": "Test fixture for Node.js backend",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

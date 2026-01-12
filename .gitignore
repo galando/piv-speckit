@@ -1,0 +1,28 @@
+# PIV Installation Backups
+.claude-backup-*/
+.claude-install-backup
+
+# PIV Installation Logs
+.piv-install.log
+
+# Test fixtures
+scripts/install/test/fixtures/*/node_modules/
+scripts/install/test/fixtures/*/.claude/
+scripts/install/test/fixtures/*/.claude-piv/
+scripts/install/test/fixtures/*/.claude-backup-*/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+# Temporary Files
+*.tmp
+.tmp/

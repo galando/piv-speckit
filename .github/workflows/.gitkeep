@@ -1,0 +1,12 @@
+# GitHub Workflows
+
+This directory contains GitHub Actions workflow files.
+
+## Workflows
+
+No CI/CD workflows are currently configured. This repository is a documentation and rules template that doesn't require automated testing.
+
+For future automation, workflows may include:
+- Documentation validation
+- Link checking
+- Rule formatting verification

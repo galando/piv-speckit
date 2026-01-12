@@ -1,0 +1,13 @@
+# Real-World Examples
+
+This directory contains real-world examples of using the PIV methodology.
+
+Examples will be added showing:
+- Complete feature implementations
+- PIV workflow demonstrations
+- Technology-specific patterns
+- Common scenarios and solutions
+
+## Contributing Examples
+
+See [Adding Technologies Guide](../extending/01-adding-technologies.md) for guidelines on contributing examples.
