@@ -1,6 +1,12 @@
 # Claude PIV Skeleton
 
-**Universal PIV (Prime-Investigate-Verify) methodology skeleton for Claude Code projects**
+[![PIV Methodology](https://img.shields.io/badge/PIV-Prime_Implement_Validate-blue?style=for-the-badge&logo=anthropic)](.claude/PIV-METHODOLOGY.md)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-success?style=for-the-badge&logo=anthropic)](https://claude.ai/code)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/galando/claude-piv-skeleton?style=for-the-badge&logo=github)](https://github.com/galando/claude-piv-skeleton)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+
+**Universal PIV (Prime-Implement-Validate) methodology skeleton for Claude Code projects**
 
 A technology-agnostic, extensible skeleton repository for implementing the PIV methodology with Claude Code. Provides comprehensive documentation, rules, and templates to accelerate development while maintaining code quality and consistency.
 
@@ -234,14 +240,20 @@ claude-piv-skeleton/
 - [Installation Guide](docs/getting-started/01-installation.md) - How to install and set up
 - [Quick Start](docs/getting-started/02-quick-start.md) - Get started in 5 minutes
 - [Your First Feature](docs/getting-started/03-your-first-feature.md) - Walkthrough of first feature
+- [FAQ](docs/FAQ.md) - Frequently asked questions
 
 ### Methodology
 - [PIV Methodology](.claude/PIV-METHODOLOGY.md) - Complete methodology guide
 - [Project Instructions](.claude/CLAUDE.md) - Quick reference for Claude Code
+- [Comparison: PIV vs Traditional](docs/comparison.md) - Why choose PIV methodology?
 
 ### Contributing
 - [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to the skeleton
 - [Adding Technologies](docs/extending/01-adding-technologies.md) - Add new technology templates
+
+### Resources
+- [Troubleshooting Guide](docs/troubleshooting.md) - Common issues and solutions
+- [Roadmap](docs/ROADMAP.md) - Future development plans
 
 ---
 
@@ -283,6 +295,29 @@ This skeleton is an implementation of Cole's PIV methodology, adapted from:
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## Used By
+
+Projects using PIV methodology:
+
+- **[WoningScout](https://github.com/galando/woningscout)** - Real estate property scanner (Spring Boot + React)
+- *[Your project here!](https://github.com/galando/claude-piv-skeleton/issues/new?template=feature_request.md)*
+
+**Using PIV in your project?** We'd love to feature it here! Open an issue or PR to add your project.
+
+---
+
+## Share the Love
+
+Found PIV useful? Help spread the word! 🚀
+
+[![Tweet](https://img.shields.io/badge/Tweet-Share-blue?style=for-the-badge&logo=twitter)](https://twitter.com/intent/tweet?text=PIV%20methodology%20for%20Claude%20Code%20is%20a%20game-changer%20for%20AI-assisted%20development%F0%9F%9A%80%0A%0ACheck%20out%20the%20universal%20skeleton%20repo%3A%0Ahttps%3A%2F%2Fgithub.com%2Fgalando%2Fclaude-piv-skeleton%0A%0A%23claudcode%20%23ai%20%23devtools)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Share-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fgalando%2Fclaude-piv-skeleton)
+[![Reddit](https://img.shields.io/badge/Reddit-Share-orange?style=for-the-badge&logo=reddit)](https://www.reddit.com/submit?title=PIV%20Skeleton%3A%20Universal%20AI-assisted%20development%20methodology&url=https%3A%2F%2Fgithub.com%2Fgalando%2Fclaude-piv-skeleton)
+
+**Don't forget to ⭐ star the repo on GitHub!**
 
 ---
 
