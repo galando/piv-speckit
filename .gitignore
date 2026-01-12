@@ -26,3 +26,7 @@ Thumbs.db
 # Temporary Files
 *.tmp
 .tmp/
+# Agent artifacts (working files, not committed)
+.claude/agents/plans/
+.claude/agents/reports/
+.claude/agents/context/

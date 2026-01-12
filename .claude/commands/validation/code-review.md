@@ -15,6 +15,65 @@ description: Technical code review for quality and bugs that runs pre-commit
 
 ## Review Process
 
+### Prerequisites (MANDATORY)
+
+**⚠️ DO NOT RUN code review if:**
+
+- ❌ Code does not compile
+- ❌ Tests are failing
+- ❌ Build is broken
+- ❌ Runtime errors exist
+
+**✅ RUN ONLY AFTER:**
+
+- ✅ Build succeeds (compilation step passes)
+- ✅ All tests pass (unit + integration)
+- ✅ No runtime errors
+- ✅ Validation pipeline passes
+
+**Why This Matters:**
+
+Code review is a **static analysis** tool. It checks code quality, patterns, and security issues, but it **cannot verify that code works**. Reviewing broken code is meaningless and wastes effort.
+
+**Required Flow:**
+
+```
+Execute → Compile → Tests → Validation → Code Review ✅
+                   ↓ FAIL
+              Stop & Fix
+```
+
+If compilation or tests fail, fix those issues FIRST. Then run code review.
+
+**How to Verify:**
+
+Before running this command, ensure:
+
+```bash
+# 1. Compilation succeeded
+<backend-compile-command>
+# Expected: BUILD SUCCESS
+
+# 2. Tests passed
+<test-command>
+# Expected: Tests run: X, Failures: 0, Errors: 0
+
+# 3. If above pass, THEN run code review
+/validation:code-review
+```
+
+**What This Command Does:**
+
+- ✅ Static code analysis
+- ✅ Pattern checking
+- ✅ Security review
+- ✅ Code quality assessment
+- ❌ Does NOT compile code
+- ❌ Does NOT run tests
+- ❌ Does NOT verify code works
+
+**Remember:** Code review assumes code is functional. It reviews quality, not correctness.
+
 ### 1. Gather Codebase Context
 
 **Start by understanding the codebase standards:**
