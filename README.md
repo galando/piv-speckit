@@ -3,6 +3,7 @@
 [![PIV Methodology](https://img.shields.io/badge/PIV-Prime_Implement_Validate-blue?style=for-the-badge&logo=anthropic)](.claude/PIV-METHODOLOGY.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/galando)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/galando/claude-piv-skeleton)
 
 **Universal PIV (Prime-Implement-Validate) methodology skeleton for Claude Code projects**
 
@@ -19,6 +20,8 @@ PIV (Prime-Implement-Validate) is a development methodology designed for AI-assi
 - **Validate**: Automatically test, verify, and validate
 
 This methodology ensures Claude Code has proper context before making changes, creates detailed plans for complex features, and automatically validates implementations thoroughly.
+
+![PIV Methodology Diagram](docs/images/PIVLoopDiagram.png)
 
 ---
 
@@ -117,6 +120,7 @@ Standardized Claude Code commands for PIV workflow:
 - `/validation:system-review` - Analyze implementation vs plan
 - `/bug_fix:rca` - Root cause analysis for bugs
 - `/bug_fix:implement-fix` - Implement bug fix from RCA
+- `/product:create-prd [filename]` - Create Product Requirements Document
 
 ### Technology Templates
 Pre-built templates for popular technologies:

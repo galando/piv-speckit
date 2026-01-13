@@ -44,6 +44,7 @@ This is a **skeleton/template repository** for starting new projects with the PI
 | `/commit` | Create atomic commit with conventional commits |
 | `/github_bug_fix:rca` | Root cause analysis for bugs |
 | `/github_bug_fix:implement-fix` | Implement bug fix from RCA |
+| `/product:create-prd [filename]` | Create Product Requirements Document from conversation |
 
 ---
 
