@@ -13,13 +13,13 @@ A technology-agnostic, extensible skeleton repository for implementing the PIV m
 
 ## What is PIV?
 
-PIV (Prime-Implement-Validate) is a development methodology designed for AI-assisted software development:
+PIV (Prime-Implement-Validate) is a development methodology designed for AI-assisted software development with **strict Test-Driven Development (TDD)**:
 
 - **Prime**: Load and understand codebase context
-- **Implement**: Plan features and execute implementation
-- **Validate**: Automatically test, verify, and validate
+- **Implement**: Plan features and execute implementation (following RED-GREEN-REFACTOR TDD cycle)
+- **Validate**: Automatically test, verify, and validate (including TDD compliance checks)
 
-This methodology ensures Claude Code has proper context before making changes, creates detailed plans for complex features, and automatically validates implementations thoroughly.
+This methodology ensures Claude Code has proper context before making changes, creates detailed plans for complex features, follows mandatory TDD practices, and automatically validates implementations thoroughly.
 
 ![PIV Methodology Diagram](docs/images/PIVLoopDiagram.png)
 
@@ -78,15 +78,22 @@ git init
    Ask Claude: "Use /piv_loop:plan-feature to create a plan for adding user authentication"
    ```
 
-3. **Execute** - Implement from plan
+3. **Execute** - Implement from plan (following TDD)
    ```
    Ask Claude: "Use /piv_loop:execute to implement the plan"
    ```
+
+   **TDD is enforced during execution:**
+   - 🔴 **RED**: Write failing test first
+   - 🟢 **GREEN**: Write minimal code to pass
+   - 🔵 **REFACTOR**: Improve while tests stay green
 
 4. **Validate** - Automatic validation runs after execute
    ```
    No manual step - /validation:validate runs automatically!
    ```
+
+   **Validation includes TDD compliance check** - fails if code written before tests!
 
 5. **Bug Fixes** - When bugs occur
    ```
@@ -98,13 +105,19 @@ git init
 
 ## Features
 
+### 🚨 Strict Test-Driven Development (TDD)
+- **MANDATORY TDD** - All code must follow RED-GREEN-REFACTOR cycle
+- **Zero Tolerance** - Code written before tests will be deleted
+- **TDD Compliance Validation** - Automatic validation fails if TDD violations detected
+- **Auto-Activating Skills** - Real-time TDD enforcement during development
+
 ### Technology Agnostic Core
 - Universal PIV methodology applicable to any technology stack
 - Modular design allows picking only what you need
 - Progressive enhancement - add technologies as needed
 
 ### Modular Rules System
-- **Universal Rules**: Apply to all projects (git, testing, documentation)
+- **Universal Rules**: Apply to all projects (git, testing, documentation, **strict TDD**)
 - **Technology Rules**: Auto-loaded based on your stack
 - **Path-based Loading**: Rules load automatically when working on specific file types
 

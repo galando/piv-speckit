@@ -4,6 +4,42 @@
 
 ---
 
+# 🚨 MANDATORY: Test-Driven Development (TDD)
+
+**TDD is NON-NEGOTIABLE across this entire repository.**
+
+## RED-GREEN-REFACTOR Cycle (MANDATORY)
+
+**ALL code MUST follow this cycle:**
+
+1. **RED** - Write a FAILING test first (before any implementation code)
+2. **GREEN** - Write MINIMAL code to make the test pass
+3. **REFACTOR** - Improve code while keeping tests green
+
+## ZERO TOLERANCE POLICY
+
+- ❌ **NEVER** write implementation code before tests
+- ❌ **NEVER** write tests after code (that's NOT TDD)
+- ❌ **NEVER** skip TDD for "simple" code (no exceptions)
+- ❌ **NEVER** say "I'll add tests later" (later never comes)
+
+## Enforcement
+
+- **Skills System**: Auto-activating behaviors enforce TDD in real-time
+- **Validation**: FAILS if TDD violations are detected
+- **Code Review**: Rejects code written before tests
+- **Git Workflow**: Commits happen after phases (with passing tests)
+
+## If You Violate TDD
+
+**Code written before tests WILL BE DELETED.**
+
+No exceptions, no "just this once", no "it's just a small change."
+
+**Follow the cycle: Test first, implement second, refactor third.**
+
+---
+
 ## Project Overview
 
 This is a **skeleton/template repository** for starting new projects with the PIV methodology. It contains:
@@ -124,6 +160,8 @@ Apply to **all projects** regardless of technology:
 - `00-general.md` - General development principles
 - `10-git.md` - Git workflow and commits
 - `20-testing.md` - Testing philosophy
+- `21-testing.md` - Testing guidelines (Given-When-Then)
+- `22-tdd-strict.md` - **MANDATORY** TDD enforcement (RED-GREEN-REFACTOR cycle)
 - `30-documentation.md` - Documentation standards
 - `40-security.md` - Security guidelines
 

@@ -12,6 +12,15 @@ PIV (Prime-Implement-Validate) is a methodology designed for AI-assisted softwar
 
 The methodology is designed to minimize misunderstandings, reduce rework, and maintain code quality through systematic planning and automatic validation.
 
+**🚨 MANDATORY: Test-Driven Development (TDD)**
+
+PIV enforces **strict Test-Driven Development** throughout the Implement phase:
+- **RED phase**: Write failing test first
+- **GREEN phase**: Write minimal code to pass
+- **REFACTOR phase**: Improve while tests stay green
+
+**TDD is NON-NEGOTIABLE** - all code must follow the RED-GREEN-REFACTOR cycle with zero exceptions.
+
 ### The PIV Phases
 
 ```
@@ -74,6 +83,7 @@ The methodology is designed to minimize misunderstandings, reduce rework, and ma
 - Architecture and design patterns
 - Dependencies and integrations
 - Testing approach and coverage
+- **TDD patterns and compliance** - Identify if codebase follows RED-GREEN-REFACTOR cycle
 - Documentation and guides
 
 ### Success Criteria
@@ -196,6 +206,8 @@ The Implement phase combines planning AND execution into a unified flow.
 
 #### Execution
 - [ ] All implementation steps completed
+- [ ] **Code follows TDD (RED-GREEN-REFACTOR cycle)**
+- [ ] **Tests written BEFORE implementation**
 - [ ] Code follows all applicable rules
 - [ ] Files created/modified as planned
 - [ ] Execution report generated
@@ -621,14 +633,50 @@ Simplification is a **behavior-preserving refactoring**:
 
 ### Integration with PIV
 
+**Commit Timing: Commits happen AFTER each major phase (ASK before committing)**
+
+**Standard PIV Workflow with Phase-Based Commits:**
+```
+1. Plan Phase
+   ├─ Create plan artifact
+   └─ Ask user: "Ready to commit plan?"
+
+2. Implement Phase
+   ├─ Execute plan (following TDD: RED-GREEN-REFACTOR)
+   ├─ Validation runs automatically
+   └─ Ask user: "Ready to commit implementation?"
+
+3. Simplify Phase (Optional)
+   ├─ Refactor and clean up
+   ├─ Validation runs again
+   └─ Ask user: "Ready to commit refactoring?"
+
+4. Validate Phase (Already ran after implement)
+   └─ Ask user: "Ready to commit validation fixes?" (if needed)
+
+Total: 2-4 commits (one per phase)
+```
+
+**IMPORTANT:** Always ASK user before committing - never commit automatically!
+
+**Why Phase-Based Commits?**
+- ✅ Right granularity - Each phase is a logical unit
+- ✅ Easy to revert - Can revert entire phase if needed
+- ✅ Clear history - Git history shows PIV phases
+- ✅ Tests + code together - Implementation phase includes both
+
 **Option A: Simplify After Validation**
 ```
-Implement → Validate → Simplify → Validate Again → Commit
+Plan → Commit Plan
+Implement → Commit Implementation
+Validate → Automatic
+Simplify → Validate Again → Commit Simplification
 ```
 Clean up code after everything works.
 
 **Option B: Skip for Simple Features**
 ```
+Plan → Commit Plan
 Implement → Validate → Commit
 ```
 Simplification is optional.
@@ -666,6 +714,14 @@ The `/validation:validate` command runs a comprehensive validation pipeline:
 - All new unit tests pass
 - Existing tests still pass
 - Test suite executes successfully
+
+#### Level 2.5: TDD Compliance Check (MANDATORY)
+- **🚨 HARD STOP if TDD violations detected**
+- Verify implementation files have corresponding test files
+- Check tests were written BEFORE implementation (RED-GREEN-REFACTOR cycle)
+- Validate test follows Given-When-Then pattern
+- **FAILS validation if code was written before tests**
+- Zero tolerance for TDD violations
 
 #### Level 3: Integration Tests
 - Integration tests pass (if applicable)
@@ -742,6 +798,14 @@ Includes:
 **🚨 MANDATORY: All tests MUST pass for validation to succeed**
 
 Validation enforces a strict test passage policy. This is non-negotiable.
+
+**🚨 MANDATORY: TDD Compliance**
+
+Validation enforces strict Test-Driven Development compliance:
+- ✅ Tests written BEFORE implementation (RED-GREEN-REFACTOR cycle)
+- ❌ Code written before tests → Validation FAILS
+- ❌ NO exceptions for "simple code" or "just this once"
+- ✅ Every implementation file has corresponding test file
 
 **Policy:**
 
@@ -906,12 +970,15 @@ The validation is designed to run **automatically** as part of the execution flo
    │
 3. /piv_loop:execute
    │
-   ├─▶ Implement from plan
-   ├─▶ Follow all rules
+   ├─▶ Implement from plan (following RED-GREEN-REFACTOR cycle)
+   │   ├─▶ RED: Write failing test first
+   │   ├─▶ GREEN: Write minimal code to pass
+   │   └─▶ REFACTOR: Improve while tests pass
+   ├─▶ Follow all rules (especially TDD rule #22)
    ├─▶ Track progress
    │
    └─▶ AUTOMATIC: /validation:validate
-       ├─▶ Run all validation levels
+       ├─▶ Run all validation levels (includes TDD compliance check)
        ├─▶ Generate validation report
        │
        └─▶ AUTOMATIC: /validation:execution-report
