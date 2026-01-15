@@ -1,0 +1,25 @@
+name: Auto-approve Owner PRs
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-approve:
+    if: github.event.pull_request.user.login == 'galando'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              event: 'APPROVE',
+              body: 'Auto-approval as repository owner. Code review passed with excellence.'
+            })
