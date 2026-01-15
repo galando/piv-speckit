@@ -59,61 +59,61 @@
             --color-coral: #FF6B6B;
             --color-dark: #F0F0F0;
             --color-gray: #A0A0A0;
-            --color-light: #1A1A1A;
-            --color-white: #222222;
+            --color-light: #0D0D0D;
+            --color-white: #1A1A1A;
             --color-border: #333333;
         }
 
         /* Dark theme specific component styling */
         [data-theme="dark"] .feature-card {
-            background: #2A2A2A;
-            border: 1px solid #3A3A3A;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         [data-theme="dark"] .feature-card:hover {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-            border-color: #5B8DEF;
+            border-color: var(--color-primary);
         }
 
         [data-theme="dark"] .quick-start {
-            background: #2A2A2A;
-            border: 1px solid #3A3A3A;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
         }
 
         [data-theme="dark"] .doc-link-card {
-            background: #2A2A2A;
-            border: 1px solid #3A3A3A;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
         }
 
         [data-theme="dark"] .doc-link-card:hover {
-            border-color: #5B8DEF;
+            border-color: var(--color-primary);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
 
         [data-theme="dark"] .header {
-            background: rgba(34, 34, 34, 0.95);
-            border-bottom: 1px solid #333333;
+            background: rgba(13, 13, 13, 0.95);
+            border-bottom: 1px solid var(--color-border);
         }
 
         [data-theme="dark"] .btn-secondary {
-            background: #2A2A2A;
-            color: #F0F0F0;
-            border-color: #3A3A3A;
+            background: var(--color-white);
+            color: var(--color-dark);
+            border-color: var(--color-border);
         }
 
         [data-theme="dark"] .btn-secondary:hover {
-            border-color: #5B8DEF;
-            color: #5B8DEF;
+            border-color: var(--color-primary);
+            color: var(--color-primary);
         }
 
         [data-theme="dark"] .step-command {
-            background: #1A1A1A;
-            border: 1px solid #3A3A3A;
+            background: var(--color-light);
+            border: 1px solid var(--color-border);
         }
 
         [data-theme="dark"] .install-command {
-            background: #0D0D0D;
+            background: #000000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
@@ -125,41 +125,41 @@
                 --color-coral: #FF6B6B;
                 --color-dark: #F0F0F0;
                 --color-gray: #A0A0A0;
-                --color-light: #1A1A1A;
-                --color-white: #222222;
+                --color-light: #0D0D0D;
+                --color-white: #1A1A1A;
                 --color-border: #333333;
             }
 
             /* Apply dark theme component styles */
             :root:not([data-theme="light"]) .feature-card {
-                background: #2A2A2A;
-                border: 1px solid #3A3A3A;
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             }
 
             :root:not([data-theme="light"]) .feature-card:hover {
                 box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-                border-color: #5B8DEF;
+                border-color: var(--color-primary);
             }
 
             :root:not([data-theme="light"]) .quick-start {
-                background: #2A2A2A;
-                border: 1px solid #3A3A3A;
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
             }
 
             :root:not([data-theme="light"]) .doc-link-card {
-                background: #2A2A2A;
-                border: 1px solid #3A3A3A;
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
             }
 
             :root:not([data-theme="light"]) .doc-link-card:hover {
-                border-color: #5B8DEF;
+                border-color: var(--color-primary);
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
             }
 
             :root:not([data-theme="light"]) .header {
-                background: rgba(34, 34, 34, 0.95);
-                border-bottom: 1px solid #333333;
+                background: rgba(13, 13, 13, 0.95);
+                border-bottom: 1px solid var(--color-border);
             }
 
             :root:not([data-theme="light"]) .nav-cta:hover {
@@ -167,23 +167,23 @@
             }
 
             :root:not([data-theme="light"]) .btn-secondary {
-                background: #2A2A2A;
-                color: #F0F0F0;
-                border-color: #3A3A3A;
+                background: var(--color-white);
+                color: var(--color-dark);
+                border-color: var(--color-border);
             }
 
             :root:not([data-theme="light"]) .btn-secondary:hover {
-                border-color: #5B8DEF;
-                color: #5B8DEF;
+                border-color: var(--color-primary);
+                color: var(--color-primary);
             }
 
             :root:not([data-theme="light"]) .step-command {
-                background: #1A1A1A;
-                border: 1px solid #3A3A3A;
+                background: var(--color-light);
+                border: 1px solid var(--color-border);
             }
 
             :root:not([data-theme="light"]) .install-command {
-                background: #0D0D0D;
+                background: #000000;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             }
 
