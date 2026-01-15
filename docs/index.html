@@ -51,6 +51,39 @@
             --header-height: 70px;
         }
 
+        /* === DARK THEME === */
+        [data-theme="dark"] {
+            /* Override colors for dark theme */
+            --color-primary: #3D8BFF;
+            --color-accent: #4DE1FF;
+            --color-coral: #FF8585;
+            --color-dark: #F8F9FA;
+            --color-gray: #9CA3AF;
+            --color-light: #121212;
+            --color-white: #0D0D0D;
+            --color-border: #2D2D2D;
+        }
+
+        /* System preference detection */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --color-primary: #3D8BFF;
+                --color-accent: #4DE1FF;
+                --color-coral: #FF8585;
+                --color-dark: #F8F9FA;
+                --color-gray: #9CA3AF;
+                --color-light: #121212;
+                --color-white: #0D0D0D;
+                --color-border: #2D2D2D;
+            }
+        }
+
+        /* Smooth theme transition */
+        *, *::before, *::after {
+            transition-property: color, background-color, border-color;
+            transition-duration: 0.2s;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -163,6 +196,28 @@
 
         .nav-cta:hover {
             background: #0052CC;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 8px;
+            font-size: 1.25rem;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        [data-theme="dark"] .theme-icon-sun {
+            display: none;
+        }
+
+        [data-theme="dark"] .theme-icon-moon {
+            display: inline;
         }
 
         .mobile-menu-btn {
@@ -449,6 +504,40 @@
             font-size: 0.625rem;
             color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
+        }
+
+        .install-command {
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: var(--space-xs);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
+        }
+
+        .copy-button.copied {
+            background: rgba(40, 167, 69, 0.3);
+            border-color: rgba(40, 167, 69, 0.5);
         }
 
         .install-command code {
@@ -772,6 +861,10 @@
                 <a href="#commands" class="nav-link">Commands</a>
                 <a href="#documentation" class="nav-link">Documentation</a>
                 <a href="https://github.com/galando/claude-dev-framework" class="nav-link nav-cta">View on GitHub</a>
+                <button class="nav-link theme-toggle" aria-label="Toggle dark theme">
+                    <span class="theme-icon-sun">☀️</span>
+                    <span class="theme-icon-moon" style="display: none;">🌙</span>
+                </button>
             </nav>
             <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
         </div>
@@ -861,6 +954,10 @@
                     <h3 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: var(--space-md);">🚀 One-Line Install</h3>
                     <div class="install-command">
                         <code>curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/install-piv.sh | bash</code>
+                        <button class="copy-button" aria-label="Copy install command" data-copy-target="install-command">
+                            <span class="copy-icon">📋</span>
+                            <span class="copy-icon-copied" style="display: none;">✓</span>
+                        </button>
                     </div>
 
                     <div class="steps-grid">
@@ -1037,6 +1134,67 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
     <script>
+        // Copy button functionality
+        const copyButtons = document.querySelectorAll('.copy-button');
+
+        copyButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const targetId = button.getAttribute('data-copy-target');
+                const targetElement = document.querySelector(`[id="${targetId}"]`) ||
+                                    button.parentElement.querySelector('code');
+
+                if (!targetElement) {
+                    console.error('Copy target not found');
+                    return;
+                }
+
+                const textToCopy = targetElement.textContent || targetElement.innerText;
+
+                try {
+                    // Use modern Clipboard API
+                    await navigator.clipboard.writeText(textToCopy);
+
+                    // Visual feedback
+                    button.classList.add('copied');
+                    const copyIcon = button.querySelector('.copy-icon');
+                    const copiedIcon = button.querySelector('.copy-icon-copied');
+
+                    if (copyIcon) copyIcon.style.display = 'none';
+                    if (copiedIcon) copiedIcon.style.display = 'inline';
+
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        button.classList.remove('copied');
+                        if (copyIcon) copyIcon.style.display = 'inline';
+                        if (copiedIcon) copiedIcon.style.display = 'none';
+                    }, 2000);
+
+                } catch (err) {
+                    // Fallback for older browsers
+                    console.error('Copy failed:', err);
+
+                    // Try legacy approach
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+
+                    try {
+                        document.execCommand('copy');
+                        button.classList.add('copied');
+                        setTimeout(() => button.classList.remove('copied'), 2000);
+                    } catch (fallbackErr) {
+                        console.error('Fallback copy also failed:', fallbackErr);
+                        alert('Copy failed. Please select and copy the command manually.');
+                    }
+
+                    document.body.removeChild(textArea);
+                }
+            });
+        });
+
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
 
@@ -1089,6 +1247,66 @@
                     });
                 }
             });
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        // Function to update icons based on theme
+        const updateThemeIcons = (theme) => {
+            const sunIcon = themeToggle.querySelector('.theme-icon-sun');
+            const moonIcon = themeToggle.querySelector('.theme-icon-moon');
+
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline';
+            } else {
+                sunIcon.style.display = 'inline';
+                moonIcon.style.display = 'none';
+            }
+        };
+
+        // Get initial theme
+        const getInitialTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                return savedTheme;
+            }
+
+            // Check system preference
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+
+            return 'light';
+        };
+
+        // Set initial theme
+        const initialTheme = getInitialTheme();
+        if (initialTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+        }
+        updateThemeIcons(initialTheme);
+
+        // Toggle theme on click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // Only change if user hasn't set a preference
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                updateThemeIcons(newTheme);
+            }
         });
     </script>
 </body>
