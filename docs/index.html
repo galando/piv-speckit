@@ -53,28 +53,134 @@
 
         /* === DARK THEME === */
         [data-theme="dark"] {
-            /* Override colors for dark theme */
-            --color-primary: #3D8BFF;
+            /* Deep charcoal background for modern, professional look */
+            --color-primary: #5B8DEF;
             --color-accent: #4DE1FF;
-            --color-coral: #FF8585;
-            --color-dark: #F8F9FA;
-            --color-gray: #9CA3AF;
-            --color-light: #121212;
-            --color-white: #0D0D0D;
-            --color-border: #2D2D2D;
+            --color-coral: #FF6B6B;
+            --color-dark: #F0F0F0;
+            --color-gray: #A0A0A0;
+            --color-light: #1A1A1A;
+            --color-white: #222222;
+            --color-border: #333333;
+        }
+
+        /* Dark theme specific component styling */
+        [data-theme="dark"] .feature-card {
+            background: #2A2A2A;
+            border: 1px solid #3A3A3A;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .feature-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-color: #5B8DEF;
+        }
+
+        [data-theme="dark"] .quick-start {
+            background: #2A2A2A;
+            border: 1px solid #3A3A3A;
+        }
+
+        [data-theme="dark"] .doc-link-card {
+            background: #2A2A2A;
+            border: 1px solid #3A3A3A;
+        }
+
+        [data-theme="dark"] .doc-link-card:hover {
+            border-color: #5B8DEF;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .header {
+            background: rgba(34, 34, 34, 0.95);
+            border-bottom: 1px solid #333333;
+        }
+
+        [data-theme="dark"] .btn-secondary {
+            background: #2A2A2A;
+            color: #F0F0F0;
+            border-color: #3A3A3A;
+        }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            border-color: #5B8DEF;
+            color: #5B8DEF;
+        }
+
+        [data-theme="dark"] .step-command {
+            background: #1A1A1A;
+            border: 1px solid #3A3A3A;
+        }
+
+        [data-theme="dark"] .install-command {
+            background: #0D0D0D;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         /* System preference detection */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --color-primary: #3D8BFF;
+                --color-primary: #5B8DEF;
                 --color-accent: #4DE1FF;
-                --color-coral: #FF8585;
-                --color-dark: #F8F9FA;
-                --color-gray: #9CA3AF;
-                --color-light: #121212;
-                --color-white: #0D0D0D;
-                --color-border: #2D2D2D;
+                --color-coral: #FF6B6B;
+                --color-dark: #F0F0F0;
+                --color-gray: #A0A0A0;
+                --color-light: #1A1A1A;
+                --color-white: #222222;
+                --color-border: #333333;
+            }
+
+            /* Apply dark theme component styles */
+            :root:not([data-theme="light"]) .feature-card {
+                background: #2A2A2A;
+                border: 1px solid #3A3A3A;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            }
+
+            :root:not([data-theme="light"]) .feature-card:hover {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+                border-color: #5B8DEF;
+            }
+
+            :root:not([data-theme="light"]) .quick-start {
+                background: #2A2A2A;
+                border: 1px solid #3A3A3A;
+            }
+
+            :root:not([data-theme="light"]) .doc-link-card {
+                background: #2A2A2A;
+                border: 1px solid #3A3A3A;
+            }
+
+            :root:not([data-theme="light"]) .doc-link-card:hover {
+                border-color: #5B8DEF;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            }
+
+            :root:not([data-theme="light"]) .header {
+                background: rgba(34, 34, 34, 0.95);
+                border-bottom: 1px solid #333333;
+            }
+
+            :root:not([data-theme="light"]) .btn-secondary {
+                background: #2A2A2A;
+                color: #F0F0F0;
+                border-color: #3A3A3A;
+            }
+
+            :root:not([data-theme="light"]) .btn-secondary:hover {
+                border-color: #5B8DEF;
+                color: #5B8DEF;
+            }
+
+            :root:not([data-theme="light"]) .step-command {
+                background: #1A1A1A;
+                border: 1px solid #3A3A3A;
+            }
+
+            :root:not([data-theme="light"]) .install-command {
+                background: #0D0D0D;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             }
         }
 
@@ -499,7 +605,7 @@
             content: 'bash';
             position: absolute;
             top: var(--space-sm);
-            right: var(--space-sm);
+            left: var(--space-sm);
             font-family: var(--font-code);
             font-size: 0.625rem;
             color: rgba(255, 255, 255, 0.5);
@@ -512,32 +618,66 @@
 
         .copy-button {
             position: absolute;
-            top: var(--space-sm);
-            right: var(--space-sm);
+            top: 50%;
+            right: var(--space-md);
+            transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            padding: var(--space-xs);
+            border-radius: 8px;
+            padding: 8px 14px;
             cursor: pointer;
             font-size: 0.875rem;
-            transition: all 0.2s;
+            font-weight: 500;
+            font-family: var(--font-body);
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .copy-button svg {
+            flex-shrink: 0;
         }
 
         .copy-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .copy-button:active {
-            transform: scale(0.95);
+            transform: translateY(-50%) scale(0.98);
         }
 
         .copy-button.copied {
-            background: rgba(40, 167, 69, 0.3);
-            border-color: rgba(40, 167, 69, 0.5);
+            background: rgba(91, 141, 239, 0.2);
+            border-color: rgba(91, 141, 239, 0.4);
+            color: rgba(91, 141, 239, 1);
+            box-shadow: 0 4px 12px rgba(91, 141, 239, 0.2);
+        }
+
+        [data-theme="dark"] .copy-button {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .copy-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .copy-button.copied {
+            background: rgba(91, 141, 239, 0.15);
+            border-color: rgba(91, 141, 239, 0.3);
+            color: rgba(91, 141, 239, 1);
+            box-shadow: 0 4px 12px rgba(91, 141, 239, 0.15);
         }
 
         .install-command code {
@@ -955,8 +1095,14 @@
                     <div class="install-command">
                         <code>curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/install-piv.sh | bash</code>
                         <button class="copy-button" aria-label="Copy install command" data-copy-target="install-command">
-                            <span class="copy-icon">📋</span>
-                            <span class="copy-icon-copied" style="display: none;">✓</span>
+                            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg class="copy-icon-copied" style="display: none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="copy-text">Copy</span>
                         </button>
                     </div>
 
@@ -1158,15 +1304,18 @@
                     button.classList.add('copied');
                     const copyIcon = button.querySelector('.copy-icon');
                     const copiedIcon = button.querySelector('.copy-icon-copied');
+                    const copyText = button.querySelector('.copy-text');
 
                     if (copyIcon) copyIcon.style.display = 'none';
                     if (copiedIcon) copiedIcon.style.display = 'inline';
+                    if (copyText) copyText.textContent = 'Copied!';
 
                     // Reset after 2 seconds
                     setTimeout(() => {
                         button.classList.remove('copied');
                         if (copyIcon) copyIcon.style.display = 'inline';
                         if (copiedIcon) copiedIcon.style.display = 'none';
+                        if (copyText) copyText.textContent = 'Copy';
                     }, 2000);
 
                 } catch (err) {
@@ -1184,7 +1333,12 @@
                     try {
                         document.execCommand('copy');
                         button.classList.add('copied');
-                        setTimeout(() => button.classList.remove('copied'), 2000);
+                        const copyText = button.querySelector('.copy-text');
+                        if (copyText) copyText.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.classList.remove('copied');
+                            if (copyText) copyText.textContent = 'Copy';
+                        }, 2000);
                     } catch (fallbackErr) {
                         console.error('Fallback copy also failed:', fallbackErr);
                         alert('Copy failed. Please select and copy the command manually.');
