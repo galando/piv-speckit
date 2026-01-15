@@ -53,28 +53,200 @@
 
         /* === DARK THEME === */
         [data-theme="dark"] {
-            /* Override colors for dark theme */
-            --color-primary: #3D8BFF;
+            /* Deep charcoal background for modern, professional look */
+            --color-primary: #5B8DEF;
             --color-accent: #4DE1FF;
-            --color-coral: #FF8585;
-            --color-dark: #F8F9FA;
-            --color-gray: #9CA3AF;
-            --color-light: #121212;
-            --color-white: #0D0D0D;
-            --color-border: #2D2D2D;
+            --color-coral: #FF6B6B;
+            --color-dark: #F0F0F0;
+            --color-gray: #A0A0A0;
+            --color-light: #0D0D0D;
+            --color-white: #1A1A1A;
+            --color-border: #333333;
+        }
+
+        /* Dark theme specific component styling */
+        [data-theme="dark"] .feature-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .feature-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-color: var(--color-primary);
+        }
+
+        [data-theme="dark"] .quick-start {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .doc-link-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .doc-link-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .header {
+            background: rgba(13, 13, 13, 0.95);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-dark);
+            border-color: var(--color-border);
+        }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        [data-theme="dark"] .step-command {
+            background: var(--color-light);
+            border: 1px solid var(--color-border);
+        }
+
+        [data-theme="dark"] .install-command {
+            background: #000000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Additional dark theme fixes for hardcoded colors */
+        [data-theme="dark"] .hero-badge {
+            background: rgba(91, 141, 239, 0.15);
+            border-color: rgba(91, 141, 239, 0.3);
+        }
+
+        [data-theme="dark"] .feature-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .feature-icon {
+            background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(77, 225, 255, 0.15));
+        }
+
+        [data-theme="dark"] .doc-link-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .doc-link-icon {
+            background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(77, 225, 255, 0.15));
         }
 
         /* System preference detection */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --color-primary: #3D8BFF;
+                --color-primary: #5B8DEF;
                 --color-accent: #4DE1FF;
-                --color-coral: #FF8585;
-                --color-dark: #F8F9FA;
-                --color-gray: #9CA3AF;
-                --color-light: #121212;
-                --color-white: #0D0D0D;
-                --color-border: #2D2D2D;
+                --color-coral: #FF6B6B;
+                --color-dark: #F0F0F0;
+                --color-gray: #A0A0A0;
+                --color-light: #0D0D0D;
+                --color-white: #1A1A1A;
+                --color-border: #333333;
+            }
+
+            /* Apply dark theme component styles */
+            :root:not([data-theme="light"]) .feature-card {
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            }
+
+            :root:not([data-theme="light"]) .feature-card:hover {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+                border-color: var(--color-primary);
+            }
+
+            :root:not([data-theme="light"]) .quick-start {
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
+            }
+
+            :root:not([data-theme="light"]) .doc-link-card {
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
+            }
+
+            :root:not([data-theme="light"]) .doc-link-card:hover {
+                border-color: var(--color-primary);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            }
+
+            :root:not([data-theme="light"]) .header {
+                background: rgba(13, 13, 13, 0.95);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            :root:not([data-theme="light"]) .nav-cta:hover {
+                background: #4A7FD4;
+            }
+
+            :root:not([data-theme="light"]) .btn-secondary {
+                background: var(--color-white);
+                color: var(--color-dark);
+                border-color: var(--color-border);
+            }
+
+            :root:not([data-theme="light"]) .btn-secondary:hover {
+                border-color: var(--color-primary);
+                color: var(--color-primary);
+            }
+
+            :root:not([data-theme="light"]) .step-command {
+                background: var(--color-light);
+                border: 1px solid var(--color-border);
+            }
+
+            :root:not([data-theme="light"]) .install-command {
+                background: #000000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            }
+
+            :root:not([data-theme="light"]) .command-card {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            :root:not([data-theme="light"]) .command-card:hover {
+                background: rgba(255, 255, 255, 0.06);
+            }
+
+            /* Additional dark theme fixes for hardcoded colors */
+            :root:not([data-theme="light"]) .hero-badge {
+                background: rgba(91, 141, 239, 0.15);
+                border-color: rgba(91, 141, 239, 0.3);
+            }
+
+            :root:not([data-theme="light"]) .feature-card:hover {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            }
+
+            :root:not([data-theme="light"]) .feature-icon {
+                background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(77, 225, 255, 0.15));
+            }
+
+            :root:not([data-theme="light"]) .doc-link-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+
+            :root:not([data-theme="light"]) .doc-link-icon {
+                background: linear-gradient(135deg, rgba(91, 141, 239, 0.15), rgba(77, 225, 255, 0.15));
+            }
+
+            /* Commands section and footer dark theme overrides */
+            :root:not([data-theme="light"]) .commands-section {
+                background: #000000;
+            }
+
+            :root:not([data-theme="light"]) .footer {
+                background: #000000;
             }
         }
 
@@ -162,7 +334,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #FFFFFF;
             font-size: 0.9rem;
             font-weight: 700;
         }
@@ -188,7 +360,7 @@
 
         .nav-cta {
             background: var(--color-primary);
-            color: white !important;
+            color: #FFFFFF !important;
             padding: var(--space-xs) var(--space-md);
             border-radius: 8px;
             transition: background 0.2s;
@@ -196,6 +368,10 @@
 
         .nav-cta:hover {
             background: #0052CC;
+        }
+
+        [data-theme="dark"] .nav-cta:hover {
+            background: #4A7FD4;
         }
 
         .theme-toggle {
@@ -311,7 +487,7 @@
 
         .btn-primary {
             background: var(--color-coral);
-            color: white;
+            color: #FFFFFF;
             border-color: var(--color-coral);
         }
 
@@ -323,7 +499,7 @@
         }
 
         .btn-secondary {
-            background: white;
+            background: var(--color-white);
             color: var(--color-dark);
             border-color: var(--color-border);
         }
@@ -420,7 +596,7 @@
         }
 
         .feature-card {
-            background: white;
+            background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: var(--space-lg);
@@ -479,7 +655,7 @@
 
         /* === QUICK START === */
         .quick-start {
-            background: white;
+            background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 20px;
             padding: var(--space-xl);
@@ -499,7 +675,7 @@
             content: 'bash';
             position: absolute;
             top: var(--space-sm);
-            right: var(--space-sm);
+            left: var(--space-sm);
             font-family: var(--font-code);
             font-size: 0.625rem;
             color: rgba(255, 255, 255, 0.5);
@@ -512,32 +688,66 @@
 
         .copy-button {
             position: absolute;
-            top: var(--space-sm);
-            right: var(--space-sm);
+            top: 50%;
+            right: var(--space-md);
+            transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            padding: var(--space-xs);
+            border-radius: 8px;
+            padding: 8px 14px;
             cursor: pointer;
             font-size: 0.875rem;
-            transition: all 0.2s;
+            font-weight: 500;
+            font-family: var(--font-body);
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .copy-button svg {
+            flex-shrink: 0;
         }
 
         .copy-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .copy-button:active {
-            transform: scale(0.95);
+            transform: translateY(-50%) scale(0.98);
         }
 
         .copy-button.copied {
-            background: rgba(40, 167, 69, 0.3);
-            border-color: rgba(40, 167, 69, 0.5);
+            background: rgba(91, 141, 239, 0.2);
+            border-color: rgba(91, 141, 239, 0.4);
+            color: rgba(91, 141, 239, 1);
+            box-shadow: 0 4px 12px rgba(91, 141, 239, 0.2);
+        }
+
+        [data-theme="dark"] .copy-button {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .copy-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .copy-button.copied {
+            background: rgba(91, 141, 239, 0.15);
+            border-color: rgba(91, 141, 239, 0.3);
+            color: rgba(91, 141, 239, 1);
+            box-shadow: 0 4px 12px rgba(91, 141, 239, 0.15);
         }
 
         .install-command code {
@@ -602,8 +812,8 @@
 
         /* === COMMANDS SECTION === */
         .commands-section {
-            background: var(--color-dark);
-            color: white;
+            background: #1A1A1A;
+            color: #FFFFFF;
         }
 
         .commands-section .section-label {
@@ -611,11 +821,16 @@
         }
 
         .commands-section .section-title {
-            color: white;
+            color: #FFFFFF;
         }
 
         .commands-section .section-description {
             color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Dark theme override for commands section */
+        [data-theme="dark"] .commands-section {
+            background: #000000;
         }
 
         .command-card {
@@ -647,13 +862,22 @@
             font-family: var(--font-display);
             font-size: 1.125rem;
             font-weight: 600;
-            color: white;
+            color: #FFFFFF;
             margin-bottom: var(--space-xs);
         }
 
         .command-description {
             font-size: 0.9375rem;
             color: rgba(255, 255, 255, 0.7);
+        }
+
+        [data-theme="dark"] .command-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] .command-card:hover {
+            background: rgba(255, 255, 255, 0.06);
         }
 
         /* === DOCUMENTATION LINKS === */
@@ -676,7 +900,7 @@
             align-items: flex-start;
             gap: var(--space-md);
             padding: var(--space-md);
-            background: white;
+            background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 12px;
             text-decoration: none;
@@ -717,9 +941,14 @@
 
         /* === FOOTER === */
         .footer {
-            background: var(--color-dark);
-            color: white;
+            background: #1A1A1A;
+            color: #FFFFFF;
             padding: var(--space-2xl) var(--space-md) var(--space-lg);
+        }
+
+        /* Dark theme override for footer */
+        [data-theme="dark"] .footer {
+            background: #000000;
         }
 
         .footer-content {
@@ -955,8 +1184,14 @@
                     <div class="install-command">
                         <code>curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/install-piv.sh | bash</code>
                         <button class="copy-button" aria-label="Copy install command" data-copy-target="install-command">
-                            <span class="copy-icon">📋</span>
-                            <span class="copy-icon-copied" style="display: none;">✓</span>
+                            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg class="copy-icon-copied" style="display: none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="copy-text">Copy</span>
                         </button>
                     </div>
 
@@ -1158,15 +1393,18 @@
                     button.classList.add('copied');
                     const copyIcon = button.querySelector('.copy-icon');
                     const copiedIcon = button.querySelector('.copy-icon-copied');
+                    const copyText = button.querySelector('.copy-text');
 
                     if (copyIcon) copyIcon.style.display = 'none';
                     if (copiedIcon) copiedIcon.style.display = 'inline';
+                    if (copyText) copyText.textContent = 'Copied!';
 
                     // Reset after 2 seconds
                     setTimeout(() => {
                         button.classList.remove('copied');
                         if (copyIcon) copyIcon.style.display = 'inline';
                         if (copiedIcon) copiedIcon.style.display = 'none';
+                        if (copyText) copyText.textContent = 'Copy';
                     }, 2000);
 
                 } catch (err) {
@@ -1184,7 +1422,12 @@
                     try {
                         document.execCommand('copy');
                         button.classList.add('copied');
-                        setTimeout(() => button.classList.remove('copied'), 2000);
+                        const copyText = button.querySelector('.copy-text');
+                        if (copyText) copyText.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.classList.remove('copied');
+                            if (copyText) copyText.textContent = 'Copy';
+                        }, 2000);
                     } catch (fallbackErr) {
                         console.error('Fallback copy also failed:', fallbackErr);
                         alert('Copy failed. Please select and copy the command manually.');
