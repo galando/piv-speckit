@@ -73,6 +73,14 @@ This is a **skeleton/template repository** for starting new projects with the PI
 | `/validation:execution-report` | Generate execution report |
 | `/validation:system-review` | Analyze implementation vs plan |
 
+### Learning (Optional)
+
+| Command | Purpose |
+|---------|---------|
+| `/validation:learn` | Analyze code reviews for patterns and learnings |
+| `/validation:suggest-improvement` | Generate improvement suggestion |
+| `/validation:learning-status` | View learning metrics dashboard |
+
 ### Other Commands
 
 | Command | Purpose |
