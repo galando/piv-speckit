@@ -31,3 +31,4 @@ Thumbs.db
 .claude/agents/reports/
 .claude/agents/context/
 .claude/agents/reviews/
+.claude/agents/learning/

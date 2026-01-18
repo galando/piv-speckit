@@ -368,7 +368,7 @@ Fixes #456
 
 - [Conventional Commits Specification](https://www.conventionalcommits.org/)
 - `.claude/rules/10-git.md` - Git workflow rules
-- `.claude/PIV-METHODOLOGY.md` - Phase-based commit workflow
+- `.claude/reference/methodology/PIV-METHODOLOGY.md` - Phase-based commit workflow
 - `docs/features/commit-commands-integration.md` - Integration guide
 
 ## Summary

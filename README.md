@@ -230,8 +230,12 @@ Each template includes:
 ```
 claude-dev-framework/
 ├── .claude/                     # Claude Code configuration
-│   ├── CLAUDE.md                # Root project instructions
-│   ├── PIV-METHODOLOGY.md       # Core methodology documentation
+│   ├── CLAUDE.md                # Root project instructions (Tier 1: auto-loaded)
+│   ├── reference/               # Tier 3: Complete guides (on-demand)
+│   │   ├── methodology/         # Full PIV methodology
+│   │   │   └── PIV-METHODOLOGY.md # Core methodology documentation
+│   │   ├── rules-full/          # Complete rule sets (expanded)
+│   │   └── skills-full/         # Complete skill definitions
 │   ├── commands/                # PIV command definitions
 │   │   ├── piv_loop/            # Core PIV workflow commands
 │   │   │   ├── prime.md         # Prime phase command
@@ -251,9 +255,10 @@ claude-dev-framework/
 │   │   │   ├── 10-api-design.md # Spring Boot API patterns
 │   │   │   └── 20-database.md   # Spring Boot database patterns
 │   │   ├── 00-general.md        # General development principles
+│   │   ├── 05-pragmatic.md      # Pragmatic Programmer principles
 │   │   ├── 10-git.md            # Git workflow rules
-│   │   ├── 20-testing.md        # Testing philosophy
-│   │   ├── 21-testing.md        # Testing guidelines (Given-When-Then)
+│   │   ├── 20-testing.md        # Testing philosophy (includes Given-When-Then)
+│   │   ├── 22-tdd-strict.md     # Strict TDD enforcement
 │   │   ├── 30-documentation.md  # Documentation standards
 │   │   └── 40-security.md       # Security guidelines
 │   ├── agents/                  # Agent artifact directories (auto-generated)
@@ -265,8 +270,18 @@ claude-dev-framework/
 │   │       ├── insights/        # Learning insights from reviews
 │   │       ├── suggestions/     # Improvement proposals
 │   │       └── applied/         # Applied improvements history
-│   └── reference/               # Best practices and patterns
-│       └── patterns/            # Design patterns reference
+│   ├── scripts/                 # Validation and maintenance scripts
+│   ├── skills/                  # Auto-activating enforcement behaviors
+│   │   ├── test-driven-development/
+│   │   ├── test-writing/
+│   │   ├── api-design/
+│   │   ├── security/
+│   │   ├── code-review/
+│   │   └── adaptive-learning/
+│   └── reference/               # Tier 3: Complete guides (on-demand)
+│       ├── methodology/         # Full PIV methodology
+│       ├── rules-full/          # Complete rule sets (expanded)
+│       └── skills-full/         # Complete skill definitions
 ├── technologies/                # Technology-specific templates
 │   ├── backend/                 # Backend frameworks
 │   │   ├── spring-boot/         # Java/Kotlin + Spring Boot
@@ -747,7 +762,7 @@ Perfect for visual learners and anyone who wants to understand PIV in 5 minutes.
 - [FAQ](docs/FAQ.md) - Frequently asked questions
 
 ### Methodology
-- [PIV Methodology](.claude/PIV-METHODOLOGY.md) - Complete methodology guide
+- [PIV Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) - Complete methodology guide
 - [Project Instructions](.claude/CLAUDE.md) - Quick reference for Claude Code
 
 ### Contributing
