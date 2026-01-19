@@ -87,8 +87,8 @@ classify_file() {
     local clean_path="${file_path#.claude/}"
 
     case "$clean_path" in
-        # Framework files - always update
-        commands/*|skills/*|reference/*)
+        # Framework files - always update (include reference subdirectories)
+        commands/*|skills/*|reference/*|reference/*/*)
             echo "framework"
             ;;
         # User files - never touch
@@ -275,21 +275,53 @@ verify_staged_changes() {
 apply_staged_changes() {
     print_info "Applying updates..."
 
-    find "$STAGING_DIR" -type f -name "*.md" 2>/dev/null | while read -r staged_file; do
+    local applied_count=0
+    local commands_count=0
+    local rules_count=0
+    local reference_count=0
+    local skills_count=0
+
+    # Use process substitution to avoid subshell variable scope issues
+    while read -r staged_file; do
+        [ -z "$staged_file" ] && continue
+        [ ! -f "$staged_file" ] && continue
+
         local rel_path="${staged_file#$STAGING_DIR/}"
         local target_file=".claude/${rel_path#.claude/}"
         local target_dir=$(dirname "$target_file")
 
         mkdir -p "$target_dir"
         mv "$staged_file" "$target_file"
+        ((applied_count++))
+
+        # Count by category for feedback
+        case "$rel_path" in
+            .claude/commands/*)
+                ((commands_count++))
+                ;;
+            .claude/rules/*)
+                ((rules_count++))
+                ;;
+            .claude/reference/*)
+                ((reference_count++))
+                ;;
+            .claude/skills/*)
+                ((skills_count++))
+                ;;
+        esac
+
         log "INFO" "Applied: $rel_path"
-    done
+    done < <(find "$STAGING_DIR" -type f -name "*.md" 2>/dev/null)
 
     # Clean up staging
     rm -rf "$STAGING_DIR"
     STAGING_DIR=""
 
-    print_success "Updates applied"
+    print_success "Updates applied: $applied_count files"
+    [ $commands_count -gt 0 ] && print_info "  Commands:  $commands_count"
+    [ $rules_count -gt 0 ] && print_info "  Rules:     $rules_count"
+    [ $reference_count -gt 0 ] && print_info "  Reference: $reference_count"
+    [ $skills_count -gt 0 ] && print_info "  Skills:    $skills_count"
 }
 
 # Rollback on failure
@@ -408,7 +440,15 @@ show_whats_new() {
     local add_count=$(echo "$change_list" | grep -c "^ADD" || echo "0")
     local update_count=$(echo "$change_list" | grep -c "^UPDATE" || echo "0")
 
-    # Display individual changes
+    # Count by category
+    local commands_count=$(echo "$change_list" | grep -c "\.claude/commands/" || echo "0")
+    local rules_count=$(echo "$change_list" | grep -c "\.claude/rules/" || echo "0")
+    local reference_count=$(echo "$change_list" | grep -c "\.claude/reference/" || echo "0")
+    local skills_count=$(echo "$change_list" | grep -c "\.claude/skills/" || echo "0")
+
+    # Display individual changes (limit output for large updates)
+    local display_limit=20
+    local count=0
     while read -r action file_path; do
         [ -z "$action" ] && continue
 
@@ -422,12 +462,24 @@ show_whats_new() {
             SKIP)
                 ;;
         esac
+        ((count++))
+        if [ $count -ge $display_limit ]; then
+            print_info "  ... and $((add_count + update_count - display_limit)) more files"
+            break
+        fi
     done <<< "$change_list"
 
     echo ""
     print_info "Summary:"
-    echo "  New files: $add_count"
+    echo "  New files:     $add_count"
     echo "  Updated files: $update_count"
+    echo "  Total:         $((add_count + update_count)) files"
+    echo ""
+    echo "  By category:"
+    echo "    Commands:  $commands_count"
+    echo "    Rules:     $rules_count"
+    echo "    Reference: $reference_count"
+    echo "    Skills:    $skills_count"
     echo ""
 }
 

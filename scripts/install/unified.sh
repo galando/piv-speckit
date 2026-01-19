@@ -3,6 +3,21 @@
 # Routes to fresh install or update based on detection
 
 # =============================================================================
+# STAGE TRACKING FOR UX
+# =============================================================================
+
+# Stage tracking globals
+STAGE_NUM=0
+TOTAL_STAGES=6
+
+# Display next stage header
+# Usage: next_stage "Stage Title"
+next_stage() {
+    STAGE_NUM=$((STAGE_NUM + 1))
+    print_header "Stage $STAGE_NUM of $TOTAL_STAGES: $1"
+}
+
+# =============================================================================
 # INSTALLATION STATE DETECTION
 # =============================================================================
 
@@ -95,7 +110,10 @@ route_to_install_or_update() {
 # Perform fresh installation
 # Usage: install_fresh
 install_fresh() {
-    print_header "Installing PIV"
+    # Reset stage counter
+    STAGE_NUM=0
+
+    print_header "Installing PIV Framework"
 
     # Change to original directory for project-specific operations
     cd "$ORIGINAL_DIR" || {
@@ -103,45 +121,68 @@ install_fresh() {
         exit 1
     }
 
-    # Check prerequisites
+    # Stage 1: Prerequisites
+    next_stage "Environment Check"
     if ! check_prerequisites; then
         print_error "Prerequisites not met"
         exit 1
     fi
+    print_success "Prerequisites met"
 
-    # Detect technologies
-    print_header "Analyzing Project"
+    # Stage 2: Technology Detection
+    next_stage "Project Analysis"
+    print_info "Analyzing project structure..."
     if ! detect_technologies; then
         print_warning "Could not auto-detect technologies"
     fi
+    print_success "Detection complete"
 
     # Confirm technologies
     confirm_technologies
 
-    # Select installation mode (if not forced)
+    # Stage 3: Installation Mode
+    next_stage "Installation Mode"
     if [ -z "$INSTALLATION_MODE" ]; then
         unified_select_installation_mode
+    else
+        print_info "Using predefined mode: $INSTALLATION_MODE"
     fi
 
-    # Backup existing .claude directory if exists
+    # Stage 4: Backup
     if [ -d ".claude" ]; then
         print_header "Backup"
         if ! backup_existing_claude; then
             print_error "Backup failed"
             exit 1
         fi
+        print_success "Backup created"
     fi
 
-    # Install PIV
+    # Stage 5: Installation
+    next_stage "Installing Framework Files"
     unified_install_piv
 
-    # Write version file
+    # Stage 6: Verification
+    next_stage "Verification"
     write_version_file "$(get_version "$PIV_SOURCE_DIR")" ""
-
-    # Verify installation
     verify_installation "$INSTALLATION_MODE"
+    print_success "All checks passed"
 
-    print_success "PIV installed successfully"
+    # Final summary
+    print_header "Installation Complete"
+    echo ""
+    print_success "PIV framework installed successfully!"
+    echo ""
+    echo "Summary:"
+    echo "  Commands:    .claude/commands/"
+    echo "  Rules:       .claude/rules/"
+    echo "  Reference:   .claude/reference/"
+    echo "  Skills:      .claude/skills/"
+    echo ""
+    echo "Next steps:"
+    echo "  1. Run '/piv_loop:prime' to load context"
+    echo "  2. Run '/validation:validate' to verify setup"
+    echo ""
 }
 
 # =============================================================================
@@ -235,7 +276,10 @@ unified_install_piv() {
 # Perform update of existing installation
 # Usage: update_existing
 update_existing() {
-    print_header "Updating PIV"
+    # Reset stage counter
+    STAGE_NUM=0
+
+    print_header "Updating PIV Framework"
 
     # Parse current version
     parse_piv_version
@@ -258,6 +302,7 @@ update_existing() {
     fi
 
     # Detect changes
+    print_info "Scanning for updates..."
     local changes=$(detect_changes)
 
     if [ -z "$changes" ]; then
@@ -277,15 +322,17 @@ update_existing() {
     fi
 
     # Backup before update
-    print_header "Backup"
+    print_header "Creating Backup"
     if [ -d ".claude" ]; then
         if ! backup_existing_claude; then
             print_error "Backup failed - cannot proceed"
             exit 1
         fi
+        print_success "Backup created"
     fi
 
     # Migration for old installations
+    print_info "Checking for migration needs..."
     migrate_old_installation
 
     # Apply updates
@@ -294,6 +341,7 @@ update_existing() {
         return 0
     fi
 
+    print_info "Applying updates..."
     # Set error trap for rollback
     trap rollback_on_failure ERR INT
 
@@ -306,12 +354,23 @@ update_existing() {
     write_version_file "$latest_version" "" "$PINNED_VERSION"
 
     # Verify after update
+    print_info "Verifying update..."
     verify_installation "$INSTALLATION_MODE"
 
     # Clear trap
     trap - ERR INT
 
-    print_success "PIV updated successfully!"
+    # Final summary
+    print_header "Update Complete"
+    echo ""
+    print_success "PIV framework updated successfully!"
+    echo ""
+    echo "Updated from: $current_version"
+    echo "Updated to:   $latest_version"
+    echo ""
+    echo "Next steps:"
+    echo "  1. Run '/validation:validate' to verify setup"
+    echo ""
 }
 
 # =============================================================================
@@ -339,6 +398,7 @@ migrate_and_update() {
 # EXPORT FUNCTIONS
 # =============================================================================
 
+export -f next_stage
 export -f detect_installation_state is_fresh_install is_update
 export -f route_to_install_or_update
 export -f install_fresh update_existing migrate_and_update
