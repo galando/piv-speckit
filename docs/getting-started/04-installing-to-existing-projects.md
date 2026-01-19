@@ -6,15 +6,42 @@
 
 ## Overview
 
-This guide walks you through installing the PIV (Prime-Implement-Validate) methodology into an existing project. The interactive installer will:
+This guide walks you through installing the PIV (Prime-Implement-Validate) methodology into an existing project. The unified installer will:
 
+- ✅ **Auto-detect** whether you need fresh install or update
 - ✅ **Detect your technology stack** automatically (Spring Boot, React, Node.js, etc.)
 - ✅ **Preserve your existing configuration** (creates automatic backup)
 - ✅ **Install PIV commands** for Prime-Implement-Validate workflow
 - ✅ **Add coding rules** specific to your technology
 - ✅ **Verify installation** to ensure everything works
+- ✅ **Support updates** with version tracking
 
 **Installation time**: 1-2 minutes
+
+---
+
+## Quick Install
+
+### One-Line Install (Recommended)
+
+```bash
+# From your project directory
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+```
+
+That's it! The installer:
+- Auto-detects if you need installation or update
+- Preserves your existing configuration
+- Creates a backup before making changes
+- Sets up version tracking for future updates
+
+### Updating
+
+Run the same command to update:
+
+```bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+```
 
 ---
 
@@ -31,42 +58,22 @@ Before installing, ensure you have:
 
 ---
 
-## Installation Methods
-
-### Method 1: Clone and Run (Recommended)
+## Advanced Installation Options
 
 ```bash
-# 1. Clone the PIV framework to a temporary location
+# Clone first (if you want to inspect the script)
 git clone https://github.com/galando/claude-dev-framework.git /tmp/piv
-
-# 2. Navigate to your existing project
 cd /path/to/your-project
+/tmp/piv/scripts/piv.sh
 
-# 3. Run the installer
-/tmp/piv/scripts/install-piv.sh
-```
+# Pin to a specific version
+curl -s .../piv.sh | bash -s -- --version 1.1.0 --pin
 
-### Method 2: Direct Download
+# Preview changes without applying
+curl -s .../piv.sh | bash -s -- --dry-run
 
-```bash
-# From your project directory
-cd /path/to/your-project
-
-# Download and run installer
-curl -sSL https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/install-piv.sh | bash
-```
-
-### Method 3: Copy and Run
-
-```bash
-# 1. Copy the entire PIV skeleton to your project
-cp -r /path/to/claude-dev-framework /tmp/
-
-# 2. Navigate to your project
-cd /path/to/your-project
-
-# 3. Run the installer
-/tmp/claude-dev-framework/scripts/install-piv.sh
+# Update without confirmation prompts
+curl -s .../piv.sh | bash -s -- --force
 ```
 
 ---
@@ -331,20 +338,23 @@ Claude will:
 ```
 your-project/
 ├── .claude/
-│   ├── CLAUDE.md              # Your config + PIV section
-│   ├── PIV-METHODOLOGY.md     # PIV methodology
+│   ├── CLAUDE.md                         # Your config + PIV section
+│   ├── .piv-version                      # Version tracking
+│   ├── reference/
+│   │   └── methodology/
+│   │       └── PIV-METHODOLOGY.md        # PIV methodology
 │   ├── commands/
-│   │   ├── piv_loop/          # PIV commands
-│   │   ├── validation/        # Validation commands
-│   │   ├── bug_fix/           # Bug fix commands
+│   │   ├── piv_loop/                     # PIV commands
+│   │   ├── validation/                   # Validation commands
+│   │   ├── bug_fix/                      # Bug fix commands
 │   │   └── [your existing commands]
 │   └── rules/
-│       ├── 00-general.md      # Universal rules
+│       ├── 00-general.md                 # Universal rules
 │       ├── 10-git.md
 │       ├── 20-testing.md
 │       ├── 30-documentation.md
 │       ├── 40-security.md
-│       ├── backend/           # Backend rules (if detected)
+│       ├── backend/                      # Backend rules (if detected)
 │       └── [your existing rules]
 ```
 
@@ -364,15 +374,18 @@ your-project/
 **Directory structure after install:**
 ```
 your-project/
-├── .claude/                    # Your existing config (unchanged)
-│   ├── CLAUDE.md              # Your config + PIV reference
+├── .claude/                              # Your existing config (unchanged)
+│   ├── CLAUDE.md                        # Your config + PIV reference
 │   └── commands/
 │       ├── piv_loop -> ../.claude-piv/commands/piv_loop
 │       ├── validation -> ../.claude-piv/commands/validation
 │       └── bug_fix -> ../.claude-piv/commands/bug_fix
 │
-└── .claude-piv/                # Complete PIV installation
-    ├── PIV-METHODOLOGY.md
+└── .claude-piv/                          # Complete PIV installation
+    ├── .piv-version                     # Version tracking
+    ├── reference/
+    │   └── methodology/
+    │       └── PIV-METHODOLOGY.md        # PIV methodology
     ├── HOW-TO-USE.md
     ├── commands/
     ├── rules/
@@ -387,7 +400,7 @@ your-project/
 **Switching modes:**
 You can easily switch from separate to merge mode:
 1. Uninstall PIV: `./scripts/uninstall-piv.sh`
-2. Reinstall: `./scripts/install-piv.sh`
+2. Reinstall: `./scripts/piv.sh`
 3. Choose merge mode
 
 ---
@@ -398,7 +411,8 @@ You can easily switch from separate to merge mode:
 
 | File | Purpose |
 |------|---------|
-| `.claude/PIV-METHODOLOGY.md` | Complete PIV methodology guide |
+| `.claude/reference/methodology/PIV-METHODOLOGY.md` | Complete PIV methodology guide |
+| `.claude/.piv-version` | Version tracking for updates |
 | `.claude/commands/piv_loop/prime.md` | Prime phase command |
 | `.claude/commands/piv_loop/plan-feature.md` | Plan phase command |
 | `.claude/commands/piv_loop/execute.md` | Execute phase command |
@@ -406,7 +420,7 @@ You can easily switch from separate to merge mode:
 | `.claude/rules/00-general.md` | General development rules |
 | `.claude/rules/10-git.md` | Git workflow rules |
 | `.claude/rules/20-testing.md` | Testing philosophy |
-| `.claude/rules/21-testing.md` | Testing guidelines (Given-When-Then) |
+| `.claude/rules/22-tdd-strict.md` | Strict TDD rules |
 | `.claude/rules/30-documentation.md` | Documentation standards |
 | `.claude/rules/40-security.md` | Security guidelines |
 
@@ -431,10 +445,10 @@ ls -la .claude/commands/piv_loop/
 ls -la .claude/commands/validation/
 
 # Read the methodology
-cat .claude/PIV-METHODOLOGY.md
+cat .claude/reference/methodology/PIV-METHODOLOGY.md
 
 # Or for separate mode:
-cat .claude-piv/PIV-METHODOLOGY.md
+cat .claude-piv/reference/methodology/PIV-METHODOLOGY.md
 ```
 
 **With Claude Code:**
@@ -460,8 +474,8 @@ Claude should show:
 
 **Solution:**
 ```bash
-chmod +x /tmp/piv/scripts/install-piv.sh
-/tmp/piv/scripts/install-piv.sh
+chmod +x /tmp/piv/scripts/piv.sh
+/tmp/piv/scripts/piv.sh
 ```
 
 ### Technology Detection is Wrong
@@ -524,7 +538,7 @@ The uninstaller will:
 
 ## Next Steps
 
-1. **Read the methodology**: `.claude/PIV-METHODOLOGY.md` (or `.claude-piv/PIV-METHODOLOGY.md`)
+1. **Read the methodology**: `.claude/reference/methodology/PIV-METHODOLOGY.md` (or `.claude-piv/reference/methodology/PIV-METHODOLOGY.md`)
 2. **Prime your workspace**: Ask Claude to "Run `/piv_loop:prime`"
 3. **Plan your first feature**: Use `/piv_loop:plan-feature` to create a plan
 4. **Implement**: Use `/piv_loop:execute` to build your feature

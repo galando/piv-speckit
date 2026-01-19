@@ -2,11 +2,6 @@
 # verify.sh - Post-installation verification for PIV installer
 # Verifies that installation completed successfully
 
-# Source core functions if not already loaded
-#if [ -z "${print_info+x}" ]; then
-#    source "$(dirname "${BASH_SOURCE[0]}")/core.sh"
-#fi
-
 # Verification checks
 CHECKS_PASSED=0
 CHECKS_FAILED=0
@@ -90,7 +85,7 @@ verify_installation() {
     if [ -z "$mode" ]; then
         if [ -d ".claude-piv" ]; then
             mode="separate"
-        elif [ -f ".claude/PIV-METHODOLOGY.md" ]; then
+        elif [ -f ".claude/reference/methodology/PIV-METHODOLOGY.md" ]; then
             mode="merge"
         else
             mode="merge"  # Default fallback
@@ -140,7 +135,7 @@ verify_merge_installation() {
 
     # Core structure
     check_directory ".claude" "Claude configuration directory"
-    check_file ".claude/PIV-METHODOLOGY.md" "PIV methodology documentation"
+    check_file ".claude/reference/methodology/PIV-METHODOLOGY.md" "PIV methodology documentation"
     check_file ".claude/CLAUDE.md" "Project instructions"
 
     # Commands
@@ -174,7 +169,7 @@ verify_separate_installation() {
 
     # Core structure
     check_directory "$piv_dir" "PIV directory"
-    check_file "$piv_dir/PIV-METHODOLOGY.md" "PIV methodology documentation"
+    check_file "$piv_dir/reference/methodology/PIV-METHODOLOGY.md" "PIV methodology documentation"
     check_file "$piv_dir/HOW-TO-USE.md" "Usage guide"
 
     # Commands
@@ -202,9 +197,9 @@ is_piv_installed() {
     local mode="${1:-merge}"
 
     if [ "$mode" = "merge" ]; then
-        [ -d ".claude" ] && [ -f ".claude/PIV-METHODOLOGY.md" ]
+        [ -d ".claude" ] && [ -f ".claude/reference/methodology/PIV-METHODOLOGY.md" ]
     else
-        [ -d ".claude-piv" ] && [ -f ".claude-piv/PIV-METHODOLOGY.md" ]
+        [ -d ".claude-piv" ] && [ -f ".claude-piv/reference/methodology/PIV-METHODOLOGY.md" ]
     fi
 }
 

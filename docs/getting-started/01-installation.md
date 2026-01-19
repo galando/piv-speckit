@@ -1,12 +1,14 @@
 # Installation Guide
 
-**How to install and set up the PIV skeleton for your project**
+**How to install and set up the Claude Dev Framework (PIV) for your project**
 
 ---
 
 ## Overview
 
-This guide will walk you through cloning and setting up the PIV skeleton for a new project.
+This guide covers two ways to get started:
+1. **One-line install** - Add PIV to an existing project (recommended)
+2. **Clone and customize** - Fork the framework and customize it
 
 ---
 
@@ -16,17 +18,59 @@ Before you begin, ensure you have:
 
 - **Git** - For version control
 - **Claude Code** - The Claude CLI tool (installed and configured)
-- **Your chosen technology stack** - Node.js, Python, Java, etc.
+- **Bash** - For running the installer (available on macOS, Linux, WSL)
 
 ---
 
-## Installation Steps
+## Method 1: One-Line Install (Recommended)
+
+**For existing projects** - Add PIV to your current project with a single command.
+
+```bash
+# From your project directory
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+```
+
+That's it! The installer will:
+- Detect your technology stack
+- Install PIV commands and rules
+- Preserve your existing configuration
+- Set up version tracking for future updates
+
+### Updating
+
+Run the same command to update:
+
+```bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+```
+
+The script auto-detects if you need installation or update.
+
+### Advanced Options
+
+```bash
+# Pin to a specific version
+curl -s .../piv.sh | bash -s -- --version 1.1.0 --pin
+
+# Preview changes without applying
+curl -s .../piv.sh | bash -s -- --dry-run
+
+# Update without confirmation prompts
+curl -s .../piv.sh | bash -s -- --force
+```
+
+---
+
+## Method 2: Clone and Customize
+
+**For new projects or heavy customization** - Fork the framework and make it your own.
 
 ### 1. Clone the Repository
 
 ```bash
 # Clone this repository
-git clone https://github.com/galando/claude-piv-skeleton.git my-project
+git clone https://github.com/galando/claude-dev-framework.git my-project
 cd my-project
 ```
 
@@ -146,7 +190,8 @@ After installation, your project includes:
 - ✅ PIV commands (`.claude/commands/`)
 - ✅ Agent artifact templates (`.claude/agents/`)
 - ✅ Project instructions (`.claude/CLAUDE.md`)
-- ✅ Methodology documentation (`.claude/PIV-METHODOLOGY.md`)
+- ✅ Methodology documentation (`.claude/reference/methodology/`)
+- ✅ Version tracking (`.claude/.piv-version`)
 
 ### Technology Templates
 - ✅ Backend templates (Spring Boot, Node.js, Python)
@@ -207,8 +252,8 @@ After installation, your project includes:
 If you encounter issues:
 
 1. Check the [troubleshooting section](#troubleshooting)
-2. Review [PIV Methodology](../../.claude/PIV-METHODOLOGY.md)
-3. Open an issue on [GitHub](https://github.com/galando/claude-piv-skeleton/issues)
+2. Review [PIV Methodology](../../.claude/reference/methodology/PIV-METHODOLOGY.md)
+3. Open an issue on [GitHub](https://github.com/galando/claude-dev-framework/issues)
 
 ---
 

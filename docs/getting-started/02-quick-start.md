@@ -481,7 +481,7 @@ A: **No.** Suggestions are proposals. Review and approve only what makes sense f
 ## Next Steps
 
 1. **Build Your First Feature** - [Your First Feature](03-your-first-feature.md)
-2. **Learn Methodology** - [PIV Methodology](../../.claude/PIV-METHODOLOGY.md)
+2. **Learn Methodology** - [PIV Methodology](../../.claude/reference/methodology/PIV-METHODOLOGY.md)
 3. **Customize Rules** - Edit `.claude/rules/` to match your preferences
 
 ---

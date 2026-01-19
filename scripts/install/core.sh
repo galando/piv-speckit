@@ -324,7 +324,7 @@ $technologies
 ## PIV Configuration
 
 ### Methodology Documentation
-See \`PIV-METHODOLOGY.md\` for complete methodology guide.
+See \`reference/methodology/PIV-METHODOLOGY.md\` for complete methodology guide.
 
 ### Rules
 - Universal rules apply to all code (see \`rules/\`)
@@ -393,7 +393,7 @@ EOF
 # Append PIV reference for merge mode (uses .claude/ path)
 # Usage: append_piv_reference_merge
 append_piv_reference_merge() {
-    append_piv_reference ".claude/PIV-METHODOLOGY.md"
+    append_piv_reference ".claude/reference/methodology/PIV-METHODOLOGY.md"
 }
 
 # Check if running in supported shell

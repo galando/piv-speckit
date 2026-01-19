@@ -56,7 +56,8 @@ show_removal_plan() {
         echo "  • .claude/commands/validation (symlink)"
         echo "  • .claude/commands/bug_fix (symlink)"
     else
-        echo "  • .claude/PIV-METHODOLOGY.md"
+        echo "  • .claude/reference/methodology/PIV-METHODOLOGY.md"
+        echo "  • .claude/.piv-version"
         echo "  • .claude/commands/piv_loop/"
         echo "  • .claude/commands/validation/"
         echo "  • .claude/commands/bug_fix/"
@@ -78,7 +79,8 @@ remove_merge_mode() {
     print_info "Removing merge mode installation..."
 
     # Remove PIV files
-    [ -f ".claude/PIV-METHODOLOGY.md" ] && rm -f ".claude/PIV-METHODOLOGY.md"
+    [ -f ".claude/.piv-version" ] && rm -f ".claude/.piv-version"
+    [ -d ".claude/reference" ] && rm -rf ".claude/reference"
 
     # Remove command directories
     [ -d ".claude/commands/piv_loop" ] && rm -rf ".claude/commands/piv_loop"

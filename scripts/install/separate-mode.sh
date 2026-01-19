@@ -2,11 +2,6 @@
 # separate-mode.sh - Separate mode installation for PIV
 # Installs PIV in separate .claude-piv directory, keeping existing .claude untouched
 
-# Source core functions if not already loaded
-#if [ -z "${print_info+x}" ]; then
-#    source "$(dirname "${BASH_SOURCE[0]}")/core.sh"
-#fi
-
 # Note: PIV_SOURCE_DIR is declared as exported in install-piv.sh
 # This script uses that exported variable
 
@@ -39,8 +34,9 @@ install_separate_mode() {
     print_info "Copying PIV files to $piv_dir..."
 
     # Copy PIV methodology
-    if [ -f "$PIV_SOURCE_DIR/.claude/PIV-METHODOLOGY.md" ]; then
-        copy_file "$PIV_SOURCE_DIR/.claude/PIV-METHODOLOGY.md" "$piv_dir/PIV-METHODOLOGY.md"
+    if [ -f "$PIV_SOURCE_DIR/.claude/reference/methodology/PIV-METHODOLOGY.md" ]; then
+        ensure_dir "$piv_dir/reference/methodology"
+        copy_file "$PIV_SOURCE_DIR/.claude/reference/methodology/PIV-METHODOLOGY.md" "$piv_dir/reference/methodology/PIV-METHODOLOGY.md"
     fi
 
     # Copy rules
@@ -125,7 +121,7 @@ install_separate_mode() {
     # Add PIV reference to existing CLAUDE.md
     if [ -f ".claude/CLAUDE.md" ]; then
         print_info "Adding PIV reference to CLAUDE.md..."
-        append_piv_reference ".claude-piv/PIV-METHODOLOGY.md"
+        append_piv_reference ".claude-piv/reference/methodology/PIV-METHODOLOGY.md"
     else
         # Create .claude directory if it doesn't exist
         ensure_dir ".claude"
@@ -144,7 +140,7 @@ This project uses the **PIV (Prime-Implement-Validate)** methodology for AI-assi
 
 ## Documentation
 
-See `.claude-piv/PIV-METHODOLOGY.md` for complete methodology guide.
+See `.claude-piv/reference/methodology/PIV-METHODOLOGY.md` for complete methodology guide.
 
 ## Configuration
 
@@ -168,7 +164,7 @@ When working with Claude Code, reference the PIV methodology in this directory:
 
 1. **Load Context**: Tell Claude to look at `.claude-piv/` for methodology
    ```
-   "Load the PIV methodology from .claude-piv/PIV-METHODOLOGY.md"
+   "Load the PIV methodology from .claude-piv/reference/methodology/PIV-METHODOLOGY.md"
    ```
 
 2. **Use Commands**: PIV commands are linked in your `.claude/commands/` directory
@@ -180,7 +176,9 @@ When working with Claude Code, reference the PIV methodology in this directory:
 
 ```
 .claude-piv/
-├── PIV-METHODOLOGY.md    # Complete methodology guide
+├── reference/
+│   └── methodology/
+│       └── PIV-METHODOLOGY.md    # Complete methodology guide
 ├── commands/             # PIV command definitions
 ├── rules/                # Coding rules and best practices
 └── technologies/         # Technology-specific templates
@@ -218,8 +216,8 @@ verify_separate_installation() {
         ((errors++))
     fi
 
-    if [ ! -f "$piv_dir/PIV-METHODOLOGY.md" ]; then
-        print_error "$piv_dir/PIV-METHODOLOGY.md not found"
+    if [ ! -f "$piv_dir/reference/methodology/PIV-METHODOLOGY.md" ]; then
+        print_error "$piv_dir/reference/methodology/PIV-METHODOLOGY.md not found"
         ((errors++))
     fi
 

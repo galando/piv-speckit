@@ -31,7 +31,7 @@ A development methodology created by **Cole Medin** specifically for AI-assisted
 ### One-Line Install
 
 ```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/install-piv.sh | bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
 ```
 
 ### Your First Feature (3 minutes)
@@ -50,6 +50,26 @@ curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scri
 ```
 
 **TDD is enforced:** 🔴 RED (write failing test) → 🟢 GREEN (minimal code) → 🔵 REFACTOR (improve)
+
+### Updating
+
+Run the same command to update your installation:
+
+```bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+```
+
+The script auto-detects if you need installation or update.
+
+**Pin to a specific version:**
+```bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --version 1.1.0 --pin
+```
+
+**Preview changes without applying:**
+```bash
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --dry-run
+```
 
 ---
 

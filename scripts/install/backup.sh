@@ -2,11 +2,6 @@
 # backup.sh - Backup and rollback functions for PIV installer
 # Manages backup of existing .claude directories
 
-# Source core functions if not already loaded
-#if [ -z "${print_info+x}" ]; then
-#    source "$(dirname "${BASH_SOURCE[0]}")/core.sh"
-#fi
-
 # Backup metadata file
 BACKUP_META_FILE=".claude-install-backup"
 CURRENT_BACKUP_DIR=""

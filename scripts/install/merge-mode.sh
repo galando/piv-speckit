@@ -2,11 +2,6 @@
 # merge-mode.sh - Merge mode installation for PIV
 # Installs PIV into existing .claude directory, merging with existing configuration
 
-# Source core functions if not already loaded
-#if [ -z "${print_info+x}" ]; then
-#    source "$(dirname "${BASH_SOURCE[0]}")/core.sh"
-#fi
-
 # Note: PIV_SOURCE_DIR is declared as exported in install-piv.sh
 # This script uses that exported variable
 
@@ -64,7 +59,8 @@ install_merge_mode() {
 
     # Copy PIV methodology
     print_info "Installing PIV methodology documentation..."
-    copy_file_if_missing "$PIV_SOURCE_DIR/.claude/PIV-METHODOLOGY.md" ".claude/PIV-METHODOLOGY.md"
+    ensure_dir ".claude/reference/methodology"
+    copy_file_if_missing "$PIV_SOURCE_DIR/.claude/reference/methodology/PIV-METHODOLOGY.md" ".claude/reference/methodology/PIV-METHODOLOGY.md"
 
     # Install technology-specific rules based on detection
     print_info "Installing technology-specific rules..."
@@ -164,8 +160,8 @@ verify_merge_installation() {
     local errors=0
 
     # Check required files
-    if [ ! -f ".claude/PIV-METHODOLOGY.md" ]; then
-        print_error "PIV-METHODOLOGY.md not found"
+    if [ ! -f ".claude/reference/methodology/PIV-METHODOLOGY.md" ]; then
+        print_error "PIV-METHODOLOGY.md not found in .claude/reference/methodology/"
         ((errors++))
     fi
 

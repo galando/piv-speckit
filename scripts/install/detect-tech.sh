@@ -2,11 +2,6 @@
 # detect-tech.sh - Technology detection for PIV installer
 # Detects project technologies based on configuration files
 
-# Source core functions if not already loaded
-#if [ -z "${print_info+x}" ]; then
-#    source "$(dirname "${BASH_SOURCE[0]}")/core.sh"
-#fi
-
 # Detected technologies (global array)
 DETECTED_BACKENDS=()
 DETECTED_FRONTENDS=()
@@ -18,8 +13,8 @@ DETECTED_DEVOPS=()
 detect_spring_boot() {
     log "INFO" "Checking for Spring Boot..."
     # Check for pom.xml (Maven)
-    if find . -name "pom.xml" -type f 2>/dev/null | head -1 | grep -q .; then
-        local pom_file=$(find . -name "pom.xml" -type f 2>/dev/null | head -1)
+    if find . -maxdepth 3 -name "pom.xml" -type f 2>/dev/null | head -1 | grep -q .; then
+        local pom_file=$(find . -maxdepth 3 -name "pom.xml" -type f 2>/dev/null | head -1)
         log "INFO" "Found pom.xml at: $pom_file"
         if grep -qi "spring-boot" "$pom_file"; then
             log "INFO" "Detected Spring Boot via $pom_file"
@@ -32,8 +27,8 @@ detect_spring_boot() {
         log "INFO" "No pom.xml found in current directory"
     fi
     # Check for build.gradle (Gradle)
-    if find . \( -name "build.gradle" -o -name "build.gradle.kts" \) -type f 2>/dev/null | head -1 | grep -q .; then
-        local gradle_file=$(find . \( -name "build.gradle" -o -name "build.gradle.kts" \) -type f 2>/dev/null | head -1)
+    if find . -maxdepth 3 \( -name "build.gradle" -o -name "build.gradle.kts" \) -type f 2>/dev/null | head -1 | grep -q .; then
+        local gradle_file=$(find . -maxdepth 3 \( -name "build.gradle" -o -name "build.gradle.kts" \) -type f 2>/dev/null | head -1)
         log "INFO" "Found gradle file at: $gradle_file"
         if grep -qi "spring-boot" "$gradle_file"; then
             log "INFO" "Detected Spring Boot via $gradle_file"
@@ -245,14 +240,14 @@ detect_kubernetes() {
     if [ -d "k8s" ] || [ -d "kubernetes" ] || [ -d ".k8s" ]; then
         return 0
     fi
-    if ls *.yaml 2>/dev/null | grep -qiE "deployment|service|ingress"; then
+    if find . -maxdepth 1 -name "*.yaml" -type f 2>/dev/null | xargs grep -qiE "deployment|service|ingress" 2>/dev/null; then
         return 0
     fi
     return 1
 }
 
 detect_terraform() {
-    if [ -f "main.tf" ] || ls *.tf 2>/dev/null | head -1; then
+    if [ -f "main.tf" ] || find . -maxdepth 1 -name "*.tf" -type f 2>/dev/null | head -1 | grep -q .; then
         return 0
     fi
     return 1
@@ -404,49 +399,52 @@ confirm_technologies() {
     echo ""
 
     # Select backend
-    select_menu "Select backend technology:" \
+    local backend_choice=$(select_menu "Select backend technology:" \
         "Spring Boot (Java/Kotlin)" \
         "Node.js/Express" \
         "Python/FastAPI" \
-        "None/Skip"
+        "None/Skip")
 
-    case $? in
+    case "$backend_choice" in
         1) DETECTED_BACKENDS=("spring-boot") ;;
         2) DETECTED_BACKENDS=("nodejs") ;;
         3) DETECTED_BACKENDS=("python") ;;
         4) DETECTED_BACKENDS=() ;;
+        *) DETECTED_BACKENDS=() ;;  # Default to empty on invalid
     esac
 
     # Select frontend
-    select_menu "Select frontend technology:" \
+    local frontend_choice=$(select_menu "Select frontend technology:" \
         "React" \
         "Vue.js" \
         "Angular" \
         "Svelte" \
-        "None/Skip"
+        "None/Skip")
 
-    case $? in
+    case "$frontend_choice" in
         1) DETECTED_FRONTENDS=("react") ;;
         2) DETECTED_FRONTENDS=("vue") ;;
         3) DETECTED_FRONTENDS=("angular") ;;
         4) DETECTED_FRONTENDS=("svelte") ;;
         5) DETECTED_FRONTENDS=() ;;
+        *) DETECTED_FRONTENDS=() ;;
     esac
 
     # Select database
-    select_menu "Select database:" \
+    local database_choice=$(select_menu "Select database:" \
         "PostgreSQL" \
         "MySQL/MariaDB" \
         "MongoDB" \
         "Redis" \
-        "None/Skip"
+        "None/Skip")
 
-    case $? in
+    case "$database_choice" in
         1) DETECTED_DATABASES=("postgresql") ;;
         2) DETECTED_DATABASES=("mysql") ;;
         3) DETECTED_DATABASES=("mongodb") ;;
         4) DETECTED_DATABASES=("redis") ;;
         5) DETECTED_DATABASES=() ;;
+        *) DETECTED_DATABASES=() ;;
     esac
 
     # Select devops

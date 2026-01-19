@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-**Solutions to common issues with PIV skeleton**
+**Solutions to common issues with Claude Dev Framework**
 
 ---
 
@@ -10,7 +10,7 @@
 
 **Symptoms:**
 ```bash
-bash: /tmp/piv/scripts/install-piv.sh: Permission denied
+bash: /tmp/piv/scripts/piv.sh: Permission denied
 ```
 
 **Cause:** Script doesn't have execute permissions
@@ -18,10 +18,10 @@ bash: /tmp/piv/scripts/install-piv.sh: Permission denied
 **Solutions:**
 ```bash
 # Make script executable
-chmod +x /tmp/piv/scripts/install-piv.sh
+chmod +x /tmp/piv/scripts/piv.sh
 
 # Then run it
-/tmp/piv/scripts/install-piv.sh
+/tmp/piv/scripts/piv.sh
 ```
 
 ---
@@ -96,7 +96,7 @@ cd your-project
 ls
 
 # Then run installer
-/tmp/piv/scripts/install-piv.sh
+/tmp/piv/scripts/piv.sh
 ```
 
 ---

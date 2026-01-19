@@ -18,15 +18,15 @@ This methodology prevents common AI-assisted development issues like lack of con
 
 ### Can I use PIV with an existing project?
 
-**Yes!** The interactive installer can add PIV to existing projects without disrupting your workflow:
+**Yes!** The unified installer can add PIV to existing projects without disrupting your workflow:
 
 ```bash
-git clone https://github.com/galando/claude-piv-skeleton.git /tmp/piv
 cd your-project
-/tmp/piv/scripts/install-piv.sh
+curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
 ```
 
 The installer will:
+- Auto-detect if you need installation or update
 - Detect your technology stack
 - Install only the relevant PIV components
 - Preserve your existing configuration
@@ -232,12 +232,12 @@ We give **full credit to Cole** for creating the PIV methodology. This is a comm
 
 ### Installer script fails with permission errors
 
-**Symptoms**: `Permission denied` when running `install-piv.sh`
+**Symptoms**: `Permission denied` when running `piv.sh`
 
 **Solution**:
 ```bash
-chmod +x /tmp/piv/scripts/install-piv.sh
-/tmp/piv/scripts/install-piv.sh
+chmod +x /tmp/piv/scripts/piv.sh
+/tmp/piv/scripts/piv.sh
 ```
 
 ### Validation fails with "No tests found"
