@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "piv",
-      "source": "../",
+      "source": "./",
       "description": "PIV methodology with TDD, code review, and development best practices"
     }
   ]
