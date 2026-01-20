@@ -10,7 +10,29 @@
   "homepage": "https://galando.github.io/universal-ai-dev-framework/",
   "license": "MIT",
   "keywords": ["piv", "tdd", "methodology", "ai-development", "universal"],
-  "commands": "../.claude/commands/",
-  "skills": "../.claude/skills/",
-  "rules": "../.claude/rules/"
+  "commands": [
+    "./.claude/commands/bug_fix/rca.md",
+    "./.claude/commands/bug_fix/implement-fix.md",
+    "./.claude/commands/git/commit.md",
+    "./.claude/commands/piv_loop/prime.md",
+    "./.claude/commands/piv_loop/plan-feature.md",
+    "./.claude/commands/piv_loop/execute.md",
+    "./.claude/commands/product/create-prd.md",
+    "./.claude/commands/validation/validate.md",
+    "./.claude/commands/validation/code-review-fix.md",
+    "./.claude/commands/validation/learn.md",
+    "./.claude/commands/validation/execution-report.md",
+    "./.claude/commands/validation/code-review.md",
+    "./.claude/commands/validation/learning-status.md",
+    "./.claude/commands/validation/suggest-improvement.md",
+    "./.claude/commands/validation/system-review.md"
+  ],
+  "skills": [
+    "./.claude/skills/adaptive-learning/SKILL.md",
+    "./.claude/skills/api-design/SKILL.md",
+    "./.claude/skills/code-review/SKILL.md",
+    "./.claude/skills/security/SKILL.md",
+    "./.claude/skills/test-driven-development/SKILL.md",
+    "./.claude/skills/test-writing/SKILL.md"
+  ]
 }
