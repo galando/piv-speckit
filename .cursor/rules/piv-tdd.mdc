@@ -1,0 +1,29 @@
+---
+description: PIV TDD enforcement for test files
+globs: ["*Test*", "*.test.*", "*_test.*", "*.spec.*", "*Spec*"]
+alwaysApply: false
+---
+
+# TDD Requirements (MANDATORY)
+
+**RED → GREEN → REFACTOR** - No exceptions.
+
+## The Cycle
+1. 🔴 **RED**: Write failing test FIRST - test MUST fail before any implementation
+2. 🟢 **GREEN**: Write MINIMAL code to make test pass - no more, no less
+3. 🔵 **REFACTOR**: Improve code while keeping tests green
+
+## Rules
+- ❌ NEVER write implementation code before the test
+- ❌ NEVER skip TDD for "simple" code
+- ✅ Test must fail with clear assertion error
+- ✅ One logical assertion per test
+
+## Test Structure (Given-When-Then)
+```
+GIVEN: Setup test data and preconditions
+WHEN:  Execute the code being tested
+THEN:  Verify expected outcomes
+```
+
+<!-- PIV v1.0.0 -->

@@ -1,6 +1,6 @@
 # Installation Guide
 
-**How to install and set up the Claude Dev Framework (PIV) for your project**
+**How to install and set up the Universal AI Dev Framework (PIV) for your project**
 
 ---
 
@@ -28,7 +28,7 @@ Before you begin, ensure you have:
 
 ```bash
 # From your project directory
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+curl -s https://raw.githubusercontent.com/galando/universal-ai-dev-framework/main/scripts/piv.sh | bash
 ```
 
 That's it! The installer will:
@@ -42,7 +42,7 @@ That's it! The installer will:
 Run the same command to update:
 
 ```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+curl -s https://raw.githubusercontent.com/galando/universal-ai-dev-framework/main/scripts/piv.sh | bash
 ```
 
 The script auto-detects if you need installation or update.
@@ -70,7 +70,7 @@ curl -s .../piv.sh | bash -s -- --force
 
 ```bash
 # Clone this repository
-git clone https://github.com/galando/claude-dev-framework.git my-project
+git clone https://github.com/galando/universal-ai-dev-framework.git my-project
 cd my-project
 ```
 
@@ -253,7 +253,7 @@ If you encounter issues:
 
 1. Check the [troubleshooting section](#troubleshooting)
 2. Review [PIV Methodology](../../.claude/reference/methodology/PIV-METHODOLOGY.md)
-3. Open an issue on [GitHub](https://github.com/galando/claude-dev-framework/issues)
+3. Open an issue on [GitHub](https://github.com/galando/universal-ai-dev-framework/issues)
 
 ---
 

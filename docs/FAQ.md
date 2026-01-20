@@ -22,7 +22,7 @@ This methodology prevents common AI-assisted development issues like lack of con
 
 ```bash
 cd your-project
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+curl -s https://raw.githubusercontent.com/galando/universal-ai-dev-framework/main/scripts/piv.sh | bash
 ```
 
 The installer will:

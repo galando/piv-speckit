@@ -6,7 +6,7 @@
 
 ## Overview
 
-The adaptive learning system transforms the claude-dev-framework from a static rule enforcer into a self-improving quality system. After each code review, it automatically:
+The adaptive learning system transforms the universal-ai-dev-framework from a static rule enforcer into a self-improving quality system. After each code review, it automatically:
 
 - **Analyzes reviews** to identify recurring patterns and issues
 - **Extracts insights** about what works well and what doesn't

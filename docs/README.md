@@ -1,4 +1,4 @@
-# Claude Dev Framework Documentation
+# Universal AI Dev Framework Documentation
 
 **Complete guide to the PIV methodology for AI-assisted development**
 
@@ -7,7 +7,7 @@
 ## Quick Navigation
 
 - [← Back to Repository](../README.md)
-- [🌐 Visual Interactive Guide](https://galando.github.io/claude-dev-framework/)
+- [🌐 Visual Interactive Guide](https://galando.github.io/universal-ai-dev-framework/)
 
 ---
 
@@ -64,8 +64,8 @@
 |----------|------|
 | [FAQ](FAQ.md) | Frequently asked questions |
 | [Troubleshooting](troubleshooting.md) | Common issues and solutions |
-| [GitHub Issues](https://github.com/galando/claude-dev-framework/issues) | Report bugs |
-| [GitHub Discussions](https://github.com/galando/claude-dev-framework/discussions) | Ask questions |
+| [GitHub Issues](https://github.com/galando/universal-ai-dev-framework/issues) | Report bugs |
+| [GitHub Discussions](https://github.com/galando/universal-ai-dev-framework/discussions) | Ask questions |
 
 ---
 

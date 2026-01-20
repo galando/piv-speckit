@@ -1,14 +1,12 @@
-# Claude Dev Framework
+# Universal AI Dev Framework
 
-[![Claude Dev Framework](https://img.shields.io/badge/Claude_Dev_Framework-AI_Development-blue?style=for-the-badge&logo=anthropic)](https://github.com/galando/claude-dev-framework)
+[![Universal AI Dev Framework](https://img.shields.io/badge/Universal_AI_Dev-Framework-blue?style=for-the-badge)](https://github.com/galando/universal-ai-dev-framework)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Visual Guide](https://img.shields.io/badge/🌐_Visual_Guide-Interactive_Methodology-467fd9?style=for-the-badge&logo=github)](https://galando.github.io/claude-dev-framework/)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/galando)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/galando/claude-dev-framework)
+[![Visual Guide](https://img.shields.io/badge/🌐_Visual_Guide-Interactive-467fd9?style=for-the-badge)](https://galando.github.io/universal-ai-dev-framework/)
 
-**Universal PIV (Prime-Implement-Validate) methodology for AI-assisted development with Claude Code.**
+**Universal PIV (Prime-Implement-Validate) methodology for AI-assisted development.**
 
-A technology-agnostic, extensible framework with comprehensive documentation, rules, and templates to accelerate development while maintaining code quality.
+Works with **Claude Code**, **Cursor**, **GitHub Copilot**, **OpenAI Codex**, and 20+ AI coding tools.
 
 ---
 
@@ -16,59 +14,74 @@ A technology-agnostic, extensible framework with comprehensive documentation, ru
 
 **PIV = Prime → Implement → Validate**
 
-A development methodology created by **Cole Medin** specifically for AI-assisted software development:
+A development methodology for AI-assisted software development:
 
 - **Prime**: Load codebase context before making changes
-- **Implement**: Plan features, then execute (with strict TDD)
+- **Implement**: Write tests FIRST (strict TDD), then minimal code
 - **Validate**: Automatic testing and verification
 
-[→ Interactive Visual Guide](https://galando.github.io/claude-dev-framework/) | [→ Full Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md)
+[→ Interactive Visual Guide](https://galando.github.io/universal-ai-dev-framework/) | [→ Full Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md)
 
 ---
 
-## Quick Start
+## Installation
 
-### One-Line Install
+### Claude Code (Full Experience) ⭐ Recommended
 
 ```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+# Add marketplace
+/plugin marketplace add galando/universal-ai-dev-framework/marketplace
+
+# Install PIV
+/plugin install piv@universal-ai-dev-framework
 ```
 
-### Your First Feature (3 minutes)
+**Commands:** `/piv:prime`, `/piv:plan-feature`, `/piv:execute`, `/piv:validate`
+
+**Features:** Auto-activating skills (TDD, code-review, security), full reference docs, agent context system.
+
+### Cursor / GitHub Copilot / Other AI Tools
 
 ```bash
-# 1. Prime - Load context
-/piv_loop:prime
-
-# 2. Plan - Create implementation plan
-/piv_loop:plan-feature "Add user authentication"
-
-# 3. Execute - Implement with strict TDD
-/piv_loop:execute
-
-# 4. Validation runs automatically!
+curl -s https://raw.githubusercontent.com/galando/universal-ai-dev-framework/main/scripts/piv.sh | bash
 ```
 
-**TDD is enforced:** 🔴 RED (write failing test) → 🟢 GREEN (minimal code) → 🔵 REFACTOR (improve)
+**Generates:** `AGENTS.md` - universal AI agent instructions that Cursor and other tools read automatically.
 
-### Updating
+---
 
-Run the same command to update your installation:
+## Tool Comparison
 
-```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+| Feature | Claude Code (Plugin) | Cursor / Others (Script) |
+|---------|---------------------|--------------------------|
+| PIV Methodology | ✅ Full | ✅ Compact (AGENTS.md) |
+| Slash Commands | ✅ `/piv:*` | ❌ |
+| Auto-Skills | ✅ TDD, Review, Security | ❌ |
+| Context Loading | Smart (on-demand) | Always (~2500 tokens) |
+| Auto-Update | ✅ Plugin system | Manual |
+| Installation | `/plugin install` | `curl \| bash` |
+
+---
+
+## Architecture
+
 ```
-
-The script auto-detects if you need installation or update.
-
-**Pin to a specific version:**
-```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --version 1.1.0 --pin
-```
-
-**Preview changes without applying:**
-```bash
-curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --dry-run
+┌─────────────────────────────────────────────────────────────────┐
+│                     SOURCE OF TRUTH                              │
+│                     /.claude/ directory                         │
+└───────────────────────────────┬─────────────────────────────────┘
+                                │
+        ┌───────────────────────┼───────────────────────────────┐
+        ▼                       ▼                               ▼
+┌───────────────┐      ┌───────────────┐              ┌───────────────┐
+│  CLAUDE CODE  │      │    CURSOR     │              │ OTHER TOOLS   │
+│   (Plugin)    │      │   (Script)    │              │   (Script)    │
+│               │      │               │              │               │
+│ /piv:prime    │      │  AGENTS.md    │              │  AGENTS.md    │
+│ /piv:plan     │      │  (< 500 lines)│              │               │
+│ /piv:execute  │      │               │              │               │
+│ + Skills      │      │               │              │               │
+└───────────────┘      └───────────────┘              └───────────────┘
 ```
 
 ---
@@ -81,7 +94,7 @@ curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scri
 | ⚡ **Skills System** | Auto-activating behaviors enforce best practices in real-time |
 | 🧠 **Adaptive Learning** | Framework gets smarter with every feature you build |
 | 🔧 **Technology Agnostic** | Works with Spring Boot, Node.js, Python, React, and more |
-| ⚙️ **Commands** | `/piv_loop:prime`, `/piv_loop:plan-feature`, `/piv_loop:execute`, `/validation:validate` |
+| ⚙️ **Commands** | `/piv:prime`, `/piv:plan-feature`, `/piv:execute`, `/piv:validate` |
 
 [→ See all features](docs/features/) | [→ Full commands list](docs/getting-started/02-quick-start.md#piv-commands-reference)
 
@@ -92,9 +105,8 @@ curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scri
 | Guide | Description |
 |-------|-------------|
 | [Quick Start](docs/getting-started/02-quick-start.md) | Get started in 5 minutes |
-| [Installation](docs/getting-started/01-installation.md) | Detailed installation guide |
-| [Your First Feature](docs/getting-started/03-your-first-feature.md) | Step-by-step walkthrough |
 | [PIV Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) | Complete methodology guide |
+| [Cursor Support](docs/getting-started/05-cursor-support.md) | Using PIV with Cursor |
 | [All Documentation](docs/README.md) | Full documentation index |
 
 ---
@@ -104,22 +116,15 @@ curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scri
 **Backend:** Spring Boot • Node.js/Express • Python/FastAPI
 **Frontend:** React + TypeScript
 **Database:** PostgreSQL
-**DevOps:** Docker
 
 [→ Add new technologies](docs/extending/01-adding-technologies.md)
-
----
-
-## Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## Repository Structure
 
 ```
-claude-dev-framework/
+universal-ai-dev-framework/
 ├── .claude/                     # Claude Code configuration
 │   ├── CLAUDE.md                # Project instructions
 │   ├── agents/                  # Artifact directories
@@ -127,27 +132,22 @@ claude-dev-framework/
 │   ├── reference/               # Complete guides
 │   ├── rules/                   # Coding rules
 │   └── skills/                  # Auto-activating behaviors
+├── .claude-plugin/              # Claude Code plugin manifest
+├── marketplace/                 # Plugin marketplace catalog
+├── AGENTS.md                    # Universal AI agent instructions
+├── .cursor/rules/               # Cursor auto-attach rules
 ├── .github/                     # GitHub configuration
-│   ├── workflows/               # CI/CD workflows
-│   └── ISSUE_TEMPLATE/          # Issue templates
 ├── docs/                        # Comprehensive documentation
-│   ├── getting-started/         # Getting started guides
-│   ├── features/                # Feature documentation
-│   ├── extending/               # Extension guides
-│   ├── methodology/             # Methodology deep dives
-│   └── index.html               # GitHub Pages site
 ├── scripts/                     # Utility scripts
-│   └── install/                 # Installer scripts
 ├── technologies/                # Technology templates
-│   ├── backend/                 # Backend frameworks
-│   ├── frontend/                # Frontend frameworks
-│   ├── database/                # Databases
-│   └── devops/                  # DevOps tools
-├── CHANGELOG.md                 # Changelog
-├── CONTRIBUTING.md              # Contributing guidelines
-├── LICENSE                      # MIT License
-└── README.md                    # This file
+└── VERSION                      # Single source of truth for versioning
 ```
+
+---
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
@@ -165,4 +165,4 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-**Made with ❤️ for the Claude Code community**
+**Made with ❤️ for the AI-assisted development community**

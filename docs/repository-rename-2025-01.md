@@ -1,24 +1,24 @@
 # Repository Rename: January 2025
 
 **Date**: January 15, 2025
-**Change**: `claude-piv-skeleton` → `claude-dev-framework`
+**Change**: `claude-piv-skeleton` → `universal-ai-dev-framework`
 
 ---
 
 ## Summary
 
-This repository has been renamed from **claude-piv-skeleton** to **claude-dev-framework** to better communicate its purpose as a production-ready development framework for Claude Code.
+This repository has been renamed from **claude-piv-skeleton** to **universal-ai-dev-framework** to better communicate its purpose as a production-ready development framework for Claude Code.
 
 ## What Changed
 
 ### Repository Name
 - **Old**: `claude-piv-skeleton`
-- **New**: `claude-dev-framework`
-- **URL**: https://github.com/galando/claude-dev-framework
+- **New**: `universal-ai-dev-framework`
+- **URL**: https://github.com/galando/universal-ai-dev-framework
 
 ### GitHub Pages
 - **Old URL**: https://galando.github.io/claude-piv-skeleton/
-- **New URL**: https://galando.github.io/claude-dev-framework/
+- **New URL**: https://galando.github.io/universal-ai-dev-framework/
 
 ### Documentation Updates
 - All repository URLs updated throughout documentation
@@ -43,7 +43,7 @@ If you have a local clone of this repository, update your remote URL:
 
 ```bash
 cd claude-piv-skeleton  # or your local directory name
-git remote set-url origin https://github.com/galando/claude-dev-framework.git
+git remote set-url origin https://github.com/galando/universal-ai-dev-framework.git
 git fetch origin
 ```
 
@@ -58,12 +58,12 @@ If you've referenced this repository in documentation, you can update the URLs a
 git clone https://github.com/galando/claude-piv-skeleton.git
 
 # New (preferred)
-git clone https://github.com/galando/claude-dev-framework.git
+git clone https://github.com/galando/universal-ai-dev-framework.git
 ```
 
 ## Rationale
 
-### Why "Claude Dev Framework"?
+### Why "Universal AI Dev Framework"?
 
 The new name better communicates the project's value:
 
@@ -102,4 +102,4 @@ If you have questions or encounter any issues after the rename, please:
 
 ## Thank You
 
-Thanks for using Claude Dev Framework! The rename reflects the project's evolution and commitment to providing the best AI-assisted development experience for Claude Code users.
+Thanks for using Universal AI Dev Framework! The rename reflects the project's evolution and commitment to providing the best AI-assisted development experience for Claude Code users.

@@ -1,0 +1,30 @@
+---
+description: PIV security rules for authentication and security code
+globs: ["*Auth*", "*Security*", "*Password*", "*Token*", "*Credential*", "*Session*"]
+alwaysApply: false
+---
+
+# Security Rules
+
+## Golden Rule
+**NEVER trust user input.**
+
+## Input Validation
+- Validate structure, type, format, length, range
+- Sanitize data before use
+- Use parameterized queries (prevent SQL injection)
+- Escape output (prevent XSS)
+
+## Authentication & Passwords
+- Use bcrypt/Argon2 (NEVER MD5/SHA for passwords)
+- Strong JWT secrets (256+ bits)
+- Short token expiration (1 hour)
+- Implement rate limiting
+
+## Data Protection
+- HTTPS in production
+- Encrypt sensitive data at rest
+- Environment variables for secrets
+- NEVER commit secrets to git
+
+<!-- PIV v1.0.0 -->

@@ -1,0 +1,30 @@
+---
+description: PIV API design rules for controllers and routes
+globs: ["*Controller*", "*Router*", "*Route*", "routes/*", "controllers/*", "*Handler*"]
+alwaysApply: false
+---
+
+# API Design Rules
+
+## RESTful Principles
+- **Nouns over verbs**: `/users` not `/getUsers`
+- **Plural nouns**: `/users` not `/user`
+- **HTTP verbs**: GET (read), POST (create), PUT (update), DELETE (remove)
+- **Resource hierarchy**: `/users/{id}/posts`
+
+## Response Format
+```json
+// Success
+{ "data": {...}, "meta": {...} }
+
+// Error
+{ "error": "ErrorCode", "message": "Human-readable description" }
+```
+
+## Best Practices
+- Use proper HTTP status codes (200, 201, 400, 404, 500)
+- Validate all input
+- Version your API (`/v1/users`)
+- Return consistent response structures
+
+<!-- PIV v1.0.0 -->

@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-**Solutions to common issues with Claude Dev Framework**
+**Solutions to common issues with Universal AI Dev Framework**
 
 ---
 

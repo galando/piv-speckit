@@ -1,6 +1,6 @@
-# Claude PIV Skeleton
+# Universal AI Dev Framework
 
-**Universal PIV (Prime-Implement-Validate) methodology for Claude Code projects**
+**Universal PIV (Prime-Implement-Validate) methodology for AI-assisted development**
 
 ---
 
@@ -57,4 +57,4 @@ VALIDATE → Runs automatically
 
 ---
 
-**PIV Version:** 1.0 | **Claude Code Compatible**
+**PIV Version:** 1.0 | **Claude Code Plugin Available**

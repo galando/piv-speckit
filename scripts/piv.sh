@@ -1,11 +1,6 @@
 #!/bin/bash
-# piv.sh - Unified PIV installer and updater
-# Auto-detects whether to install fresh or update existing
-#
-# Usage:
-#   curl -s .../piv.sh | bash
-#   bash piv.sh --help
-#   bash piv.sh --version 1.1.0 --pin
+# piv.sh - Universal AI Dev Framework installer for Cursor and other AI tools
+# For Claude Code, use: /plugin install piv@universal-ai-dev-framework
 
 set -euo pipefail
 
@@ -13,17 +8,14 @@ set -euo pipefail
 # CONFIGURATION
 ################################################################################
 
-readonly SCRIPT_NAME="piv.sh"
-readonly SCRIPT_VERSION="1.1.0"
+readonly SCRIPT_VERSION="2.0.0"
+readonly REPO_URL="https://github.com/galando/universal-ai-dev-framework"
+readonly REPO_NAME="universal-ai-dev-framework"
 
 # User options
-# PIV_VERSION is reserved for future use (will support installing specific versions from remote)
-PIV_VERSION="${PIV_VERSION:-latest}"
-PINNED_VERSION=""
-PIV_TAG=""  # Specific git tag to install from
+PIV_TAG=""
 DRY_RUN=false
-FORCE=false
-WANT_VERSION=false
+AUTO_CONFIRM=false
 
 # Working directory
 ORIGINAL_DIR="$(pwd)"
@@ -35,7 +27,7 @@ SCRIPT_DIR=""
 
 # Check if running from stdin (via curl | bash)
 if [ -z "${BASH_SOURCE+x}" ] || [ "${BASH_SOURCE[0]}" = "bash" ] || [ "${BASH_SOURCE[0]}" = "/dev/stdin" ]; then
-    echo "PIV Installer - Downloading..."
+    echo "🌐 Universal AI Dev Framework - Downloading..."
 
     # Create temp directory
     TEMP_DIR=$(mktemp -d) || {
@@ -54,21 +46,21 @@ if [ -z "${BASH_SOURCE+x}" ] || [ "${BASH_SOURCE[0]}" = "bash" ] || [ "${BASH_SO
     echo "Downloading from GitHub..."
     if [ -n "$PIV_TAG" ]; then
         echo "Fetching tag: $PIV_TAG"
-        if ! git clone --depth 1 --branch "$PIV_TAG" -q https://github.com/galando/claude-dev-framework.git "$TEMP_DIR" 2>/dev/null; then
+        if ! git clone --depth 1 --branch "$PIV_TAG" -q "https://github.com/galando/$REPO_NAME.git" "$TEMP_DIR" 2>/dev/null; then
             echo "Error: Failed to download tag '$PIV_TAG'"
             rm -rf "$TEMP_DIR"
             exit 1
         fi
     else
-        if ! git clone --depth 1 -q https://github.com/galando/claude-dev-framework.git "$TEMP_DIR" 2>/dev/null; then
+        if ! git clone --depth 1 -q "https://github.com/galando/$REPO_NAME.git" "$TEMP_DIR" 2>/dev/null; then
             echo "Error: Failed to download"
             rm -rf "$TEMP_DIR"
             exit 1
         fi
     fi
 
-    # Change to original directory
-    cd "$ORIGINAL_DIR" || cd /
+    # Change to original directory (with fallback)
+    cd "$ORIGINAL_DIR" 2>/dev/null || cd /
 
     # Run the real script with all arguments
     bash "$TEMP_DIR/scripts/piv.sh" "$@" < /dev/tty
@@ -87,27 +79,9 @@ fi
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Source all required modules
-source "$SCRIPT_DIR/install/core.sh"
-source "$SCRIPT_DIR/install/backup.sh"
-source "$SCRIPT_DIR/install/detect-tech.sh"
-source "$SCRIPT_DIR/install/verify.sh"
-source "$SCRIPT_DIR/install/merge-mode.sh"
-source "$SCRIPT_DIR/install/separate-mode.sh"
-source "$SCRIPT_DIR/install/unified.sh"
-source "$SCRIPT_DIR/install/update.sh"
-
-# Set PIV source directory
-if [ -f "$SCRIPT_DIR/../.claude/reference/methodology/PIV-METHODOLOGY.md" ]; then
-    PIV_SOURCE_DIR="$(dirname "$SCRIPT_DIR")"
-elif [ -f "$SCRIPT_DIR/../.claude/PIV-METHODOLOGY.md" ]; then
-    PIV_SOURCE_DIR="$(dirname "$SCRIPT_DIR")"
-else
-    echo "Error: PIV source not found"
-    exit 1
-fi
-
-export PIV_SOURCE_DIR SCRIPT_DIR
+# Source generators
+source "$SCRIPT_DIR/install/generate-agents-md.sh"
+source "$SCRIPT_DIR/install/generate-cursor-rules.sh"
 
 ################################################################################
 # ARGUMENT PARSING
@@ -115,44 +89,41 @@ export PIV_SOURCE_DIR SCRIPT_DIR
 
 print_usage() {
     cat << EOF
-Usage: $SCRIPT_NAME [OPTIONS]
+Usage: piv.sh [OPTIONS]
 
-Unified PIV installer and updater. Auto-detects install vs update.
+Universal AI Dev Framework installer for Cursor and other AI tools.
 
 OPTIONS:
-    --tag vX.Y.Z       Install from specific release tag (e.g., v1.1.0)
-    --version X.Y.Z    Pin to specific version
-    --pin              Remember version for future updates
+    --tag vX.Y.Z       Install from specific release tag (e.g., v1.0.0)
     --dry-run          Show changes without applying
-    --force, -y        Skip confirmation prompts (auto-confirm)
     --help             Show this help message
     -v, --version      Show version information
 
 EXAMPLES:
-    # Fresh install or update (auto-detected)
-    curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+    # Fresh install
+    curl -s $REPO_URL/raw/main/scripts/piv.sh | bash
 
     # Install specific release
-    curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --tag v1.1.0
-
-    # Pin to version 1.1.0
-    bash piv.sh --version 1.1.0 --pin
+    curl -s $REPO_URL/raw/main/scripts/piv.sh | bash -s -- --tag v1.0.0
 
     # Preview changes without applying
     bash piv.sh --dry-run
 
-    # Update without confirmation
-    bash piv.sh --force
-    bash piv.sh -y
+For Claude Code full experience:
+    /plugin marketplace add galando/universal-ai-dev-framework/marketplace
+    /plugin install piv@universal-ai-dev-framework
 
-For more information: https://github.com/galando/claude-dev-framework
+For more information: $REPO_URL
 EOF
 }
 
 show_version() {
+    local version
+    version=$(cat "$SCRIPT_DIR/../VERSION" 2>/dev/null || echo "unknown")
     cat << EOF
-PIV Unified Script v$SCRIPT_VERSION
-PIV Framework Version: $(get_version "$SCRIPT_DIR/..")
+Universal AI Dev Framework Installer v$SCRIPT_VERSION
+PIV Framework Version: $version
+Repository: $REPO_URL
 EOF
 }
 
@@ -167,22 +138,8 @@ while [[ $# -gt 0 ]]; do
             PIV_TAG="$2"
             shift 2
             ;;
-        --version=*)
-            PIV_VERSION="${1#*=}"
-            PINNED_VERSION="$PIV_VERSION"
-            shift
-            ;;
-        --pin)
-            PINNED_VERSION="$PIV_VERSION"
-            shift
-            ;;
         --dry-run)
             DRY_RUN=true
-            shift
-            ;;
-        --force|-y|--yes)
-            FORCE=true
-            AUTO_CONFIRM=true
             shift
             ;;
         --help|-h)
@@ -190,8 +147,8 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         -v|--version)
-            WANT_VERSION=true
-            shift
+            show_version
+            exit 0
             ;;
         *)
             echo "Unknown option: $1"
@@ -201,62 +158,92 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Show version and exit if requested
-if [ "$WANT_VERSION" = true ]; then
-    show_version
-    exit 0
-fi
+################################################################################
+# BANNER
+################################################################################
 
-# Export options for subshells
-export DRY_RUN FORCE AUTO_CONFIRM PINNED_VERSION PIV_TAG
+print_banner() {
+    cat << "EOF"
+
+╔═══════════════════════════════════════════════════════════════════════╗
+║                                                                        ║
+║            Universal AI Dev Framework - PIV Methodology                ║
+║                                                                        ║
+║      Works with: Cursor • GitHub Copilot • OpenAI Codex • More        ║
+║                                                                        ║
+║      For Claude Code full experience:                                  ║
+║      /plugin marketplace add galando/universal-ai-dev-framework/marketplace
+║      /plugin install piv@universal-ai-dev-framework                    ║
+║                                                                        ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+EOF
+}
+
+################################################################################
+# CONFIRMATION
+################################################################################
+
+confirm_install() {
+    if [ "$AUTO_CONFIRM" = true ]; then
+        return 0
+    fi
+
+    # Check if already installed
+    if [ -f "$ORIGINAL_DIR/AGENTS.md" ] && [ -d "$ORIGINAL_DIR/.cursor/rules" ]; then
+        echo "⚠️  PIV already installed in this directory"
+        echo ""
+        read -p "Reinstall/update? [y/N]: " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Aborted."
+            exit 0
+        fi
+    fi
+
+    return 0
+}
 
 ################################################################################
 # MAIN FLOW
 ################################################################################
 
-print_welcome_unified() {
-    cat << "EOF"
-
-╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║              PIV Framework Installer/Updater             ║
-║                                                           ║
-║     Prime → Implement → Validate methodology              ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-
-EOF
-
-    print_info "PIV: Universal methodology for AI-assisted development"
-    echo ""
-}
-
 main() {
-    # Set error trap
-    set_error_trap
+    local target_dir="${1:-$ORIGINAL_DIR}"
 
-    # Print welcome
-    print_welcome_unified
+    print_banner
+    confirm_install
 
-    # Ensure we're in the project directory
-    cd "$ORIGINAL_DIR" || {
-        print_error "Cannot access project directory"
-        exit 1
-    }
-
-    # Route to install or update
-    route_to_install_or_update
-
-    # Print success
-    echo ""
-    print_success "Done!"
+    echo "📦 Installing Universal AI Dev Framework..."
     echo ""
 
-    # Show next steps
-    print_info "Quick Start:"
-    echo "  1. Load context: /piv_loop:prime"
-    echo "  2. Plan feature: /piv_loop:plan-feature \"description\""
-    echo "  3. Implement: /piv_loop:execute"
+    # 1. Generate AGENTS.md (for all AI tools)
+    echo "📄 Generating AGENTS.md..."
+    generate_agents_md "$target_dir/AGENTS.md"
+
+    # 2. Generate .cursor/rules/ (for Cursor users)
+    echo ""
+    echo "📁 Generating .cursor/rules/..."
+    generate_cursor_rules "$target_dir"
+
+    echo ""
+    echo "════════════════════════════════════════════════════════════════════"
+    echo "✅ Universal AI Dev Framework installed successfully!"
+    echo "════════════════════════════════════════════════════════════════════"
+    echo ""
+    echo "📄 AGENTS.md - Core PIV methodology (works with ALL AI tools)"
+    echo "📁 .cursor/rules/ - Auto-attach rules for Cursor"
+    echo ""
+    echo "For Cursor users:"
+    echo "  • AGENTS.md is loaded automatically"
+    echo "  • .cursor/rules/ auto-attach based on file type"
+    echo "  • Edit a *Test.java file → TDD rules activate"
+    echo "  • Edit a *Controller.java → API rules activate"
+    echo ""
+    echo "For other AI tools (Copilot, Codex, etc.):"
+    echo "  • AGENTS.md provides PIV methodology guidance"
+    echo ""
+    echo "📚 Learn more: $REPO_URL"
     echo ""
 }
 

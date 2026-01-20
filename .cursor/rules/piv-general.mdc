@@ -1,0 +1,22 @@
+---
+description: PIV Framework core development rules
+globs: []
+alwaysApply: true
+---
+
+# PIV Development Rules
+
+Follow these rules for all code in this project.
+
+## Core Principles
+- **Understand first**: Read existing code before modifying
+- **Match patterns**: Follow existing codebase conventions
+- **Minimal changes**: Only change what's necessary
+- **Self-documenting**: Clear names over comments
+
+## DRY & KISS
+- Check for existing implementations before creating new
+- Prefer simple over clever solutions
+- Single source of truth for each piece of knowledge
+
+<!-- PIV v1.0.0 -->
