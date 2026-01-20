@@ -1,0 +1,15 @@
+{
+  "name": "universal-ai-dev-framework",
+  "description": "PIV methodology and universal AI development tools",
+  "owner": {
+    "name": "galando",
+    "url": "https://github.com/galando"
+  },
+  "plugins": [
+    {
+      "name": "piv",
+      "source": "../",
+      "description": "PIV methodology with TDD, code review, and development best practices"
+    }
+  ]
+}
