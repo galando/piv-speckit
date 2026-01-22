@@ -1,10 +1,13 @@
 #!/bin/bash
-# bump-version.sh - Update version in VERSION file and regenerate AGENTS.md/.cursor/rules
+# bump-version.sh - Update VERSION (single source of truth) and propagate to all files
+# Updates: VERSION, .claude-plugin/plugin.json, scripts/piv.sh, AGENTS.md, .cursor/rules/
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VERSION_FILE="$SCRIPT_DIR/../VERSION"
+PLUGIN_FILE="$SCRIPT_DIR/../.claude-plugin/plugin.json"
+INSTALLER_SCRIPT="$SCRIPT_DIR/piv.sh"
 
 show_usage() {
     cat << EOF
@@ -23,7 +26,9 @@ Example:
   bump-version.sh 2.0.0
 
 Files updated:
-  - VERSION
+  - VERSION (single source of truth)
+  - .claude-plugin/plugin.json
+  - scripts/piv.sh
   - AGENTS.md
   - .cursor/rules/*
 EOF
@@ -74,6 +79,22 @@ bump_version() {
     echo "$new_version" > "$VERSION_FILE"
     echo "✅ Updated: VERSION"
 
+    # Update plugin.json
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/\"version\": \".*\"/\"version\": \"$new_version\"/" "$PLUGIN_FILE"
+    else
+        sed -i "s/\"version\": \".*\"/\"version\": \"$new_version\"/" "$PLUGIN_FILE"
+    fi
+    echo "✅ Updated: .claude-plugin/plugin.json"
+
+    # Update piv.sh SCRIPT_VERSION
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/readonly SCRIPT_VERSION=\".*\"/readonly SCRIPT_VERSION=\"$new_version\"/" "$INSTALLER_SCRIPT"
+    else
+        sed -i "s/readonly SCRIPT_VERSION=\".*\"/readonly SCRIPT_VERSION=\"$new_version\"/" "$INSTALLER_SCRIPT"
+    fi
+    echo "✅ Updated: scripts/piv.sh"
+
     # Regenerate AGENTS.md and .cursor/rules/
     echo ""
     echo "Regenerating files with new version..."
@@ -93,6 +114,8 @@ bump_version() {
     echo ""
     echo "Updated files:"
     echo "  - VERSION: $new_version"
+    echo "  - .claude-plugin/plugin.json"
+    echo "  - scripts/piv.sh"
     echo "  - AGENTS.md"
     echo "  - .cursor/rules/*"
     echo ""

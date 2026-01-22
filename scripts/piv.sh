@@ -8,7 +8,7 @@ set -euo pipefail
 # CONFIGURATION
 ################################################################################
 
-readonly SCRIPT_VERSION="2.0.0"
+readonly SCRIPT_VERSION="2.0.1"
 readonly REPO_URL="https://github.com/galando/piv-speckit"
 readonly REPO_NAME="universal-ai-dev-framework"
 
