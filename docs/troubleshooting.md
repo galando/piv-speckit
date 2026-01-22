@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-**Solutions to common issues with Universal AI Dev Framework**
+**Solutions to common issues with PIV Spec-Kit**
 
 ---
 

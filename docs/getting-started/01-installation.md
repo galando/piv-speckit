@@ -1,6 +1,6 @@
 # Installation Guide
 
-**How to install and set up the Universal AI Dev Framework (PIV) for your project**
+**How to install and set up PIV Spec-Kit for your project**
 
 ---
 

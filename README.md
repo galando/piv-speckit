@@ -306,12 +306,19 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 ## Documentation
 
+### Getting Started
 | Guide | Description |
 |-------|-------------|
 | [Quick Start](docs/getting-started/02-quick-start.md) | Get started in 5 minutes |
 | [PIV Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) | Complete methodology guide |
-| [Cursor Support](docs/getting-started/05-cursor-support.md) | Using PIV with Cursor, Copilot, and more |
-| [All Documentation](docs/README.md) | Full documentation index |
+
+**[→ Documentation Hub](docs/README.md)** — Full index: Features, Commands, Support, Extending
+
+### Tool-Specific Guides
+| Guide | Description |
+|-------|-------------|
+| [Cursor Guide](docs/getting-started/05-cursor-guide.md) | Complete guide for Cursor users |
+| [GitHub Copilot Guide](docs/getting-started/06-copilot-guide.md) | Complete guide for Copilot users |
 
 ---
 
@@ -338,7 +345,7 @@ piv-speckit/
 │   └── skills/                  # Auto-activating behaviors
 ├── .claude-plugin/              # Claude Code plugin manifest
 ├── marketplace/                 # Plugin marketplace catalog
-├── AGENTS.md                    # Universal AI agent instructions
+├── AGENTS.md                    # PIV methodology for AI tools
 ├── .cursor/rules/               # Cursor auto-attach rules
 ├── .github/                     # GitHub configuration
 ├── docs/                        # Comprehensive documentation
