@@ -24,7 +24,7 @@ This guide will get you up and running with the PIV methodology quickly.
 
 **Ask Claude Code**:
 ```
-Run /piv_loop:prime to load the project context
+Run /piv-speckit:prime to load the project context
 ```
 
 **What happens**:
@@ -45,12 +45,12 @@ Run /piv_loop:prime to load the project context
 
 **Ask Claude Code**:
 ```
-Use /piv_loop:plan-feature to create a plan for adding [your feature]
+Use /piv-speckit:plan-feature to create a plan for adding [your feature]
 ```
 
 **Example**:
 ```
-Use /piv_loop:plan-feature to create a plan for adding user authentication
+Use /piv-speckit:plan-feature to create a plan for adding user authentication
 ```
 
 **What happens**:
@@ -66,7 +66,7 @@ Use /piv_loop:plan-feature to create a plan for adding user authentication
 
 **Ask Claude Code**:
 ```
-Use /piv_loop:execute to implement the plan
+Use /piv-speckit:execute to implement the plan
 ```
 
 **What happens**:
@@ -124,7 +124,7 @@ Implement this change: Add a timestamp field to the User entity
 
 **Ask Claude Code**:
 ```
-Run /validation:learn to analyze code reviews and extract insights
+Run /piv-speckit:learn to analyze code reviews and extract insights
 ```
 
 **What it does**:
@@ -152,22 +152,22 @@ Run /validation:learn to analyze code reviews and extract insights
 
 ```bash
 # 1. Prime context
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Plan feature
-/piv_loop:plan-feature "Add user authentication"
+/piv-speckit:plan-feature "Add user authentication"
 
 # 3. Review plan (in .claude/agents/plans/)
 # Edit if needed
 
 # 4. Execute plan
-/piv_loop:execute
+/piv-speckit:execute
 
 # 5. Validation runs automatically
 # ✨ No manual step needed!
 
 # 6. Review results
-/validation:execution-report
+/piv-speckit:execution-report
 ```
 
 **Total Time**: 5-15 minutes (depending on complexity)
@@ -176,7 +176,7 @@ Run /validation:learn to analyze code reviews and extract insights
 
 ```bash
 # 1. Prime context (if not already done)
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Implement fix directly
 Fix the bug in UserService where null pointer occurs
@@ -190,7 +190,7 @@ Fix the bug in UserService where null pointer occurs
 
 ```bash
 # When switching to a new session or project
-/piv_loop:prime
+/piv-speckit:prime
 ```
 
 **Total Time**: 30 seconds
@@ -203,22 +203,22 @@ Fix the bug in UserService where null pointer occurs
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/piv_loop:prime` | Load context | New session, context switch |
-| `/piv_loop:plan-feature "desc"` | Create plan | Complex features, refactoring |
-| `/piv_loop:execute` | Implement | Execute from plan |
-| `/validation:validate` | Run validation | Manual validation (optional) |
-| `/validation:code-review` | Code review | Detailed technical review |
-| `/validation:execution-report` | View report | See what was executed |
-| `/validation:learn` | **Extract learnings** | **After code reviews 🆕** |
-| `/validation:learning-status` | **View learning metrics** | **Check progress 🆕** |
+| `/piv-speckit:prime` | Load context | New session, context switch |
+| `/piv-speckit:plan-feature "desc"` | Create plan | Complex features, refactoring |
+| `/piv-speckit:execute` | Implement | Execute from plan |
+| `/piv-speckit:validate` | Run validation | Manual validation (optional) |
+| `/piv-speckit:code-review` | Code review | Detailed technical review |
+| `/piv-speckit:execution-report` | View report | See what was executed |
+| `/piv-speckit:learn` | **Extract learnings** | **After code reviews 🆕** |
+| `/piv-speckit:learning-status` | **View learning metrics** | **Check progress 🆕** |
 
 ### Utility Commands
 
 | Command | Purpose |
 |---------|---------|
 | `/commit` | Create atomic commit |
-| `/github_bug_fix:rca` | Root cause analysis |
-| `/github_bug_fix:implement-fix` | Implement bug fix from RCA |
+| `/piv-speckit:rca` | Root cause analysis |
+| `/piv-speckit:implement-fix` | Implement bug fix from RCA |
 
 ---
 
@@ -247,23 +247,23 @@ Fix the bug in UserService where null pointer occurs
 
 ```bash
 # 1. Prime
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Plan
-/piv_loop:plan-feature "Add REST API endpoint for creating users"
+/piv-speckit:plan-feature "Add REST API endpoint for creating users"
 
 # 3. Execute
-/piv_loop:execute
+/piv-speckit:execute
 
 # 4. Review
-/validation:execution-report
+/piv-speckit:execution-report
 ```
 
 ### Example 2: Fix Bug
 
 ```bash
 # 1. Prime (if needed)
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Implement directly
 Fix the bug where user email validation doesn't reject invalid domains
@@ -275,13 +275,13 @@ Fix the bug where user email validation doesn't reject invalid domains
 
 ```bash
 # 1. Prime
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Plan
-/piv_loop:plan-feature "Refactor UserService to use repository pattern"
+/piv-speckit:plan-feature "Refactor UserService to use repository pattern"
 
 # 3. Execute
-/piv_loop:execute
+/piv-speckit:execute
 ```
 
 ---
@@ -314,7 +314,7 @@ Fix the bug where user email validation doesn't reject invalid domains
 
 ### "Claude doesn't understand my codebase"
 
-**Solution**: Run `/piv_loop:prime` to reload context
+**Solution**: Run `/piv-speckit:prime` to reload context
 
 ### "Plan doesn't match what I want"
 
@@ -323,9 +323,9 @@ Fix the bug where user email validation doesn't reject invalid domains
 ### "Validation fails"
 
 **Solution**:
-1. Check validation report: `/validation:execution-report`
+1. Check validation report: `/piv-speckit:execution-report`
 2. Fix issues manually or ask Claude to fix
-3. Re-run: `/validation:validate`
+3. Re-run: `/piv-speckit:validate`
 
 ### "Execute makes unexpected changes"
 
@@ -354,7 +354,7 @@ Feature Implementation
 Code Review (automatic)
         ↓
 Adaptive-Learning Suggests:
-"Run /validation:learn?"
+"Run /piv-speckit:learn?"
         ↓
 Learning Analysis:
 - Parse reviews
@@ -375,32 +375,32 @@ Framework Gets Smarter! 🧠
 ```
 ✅ Code review complete.
 
-Capture learnings? Run /validation:learn
+Capture learnings? Run /piv-speckit:learn
 ```
 
 **2. Extract insights:**
 ```bash
-/validation:learn
+/piv-speckit:learn
 ```
 
 **3. Check your learning status:**
 ```bash
-/validation:learning-status
+/piv-speckit:learning-status
 ```
 
 **4. If recurring issues found, generate improvements:**
 ```bash
-/validation:suggest-improvement rule "Add input validation pattern"
+/piv-speckit:suggest-improvement rule "Add input validation pattern"
 ```
 
 ### When to Use Learning
 
 | Scenario | Action |
 |----------|--------|
-| After code review | `/validation:learn` (suggested automatically) |
-| Before new feature | `/validation:learning-status` (check known issues) |
-| Recurring issue found | `/validation:suggest-improvement` (create fix) |
-| Periodically | `/validation:learn --last=5` (analyze trends) |
+| After code review | `/piv-speckit:learn` (suggested automatically) |
+| Before new feature | `/piv-speckit:learning-status` (check known issues) |
+| Recurring issue found | `/piv-speckit:suggest-improvement` (create fix) |
+| Periodically | `/piv-speckit:learn --last=5` (analyze trends) |
 
 ### Benefits
 
@@ -414,17 +414,17 @@ Capture learnings? Run /validation:learn
 
 ```bash
 # Feature 1: Code review finds N+1 query issue
-/validation:code-review
+/piv-speckit:code-review
 
 # Learning captures it
-/validation:learn
+/piv-speckit:learn
 # Output: "N+1 query found in UserService"
 
 # Feature 2: Same issue found again
 # Learning flags as recurring
 
 # Feature 3: Generate improvement
-/validation:suggest-improvement rule "Add N+1 query detection"
+/piv-speckit:suggest-improvement rule "Add N+1 query detection"
 
 # Apply improvement to rules
 # Now all future features are protected! ✅

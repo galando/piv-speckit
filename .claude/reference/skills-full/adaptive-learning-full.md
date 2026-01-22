@@ -1,9 +1,9 @@
 ---
 description: Auto-suggests learning analysis after code reviews to capture insights and improve rules
 triggers:
-  - command: "/validation:code-review"
+  - command: "/piv-speckit:code-review"
     when: "code review completed successfully"
-  - command: "/validation:code-review-fix"
+  - command: "/piv-speckit:code-review-fix"
     when: "code review fix completed"
 ---
 
@@ -14,9 +14,9 @@ triggers:
 This skill **auto-activates after code reviews** to suggest capturing learnings.
 
 **Triggers:**
-- `/validation:code-review` completes (pass or fail)
-- `/validation:code-review-fix` completes
-- Manual invocation via `/validation:learn`
+- `/piv-speckit:code-review` completes (pass or fail)
+- `/piv-speckit:code-review-fix` completes
+- Manual invocation via `/piv-speckit:learn`
 
 **IMPORTANT:** This is a **SKILL** that suggests learning, not enforces it.
 Learning analysis is optional but recommended.
@@ -33,7 +33,7 @@ When code review completes:
 ✅ Code review complete.
 
 **Capture learnings?**
-Run `/validation:learn` to:
+Run `/piv-speckit:learn` to:
 - Extract insights from this review
 - Identify recurring patterns
 - Update learning metrics
@@ -50,7 +50,7 @@ If code review found issues:
 📊 Code review found {N} issues ({critical}, {high}, {medium}, {low}).
 
 **Learning opportunity detected.**
-Run `/validation:learn` to analyze if these issues are recurring
+Run `/piv-speckit:learn` to analyze if these issues are recurring
 and generate improvement suggestions to prevent them in future.
 ```
 
@@ -62,7 +62,7 @@ If code review found no issues:
 ✨ Clean code review! No issues found.
 
 **Good patterns identified.**
-Run `/validation:learn` to capture what went well
+Run `/piv-speckit:learn` to capture what went well
 and reinforce good practices in the framework.
 ```
 
@@ -99,7 +99,7 @@ Show brief learning status:
 - Recurring issues: {N} pending attention
 - Suggestions: {N} pending approval
 
-Run `/validation:learning-status` for full dashboard.
+Run `/piv-speckit:learning-status` for full dashboard.
 ```
 
 ## Examples
@@ -107,24 +107,24 @@ Run `/validation:learning-status` for full dashboard.
 ### ✅ GOOD: Capturing Learnings
 
 ```
-User: /validation:code-review
+User: /piv-speckit:code-review
 
 [Code review runs and completes]
 
 Skill prompts:
 "✅ Code review complete. Found 2 medium issues.
 
- Capture learnings? Run `/validation:learn` to analyze
+ Capture learnings? Run `/piv-speckit:learn` to analyze
  if these issues are recurring and suggest improvements."
 
-User: /validation:learn
+User: /piv-speckit:learn
 
 [Learning analysis runs, creates insights artifact]
 
 "Learning analysis complete. 1 recurring issue identified:
  'Missing input validation on API endpoints (3 occurrences)'
 
- Run `/validation:suggest-improvement rule "Add API input validation pattern"`
+ Run `/piv-speckit:suggest-improvement rule "Add API input validation pattern"`
  to create improvement suggestion."
 ```
 
@@ -141,14 +141,14 @@ Review 4: No security issues → Learning notes improvement!
 
 ### With Code Review
 
-After `/validation:code-review` completes:
+After `/piv-speckit:code-review` completes:
 - Skill activates
 - Suggests learning analysis
 - User can accept or skip
 
 ### With Code Review Fix
 
-After `/validation:code-review-fix` completes:
+After `/piv-speckit:code-review-fix` completes:
 - Skill activates
 - Suggests learning analysis (what issues were fixed?)
 

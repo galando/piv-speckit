@@ -65,10 +65,10 @@ Based on metrics, suggest actions:
 ## Recommendations
 
 {If recurring issues exist}
-- **Address recurring issues:** Run `/validation:suggest-improvement` for top recurring issues
+- **Address recurring issues:** Run `/piv-speckit:suggest-improvement` for top recurring issues
 
 {If no recent analysis}
-- **Run learning analysis:** No reviews analyzed recently. Run `/validation:learn`
+- **Run learning analysis:** No reviews analyzed recently. Run `/piv-speckit:learn`
 
 {If suggestions pending}
 - **Review pending suggestions:** {N} suggestions awaiting approval in `.claude/agents/learning/suggestions/`
@@ -81,5 +81,5 @@ Formatted dashboard display with recommendations.
 ## Example
 
 ```bash
-/validation:learning-status
+/piv-speckit:learning-status
 ```

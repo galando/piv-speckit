@@ -174,7 +174,7 @@ Test that Claude Code recognizes your PIV setup:
 
 ```bash
 # In Claude Code, run:
-/piv_loop:prime
+/piv-speckit:prime
 ```
 
 You should see context loading from your project.

@@ -41,7 +41,7 @@ Fixes #123"
 
 ```bash
 # 1. Run validation (automatic in PIV)
-/piv_loop:execute [plan-file]
+/piv-speckit:execute [plan-file]
 
 # 2. Wait for validation to pass
 # (Automatic validation runs: compilation, tests, coverage, etc.)
@@ -362,7 +362,7 @@ This:
 
 ```bash
 # 1. Plan Phase
-/piv_loop:plan-feature "add user authentication"
+/piv-speckit:plan-feature "add user authentication"
 
 # Output: Plan created at .claude/agents/plans/user-authentication.md
 
@@ -371,7 +371,7 @@ This:
 /commit "plan: add user authentication feature"
 
 # 2. Implement Phase
-/piv_loop:execute .claude/agents/plans/user-authentication.md
+/piv-speckit:execute .claude/agents/plans/user-authentication.md
 
 # Implementation follows TDD:
 # - Write test (RED)
@@ -419,12 +419,12 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 User: "Login fails when email has uppercase letters"
 
 # 2. Root Cause Analysis
-/bug_fix:rca
+/piv-speckit:rca
 
 # Output: RCA report at .claude/agents/reviews/rca-login-bug.md
 
 # 3. Implement Fix
-/piv_loop:execute .claude/agents/plans/fix-login-email-case.md
+/piv-speckit:execute .claude/agents/plans/fix-login-email-case.md
 
 # Implementation follows TDD:
 # - Write test for uppercase email (RED)
@@ -461,10 +461,10 @@ Fixes #789"
 
 ```bash
 # 1. Plan Refactoring
-/piv_loop:plan-feature "extract validation logic to separate service"
+/piv-speckit:plan-feature "extract validation logic to separate service"
 
 # 2. Implement Refactoring
-/piv_loop:execute [plan-file]
+/piv-speckit:execute [plan-file]
 
 # Refactoring follows TDD:
 # - Write tests for new validation service (RED)

@@ -56,8 +56,8 @@ Only these types of changes may be considered for direct commit (still requires 
 **Even for exceptions, get approval first!**
 
 **Commands That Enforce This:**
-- `/piv_loop:execute` - Checks for feature branch before implementing
-- `/bug_fix:implement-fix` - Checks for feature branch before fixing
+- `/piv-speckit:execute` - Checks for feature branch before implementing
+- `/piv-speckit:implement-fix` - Checks for feature branch before fixing
 - Both commands will stop and ask to create a branch if on main
 
 ---

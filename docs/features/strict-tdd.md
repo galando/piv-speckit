@@ -230,7 +230,7 @@ function calculateDiscount(price) {
 **Automatic validation FAILS if TDD violations detected:**
 
 ```bash
-$ /validation:validate
+$ /piv-speckit:validate
 
 Level 2.5: TDD Compliance Check
 

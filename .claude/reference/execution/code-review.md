@@ -59,7 +59,7 @@ Before running this command, ensure:
 # Expected: Tests run: X, Failures: 0, Errors: 0
 
 # 3. If above pass, THEN run code review
-/validation:code-review
+/piv-speckit:code-review
 ```
 
 **What This Command Does:**
@@ -717,18 +717,18 @@ for (User user : users) {
 **After generating the review report:**
 
 **If CRITICAL or HIGH priority issues found:**
-- Automatically invoke: `/validation:code-review-fix <report-path>`
+- Automatically invoke: `/piv-speckit:code-review-fix <report-path>`
 - This will fix issues and loop back to code review
 - Don't wait for user - automated quality gate
 
 **If NO critical/high issues (clean review):**
-- Automatically invoke: `/validation:validate`
+- Automatically invoke: `/piv-speckit:validate`
 - This runs final validation suite
 - Continue the automatic flow
 
 **If called manually (not from execute):**
 - Show report summary
-- Ask user: "Run `/validation:code-review-fix <report-path>` to fix issues"
-- Or "Run `/validation:validate` if code is clean"
+- Ask user: "Run `/piv-speckit:code-review-fix <report-path>` to fix issues"
+- Or "Run `/piv-speckit:validate` if code is clean"
 
 This automatic chaining ensures quality gates are never skipped.

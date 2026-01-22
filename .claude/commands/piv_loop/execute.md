@@ -11,12 +11,12 @@ argument-hint: "<path-to-plan.md | path-to-tasks.md>"
 
 **For split artifacts (Spec-Kit style):**
 ```
-/piv_loop:execute .claude/specs/XXX-feature-name/tasks.md
+/piv-speckit:execute .claude/specs/XXX-feature-name/tasks.md
 ```
 
 **For single-file plans (legacy):**
 ```
-/piv_loop:execute .claude/agents/plans/feature-name.md
+/piv-speckit:execute .claude/agents/plans/feature-name.md
 ```
 
 ## Execution

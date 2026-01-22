@@ -293,7 +293,7 @@ find backend/src/main/java -name "*Service.java"
 
 ## Next Steps
 
-1. Implement fix using: `/bug_fix:implement-fix <this-rca>`
+1. Implement fix using: `/piv-speckit:implement-fix <this-rca>`
 2. Validate fix
 3. Update prevention measures
 4. Close issue

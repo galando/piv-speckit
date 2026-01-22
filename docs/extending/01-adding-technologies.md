@@ -441,7 +441,7 @@ Before submitting:
 
 2. **Test Rule Loading**
    - Create a test project using the template
-   - Run `/piv_loop:prime`
+   - Run `/piv-speckit:prime`
    - Verify rules load correctly
 
 3. **Test Examples**

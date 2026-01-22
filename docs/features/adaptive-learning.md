@@ -33,7 +33,7 @@ The adaptive learning system transforms the universal-ai-dev-framework from a st
                        ▼
 ┌─────────────────────────────────────────────────────────────┐
 │              ADAPTIVE-LEARNING SKILL ACTIVATES              │
-│  "Capture learnings? Run /validation:learn"                 │
+│  "Capture learnings? Run /piv-speckit:learn"                 │
 └──────────────────────┬──────────────────────────────────────┘
                        │
                        ▼
@@ -75,20 +75,20 @@ The adaptive learning system transforms the universal-ai-dev-framework from a st
 
 ## Commands
 
-### `/validation:learn` - Extract Learnings from Code Reviews
+### `/piv-speckit:learn` - Extract Learnings from Code Reviews
 
 **Purpose:** Analyze code review artifacts to identify patterns and generate insights
 
 **Usage:**
 ```bash
 # Analyze all code reviews
-/validation:learn
+/piv-speckit:learn
 
 # Analyze last 5 reviews only
-/validation:learn --last=5
+/piv-speckit:learn --last=5
 
 # Analyze specific review
-/validation:learn --review=.claude/agents/reviews/code-review-feature-x.md
+/piv-speckit:learn --review=.claude/agents/reviews/code-review-feature-x.md
 ```
 
 **What It Does:**
@@ -103,20 +103,20 @@ The adaptive learning system transforms the universal-ai-dev-framework from a st
 - Creates: `.claude/agents/learning/insights/learning-insights-{timestamp}.md`
 - Updates: `.claude/agents/learning/learning-metrics.md`
 
-### `/validation:suggest-improvement` - Generate Improvement Suggestions
+### `/piv-speckit:suggest-improvement` - Generate Improvement Suggestions
 
 **Purpose:** Create structured improvement proposals for rules, validation, or skills
 
 **Usage:**
 ```bash
 # Suggest rule update
-/validation:suggest-improvement rule "Add N+1 query anti-pattern"
+/piv-speckit:suggest-improvement rule "Add N+1 query anti-pattern"
 
 # Suggest validation addition
-/validation:suggest-improvement validation "Add environment URL check"
+/piv-speckit:suggest-improvement validation "Add environment URL check"
 
 # Suggest skill enhancement
-/validation:suggest-improvement skill "Enhance code-review with N+1 detection"
+/piv-speckit:suggest-improvement skill "Enhance code-review with N+1 detection"
 ```
 
 **What It Does:**
@@ -130,13 +130,13 @@ The adaptive learning system transforms the universal-ai-dev-framework from a st
 - Creates: `.claude/agents/learning/suggestions/{suggestion-id}.md`
 - Updates: Metrics (increment suggestions generated)
 
-### `/validation:learning-status` - View Learning Metrics Dashboard
+### `/piv-speckit:learning-status` - View Learning Metrics Dashboard
 
 **Purpose:** Display current learning status and metrics
 
 **Usage:**
 ```bash
-/validation:learning-status
+/piv-speckit:learning-status
 ```
 
 **What It Shows:**
@@ -157,7 +157,7 @@ The **adaptive-learning skill** automatically suggests learning analysis after c
 📊 Code review found 3 issues (1 high, 2 medium).
 
 **Learning opportunity detected.**
-Run /validation:learn to analyze if these issues are recurring
+Run /piv-speckit:learn to analyze if these issues are recurring
 and generate improvement suggestions to prevent them in future.
 ```
 
@@ -166,7 +166,7 @@ and generate improvement suggestions to prevent them in future.
 ✨ Clean code review! No issues found.
 
 **Good patterns identified.**
-Run /validation:learn to capture what went well
+Run /piv-speckit:learn to capture what went well
 and reinforce good practices in the framework.
 ```
 
@@ -249,21 +249,21 @@ and reinforce good practices in the framework.
 
 ```bash
 # 1. Implement feature with PIV
-/piv_loop:execute
+/piv-speckit:execute
 
 # 2. Code review runs automatically
 # (finds 2 medium issues)
 
 # 3. Adaptive-learning skill suggests:
 "📊 Code review found 2 issues.
- Capture learnings? Run /validation:learn"
+ Capture learnings? Run /piv-speckit:learn"
 
 # 4. Extract learnings
-/validation:learn
+/piv-speckit:learn
 # Output: "1 recurring issue: Missing input validation"
 
 # 5. Generate improvement
-/validation:suggest-improvement rule "Add API input validation pattern"
+/piv-speckit:suggest-improvement rule "Add API input validation pattern"
 # Creates: suggestions/rule-api-validation-20250116.md
 
 # 6. Review suggestion
@@ -303,7 +303,7 @@ A: **Yes!** The learning system is modular. You can extend it to track additiona
 A: **That's fine!** Suggestions are proposals, not commands. Review them, reject if inappropriate, or modify before applying. You have final say.
 
 **Q: How do I know if improvements are working?**
-A: **Check the metrics!** Run `/validation:learning-status` to see issue trends over time. If improvements are working, you'll see recurring issues decrease.
+A: **Check the metrics!** Run `/piv-speckit:learning-status` to see issue trends over time. If improvements are working, you'll see recurring issues decrease.
 
 ---
 
@@ -312,8 +312,8 @@ A: **Check the metrics!** Run `/validation:learning-status` to see issue trends 
 **Ready to start learning?**
 
 1. **Complete a feature** using PIV methodology
-2. **Run learning analysis** after code review: `/validation:learn`
-3. **Check your status** with `/validation:learning-status`
+2. **Run learning analysis** after code review: `/piv-speckit:learn`
+3. **Check your status** with `/piv-speckit:learning-status`
 4. **Generate improvements** for recurring issues
 5. **Watch the framework** get smarter! 🧠
 

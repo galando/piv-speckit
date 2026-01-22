@@ -181,19 +181,19 @@ npm test
 
 **Run code review:**
 ```
-/validation:code-review
+/piv-speckit:code-review
 ```
 
 **Fix any issues found:**
 ```
-/validation:code-review-fix <review-report>
+/piv-speckit:code-review-fix <review-report>
 ```
 
 ### 9. Create Execution Report
 
 **Generate report:**
 ```
-/validation:execution-report <plan-path>
+/piv-speckit:execution-report <plan-path>
 ```
 
 **Include in report:**

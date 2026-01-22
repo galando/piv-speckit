@@ -53,12 +53,12 @@ Skills activate when you run specific commands:
 
 ```yaml
 triggers:
-  - command: "/validation:code-review"
+  - command: "/piv-speckit:code-review"
     when: "running code review", "reviewing pull request"
 ```
 
 **Example:**
-- Running `/validation:code-review` → Activates code-review skill
+- Running `/piv-speckit:code-review` → Activates code-review skill
 - Running `gh pr view` → Activates code-review skill
 
 ### Enforcement Behavior
@@ -193,7 +193,7 @@ public void saveUser(String username, String password) {
 
 **Activates when:**
 - Running code review commands
-- Commands: `/validation:code-review`, `/code-review:code-review`, `gh pr view`
+- Commands: `/piv-speckit:code-review`, `/piv-speckit:code-review`, `gh pr view`
 
 **Enforces:**
 - TDD compliance (tests written before code)
@@ -209,7 +209,7 @@ public void saveUser(String username, String password) {
 
 **Example:**
 ```
-You run: /validation:code-review
+You run: /piv-speckit:code-review
 
 🔍 SKILL ACTIVATES: "Running systematic quality checks..."
 - Checking TDD compliance...
@@ -219,7 +219,7 @@ You run: /validation:code-review
 - [Generates comprehensive review report]
 ```
 
-**Important:** This skill **complements** the `/validation:code-review` command:
+**Important:** This skill **complements** the `/piv-speckit:code-review` command:
 - **Command**: Manual trigger for code review
 - **Skill**: Auto-activates during review to enforce systematic checks
 - **Result**: Best of both worlds (manual control + automatic enforcement)
@@ -235,14 +235,14 @@ You run: /validation:code-review
 | **Invocation** | Automatic (file patterns, commands) | Manual (you invoke) |
 | **Purpose** | Real-time enforcement | Execute workflows |
 | **Triggers** | File types, commands | User request |
-| **Example** | Opens `*.java` → TDD skill activates | `/piv_loop:execute` → Runs execution workflow |
+| **Example** | Opens `*.java` → TDD skill activates | `/piv-speckit:execute` → Runs execution workflow |
 
 ### How They Work Together
 
 **Example 1: Code Review Workflow**
 
 ```
-1. You run: /validation:code-review
+1. You run: /piv-speckit:code-review
    ↓
 2. Command triggers review workflow
    ↓
@@ -275,7 +275,7 @@ You run: /validation:code-review
 
 ### Code Review: BOTH Command AND Skill
 
-**Command (`/validation:code-review`):**
+**Command (`/piv-speckit:code-review`):**
 - You manually invoke it
 - Executes review workflow
 - Generates review report
@@ -340,7 +340,7 @@ test('creates user', () => {
 ### Example 3: Running Code Review
 
 ```bash
-$ /validation:code-review
+$ /piv-speckit:code-review
 ```
 
 **Skills that activate:**

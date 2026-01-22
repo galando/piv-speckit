@@ -1,9 +1,9 @@
 ---
-description: Auto-activates during code reviews to enforce systematic quality checks (COMPLEMENTS /validation:code-review command)
+description: Auto-activates during code reviews to enforce systematic quality checks (COMPLEMENTS /piv-speckit:code-review command)
 triggers:
-  - command: "/validation:code-review"
+  - command: "/piv-speckit:code-review"
     when: "running code review", "reviewing pull request"
-  - command: "/code-review:code-review"
+  - command: "/piv-speckit:code-review"
     when: "running code review", "reviewing pull request"
   - command: "gh pr view"
     when: "reviewing pull request"
@@ -16,11 +16,11 @@ triggers:
 This skill **auto-activates during manual code reviews**.
 
 **Triggers:**
-- `/validation:code-review` command executed
-- `/code-review:code-review` command executed
+- `/piv-speckit:code-review` command executed
+- `/piv-speckit:code-review` command executed
 - `gh pr view` or similar PR review commands
 
-**IMPORTANT:** This is a **SKILL** that auto-activates DURING manual review, NOT a replacement for the `/validation:code-review` command.
+**IMPORTANT:** This is a **SKILL** that auto-activates DURING manual review, NOT a replacement for the `/piv-speckit:code-review` command.
 
 **Relationship:**
 - User triggers review via command

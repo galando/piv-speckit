@@ -23,16 +23,16 @@ First official release of the universal PIV (Prime-Implement-Validate) methodolo
 - Comprehensive methodology documentation
 
 #### Command Infrastructure
-- `/piv_loop:prime` - Load codebase context
-- `/piv_loop:plan-feature` - Create detailed implementation plans
-- `/piv_loop:execute` - Execute plans with automatic validation
-- `/validation:validate` - Complete validation pipeline
-- `/validation:code-review` - Technical code review
-- `/validation:code-review-fix` - Auto-fix code review issues
-- `/validation:execution-report` - View implementation reports
-- `/validation:system-review` - Process improvement analysis
-- `/bug_fix:rca` - Root cause analysis for bugs
-- `/bug_fix:implement-fix` - Implement bug fixes from RCA
+- `/piv-speckit:prime` - Load codebase context
+- `/piv-speckit:plan-feature` - Create detailed implementation plans
+- `/piv-speckit:execute` - Execute plans with automatic validation
+- `/piv-speckit:validate` - Complete validation pipeline
+- `/piv-speckit:code-review` - Technical code review
+- `/piv-speckit:code-review-fix` - Auto-fix code review issues
+- `/piv-speckit:execution-report` - View implementation reports
+- `/piv-speckit:system-review` - Process improvement analysis
+- `/piv-speckit:rca` - Root cause analysis for bugs
+- `/piv-speckit:implement-fix` - Implement bug fixes from RCA
 
 #### Technology Templates
 - **Backend**: Spring Boot (Java/Kotlin)
@@ -123,7 +123,7 @@ Major update integrating [GitHub's Spec-Kit](https://github.com/github/spec-kit)
 ### ✨ Added
 
 #### Phase 0: Constitution (New)
-- `/piv_loop:constitution` command for one-time project definition
+- `/piv-speckit:constitution` command for one-time project definition
 - `.claude/memory/constitution.md` - Project principles document
 - `.claude/memory/constitution.template.md` - Constitution template
 - Defines: project purpose, core principles, technology stack, constraints, development guidelines

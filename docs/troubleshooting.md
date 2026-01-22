@@ -107,7 +107,7 @@ ls
 
 **Symptoms:**
 ```
-User: /piv_loop:prime
+User: /piv-speckit:prime
 Claude: I don't recognize that command
 ```
 
@@ -137,7 +137,7 @@ project-root/backend/.claude/commands/
 
 ### Context Loading Takes Too Long
 
-**Symptoms:** `/piv_loop:prime` takes more than 2 minutes
+**Symptoms:** `/piv-speckit:prime` takes more than 2 minutes
 
 **Cause:** Scanning too many files (including `node_modules/`, `target/`, etc.)
 
@@ -202,7 +202,7 @@ cp -r technologies/backend/spring-boot/rules/* .claude/rules/backend/
 
 ### Prime Context File Not Created
 
-**Symptoms:** After running `/piv_loop:prime`, no `.claude/agents/context/prime-context.md` file
+**Symptoms:** After running `/piv-speckit:prime`, no `.claude/agents/context/prime-context.md` file
 
 **Cause:** Prime command failed or didn't complete
 
@@ -301,14 +301,14 @@ python -m py_compile src/**/*.py
 3. **Re-run validation:**
 ```bash
 # Ask Claude to run validation again
-Use /validation:validate
+Use /piv-speckit:validate
 ```
 
 ---
 
 ### Code Review Finds Issues
 
-**Symptoms:** `/validation:code-review` reports bugs or security issues
+**Symptoms:** `/piv-speckit:code-review` reports bugs or security issues
 
 **Cause:** Code has quality or security problems
 
@@ -318,7 +318,7 @@ Use /validation:validate
 2. **Use automatic fix:**
 ```bash
 # Ask Claude to fix issues
-Use /validation:code-review-fix .claude/agents/reviews/code-report-123456.md
+Use /piv-speckit:code-review-fix .claude/agents/reviews/code-report-123456.md
 ```
 
 3. **Manual fixes** - Address issues that can't be auto-fixed

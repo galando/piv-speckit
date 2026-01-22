@@ -10,7 +10,7 @@ argument-hint: "<feature-name>"
 ## Usage
 
 ```
-/piv_loop:plan-feature "feature description"
+/piv-speckit:plan-feature "feature description"
 ```
 
 ## Execution

@@ -47,8 +47,8 @@ A **constitution** is a one-time document that defines:
 Constitution is stored at: `.claude/memory/constitution.md`
 
 This file is read automatically during:
-- `/piv_loop:plan-feature` - Planning phase reads constitution
-- `/piv_loop:prime` - Prime checks for constitution existence
+- `/piv-speckit:plan-feature` - Planning phase reads constitution
+- `/piv-speckit:prime` - Prime checks for constitution existence
 
 ## Template
 
@@ -58,7 +58,7 @@ A template is available at: `.claude/memory/constitution.template.md`
 
 **Create constitution:**
 ```
-/piv_loop:constitution
+/piv-speckit:constitution
 ```
 
 **Update constitution:**
