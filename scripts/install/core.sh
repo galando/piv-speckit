@@ -332,12 +332,16 @@ create_claude_md() {
 
 ### Core PIV Commands
 - \`/piv_loop:prime\` - Load project context
+- \`/piv_loop:constitution\` - Create project principles (one-time)
 - \`/piv_loop:plan-feature "description"\` - Create implementation plan
 - \`/piv_loop:execute\` - Execute plan (auto-validates)
 
 ### Validation Commands
 - \`/validation:validate\` - Run validation pipeline (automatic)
 - \`/validation:code-review\` - Technical code review
+- \`/validation:code-review-fix\` - Fix issues from review
+- \`/validation:learn\` - Capture learnings from reviews
+- \`/validation:learning-status\` - View learning metrics
 
 ### Bug Fix Commands
 - \`/bug_fix:rca\` - Root cause analysis
@@ -396,9 +400,9 @@ This project uses the **PIV (Prime-Implement-Validate)** methodology for AI-assi
 
 ## Quick Start
 
-1. **Prime**: Load context with \`/piv_loop:prime\`
-2. **Plan**: Create plan with \`/piv_loop:plan-feature "description"\`
-3. **Execute**: Implement with \`/piv_loop:execute\` (auto-validates)
+1. **Prime**: Load context with \`/piv-speckit:prime\`
+2. **Plan**: Create plan with \`/piv-speckit:plan-feature "description"\`
+3. **Execute**: Implement with \`/piv-speckit:execute\` (auto-validates)
 
 ## Documentation
 

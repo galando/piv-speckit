@@ -496,9 +496,9 @@ If you want to skip automatic validation and run manually:
 
 ```bash
 # Skip automatic flow, run individual commands
-/validation:code-review
-/validation:code-review-fix <report-path>
-/validation:validate
+/piv-speckit:code-review
+/piv-speckit:code-review-fix <report-path>
+/piv-speckit:validate
 ```
 
 **But why?** Automatic flow ensures consistent quality and catches issues early.

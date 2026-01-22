@@ -34,11 +34,11 @@ This framework integrates best practices from [GitHub's Spec-Kit](https://github
 
 | Artifact | Purpose | Created By |
 |----------|---------|------------|
-| `constitution.md` | Project principles (one-time setup) | `/piv_loop:constitution` |
-| `spec.md` | Functional requirements (WHAT) | `/piv_loop:plan-feature` |
-| `plan.md` | Technical approach (HOW) | `/piv_loop:plan-feature` |
-| `tasks.md` | Implementation steps (DO) | `/piv_loop:plan-feature` |
-| `quickstart.md` | TL;DR for humans | `/piv_loop:plan-feature` |
+| `constitution.md` | Project principles (one-time setup) | `/piv-speckit:constitution` |
+| `spec.md` | Functional requirements (WHAT) | `/piv-speckit:plan-feature` |
+| `plan.md` | Technical approach (HOW) | `/piv-speckit:plan-feature` |
+| `tasks.md` | Implementation steps (DO) | `/piv-speckit:plan-feature` |
+| `quickstart.md` | TL;DR for humans | `/piv-speckit:plan-feature` |
 
 ### Multi-AI Compatibility
 
@@ -63,7 +63,7 @@ No Claude Code dependency for planning or implementation!
 /plugin install piv-speckit
 ```
 
-**Commands:** `/piv_loop:prime`, `/piv_loop:plan-feature`, `/piv_loop:execute`, `/piv_loop:constitution`
+**Commands:** `/piv-speckit:prime`, `/piv-speckit:plan-feature`, `/piv-speckit:execute`, `/piv-speckit:constitution`
 
 **Features:** Auto-activating skills (TDD, code-review, security), full reference docs, agent context system.
 
@@ -82,7 +82,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 | Feature | Claude Code | Cursor / Copilot |
 |---------|-------------|-------------------|
-| Slash commands | ✅ `/piv_loop:*` | ❌ (natural language) |
+| Slash commands | ✅ `/piv-speckit:*` | ❌ (natural language) |
 | Auto-skills | ✅ TDD, security | ❌ |
 | Constitution template | ✅ Included | ✅ Included |
 | Spec templates | ✅ Included | ✅ Included |
@@ -94,7 +94,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 | Feature | Claude Code (Plugin) | Cursor / Copilot (Script) |
 |---------|---------------------|----------------------------|
-| Commands | `/piv_loop:prime`, `/piv_loop:plan-feature`, `/piv_loop:execute`, `/piv_loop:constitution` | Natural language (AI reads AGENTS.md) |
+| Commands | `/piv-speckit:prime`, `/piv-speckit:plan-feature`, `/piv-speckit:execute`, `/piv-speckit:constitution` | Natural language (AI reads AGENTS.md) |
 | Auto-Skills | ✅ TDD, code-review, security activate automatically | ❌ |
 | Spec Templates | ✅ Included | ✅ Included |
 | Constitution | ✅ Included | ✅ Included |
@@ -114,14 +114,14 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 │                                                                             │
 │  1. CONSTITUTION (One-time)                                                 │
 │     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ /piv_loop:constitution                                          │    │
+│     │ /piv-speckit:constitution                                          │    │
 │     │ → Creates .claude/memory/constitution.md                        │    │
 │     │ → Defines: purpose, principles, stack, constraints              │    │
 │     └─────────────────────────────────────────────────────────────────┘    │
 │                                    ↓                                        │
 │  2. PRIME (Context Loading)                                               │
 │     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ /piv_loop:prime                                                  │    │
+│     │ /piv-speckit:prime                                                  │    │
 │     │ → Analyzes codebase structure                                   │    │
 │     │ → Identifies patterns, conventions, tech stack                  │    │
 │     │ → Loads only relevant context (smart layering)                 │    │
@@ -129,7 +129,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 │                                    ↓                                        │
 │  3. PLAN (Structured Specs)                                               │
 │     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ /piv_loop:plan-feature "Add user authentication"              │    │
+│     │ /piv-speckit:plan-feature "Add user authentication"              │    │
 │     │ → Creates .claude/specs/{feature}/                              │    │
 │     │   ├─ spec.md        (WHAT: requirements, user stories)          │    │
 │     │   ├─ plan.md        (HOW: architecture, data model, APIs)       │    │
@@ -139,7 +139,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 │                                    ↓                                        │
 │  4. IMPLEMENT (Strict TDD)                                               │
 │     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ /piv_loop:execute .claude/specs/{feature}/tasks.md              │    │
+│     │ /piv-speckit:execute .claude/specs/{feature}/tasks.md              │    │
 │     │                                                                  │    │
 │     │   For each task:                                                 │    │
 │     │   ├─ RED:   Write failing test first                            │    │
@@ -222,7 +222,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 | ⚡ **Skills System** | Auto-activating behaviors enforce best practices in real-time |
 | 🧠 **Adaptive Learning** | Framework gets smarter with every feature you build |
 | 🔧 **Technology Agnostic** | Works with Spring Boot, Node.js, Python, React, and more |
-| ⚙️ **Commands** | `/piv_loop:prime`, `/piv_loop:plan-feature`, `/piv_loop:execute` |
+| ⚙️ **Commands** | `/piv-speckit:prime`, `/piv-speckit:plan-feature`, `/piv-speckit:execute` |
 
 [→ See all features](docs/features/) | [→ Full commands list](docs/getting-started/02-quick-start.md#piv-commands-reference)
 
@@ -234,7 +234,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  USER: "/piv_loop:prime"                                                │
+│  USER: "/piv-speckit:prime"                                                │
 │                                                                          │
 │  CLAUDE: [Loads project context]                                         │
 │    → "Project: Spring Boot + React + PostgreSQL"                        │
@@ -255,7 +255,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 └─────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  USER: "/piv_loop:execute"                                              │
+│  USER: "/piv-speckit:execute"                                              │
 │                                                                          │
 │  CLAUDE: [test-driven-development SKILL ACTIVATES 🔴]                    │
 │    → "🔴 RED: Writing test FIRST..."                                     │

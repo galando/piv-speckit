@@ -292,7 +292,7 @@ The installer shows:
 Start using PIV with Claude Code:
 
 ```
-Ask Claude: "Run /piv_loop:prime to load project context"
+Ask Claude: "Run /piv-speckit:prime to load project context"
 ```
 
 This will load your project's context into Claude's working memory, including:
@@ -304,7 +304,7 @@ This will load your project's context into Claude's working memory, including:
 ### Plan Your First Feature
 
 ```
-Ask Claude: "Use /piv_loop:plan-feature to plan adding user authentication"
+Ask Claude: "Use /piv-speckit:plan-feature to plan adding user authentication"
 ```
 
 Claude will create a detailed implementation plan saved to `.claude/agents/plans/`.
@@ -312,7 +312,7 @@ Claude will create a detailed implementation plan saved to `.claude/agents/plans
 ### Implement Your Feature
 
 ```
-Ask Claude: "Use /piv_loop:execute to implement the plan"
+Ask Claude: "Use /piv-speckit:execute to implement the plan"
 ```
 
 Claude will:
@@ -457,12 +457,12 @@ Ask: "List available PIV commands"
 ```
 
 Claude should show:
-- `/piv_loop:prime`
-- `/piv_loop:plan-feature "description"`
-- `/piv_loop:execute`
-- `/validation:validate`
-- `/bug_fix:rca`
-- `/bug_fix:implement-fix`
+- `/piv-speckit:prime`
+- `/piv-speckit:plan-feature "description"`
+- `/piv-speckit:execute`
+- `/piv-speckit:validate`
+- `/piv-speckit:rca`
+- `/piv-speckit:implement-fix`
 
 ---
 
@@ -539,9 +539,9 @@ The uninstaller will:
 ## Next Steps
 
 1. **Read the methodology**: `.claude/reference/methodology/PIV-METHODOLOGY.md` (or `.claude-piv/reference/methodology/PIV-METHODOLOGY.md`)
-2. **Prime your workspace**: Ask Claude to "Run `/piv_loop:prime`"
-3. **Plan your first feature**: Use `/piv_loop:plan-feature` to create a plan
-4. **Implement**: Use `/piv_loop:execute` to build your feature
+2. **Prime your workspace**: Ask Claude to "Run `/piv-speckit:prime`"
+3. **Plan your first feature**: Use `/piv-speckit:plan-feature` to create a plan
+4. **Implement**: Use `/piv-speckit:execute` to build your feature
 5. **Learn more**: Check out [other guides](../)
 
 ---

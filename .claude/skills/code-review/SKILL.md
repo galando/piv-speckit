@@ -1,7 +1,7 @@
 ---
 description: Auto-activates during code reviews
 triggers:
-  - command: "/validation:code-review;/code-review:code-review;gh pr view"
+  - command: "/piv-speckit:code-review;/piv-speckit:code-review;gh pr view"
 ---
 
 # Code Review Skill

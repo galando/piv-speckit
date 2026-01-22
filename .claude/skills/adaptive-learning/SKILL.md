@@ -1,12 +1,12 @@
 ---
 description: Suggests learning analysis after code reviews
 triggers:
-  - command: "/validation:code-review;/validation:code-review-fix"
+  - command: "/piv-speckit:code-review;/piv-speckit:code-review-fix"
 ---
 
 # Adaptive Learning Skill
 
-**Prompts after review:** Run `/validation:learn`
+**Prompts after review:** Run `/piv-speckit:learn`
 
 Captures patterns to improve framework over time.
 

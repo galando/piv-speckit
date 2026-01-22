@@ -14,7 +14,7 @@ Create a structured improvement suggestion artifact that proposes changes to:
 
 ## Prerequisites
 
-- Learning insights exist (run `/validation:learn` first)
+- Learning insights exist (run `/piv-speckit:learn` first)
 - Improvement is based on real data from code reviews
 
 ## Arguments
@@ -156,11 +156,11 @@ Output to user:
 
 ```bash
 # Suggest rule update
-/validation:suggest-improvement rule "Add N+1 query anti-pattern"
+/piv-speckit:suggest-improvement rule "Add N+1 query anti-pattern"
 
 # Suggest validation addition
-/validation:suggest-improvement validation "Add environment URL check"
+/piv-speckit:suggest-improvement validation "Add environment URL check"
 
 # Suggest skill enhancement
-/validation:suggest-improvement skill "Enhance code-review with N+1 detection"
+/piv-speckit:suggest-improvement skill "Enhance code-review with N+1 detection"
 ```

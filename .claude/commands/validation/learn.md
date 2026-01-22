@@ -16,7 +16,7 @@ Analyze code review artifacts to:
 ## Prerequisites
 
 - At least one code review artifact exists in `.claude/agents/reviews/`
-- Code review artifacts follow standard format (from `/validation:code-review`)
+- Code review artifacts follow standard format (from `/piv-speckit:code-review`)
 
 ## Arguments
 
@@ -163,7 +163,7 @@ Based on this analysis, consider:
 
 ## Next Steps
 
-- Run `/validation:suggest-improvement "{suggestion}"` to create improvement artifact
+- Run `/piv-speckit:suggest-improvement "{suggestion}"` to create improvement artifact
 - Review and approve suggestions before applying
 - Track effectiveness in learning metrics
 ```
@@ -193,7 +193,7 @@ Output to user:
 
 **Next Steps:**
 - Review learning insights for accuracy
-- Run `/validation:suggest-improvement` for high-priority items
+- Run `/piv-speckit:suggest-improvement` for high-priority items
 - Track learning effectiveness over time
 ```
 
@@ -209,13 +209,13 @@ Output to user:
 
 ```bash
 # Analyze all reviews
-/validation:learn
+/piv-speckit:learn
 
 # Analyze last 5 reviews only
-/validation:learn --last=5
+/piv-speckit:learn --last=5
 
 # Analyze specific review
-/validation:learn --review=.claude/agents/reviews/code-review-feature-x.md
+/piv-speckit:learn --review=.claude/agents/reviews/code-review-feature-x.md
 ```
 
 ## When to Run
@@ -226,5 +226,5 @@ Output to user:
 
 ## Automatic Chaining
 
-This command can be automatically suggested after `/validation:code-review` completes.
+This command can be automatically suggested after `/piv-speckit:code-review` completes.
 The adaptive-learning skill will prompt: "Run learning analysis to capture insights?"

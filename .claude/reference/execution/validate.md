@@ -693,6 +693,6 @@ Don't reach "Ready State" - Instead:
 - Tell user which validation failed
 - Explain what went wrong
 - Suggest how to fix
-- Ask user to fix and re-run `/validation:validate`
+- Ask user to fix and re-run `/piv-speckit:validate`
 
 **Only reach "Ready State" when ALL validations pass.**

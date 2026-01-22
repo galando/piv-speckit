@@ -58,7 +58,7 @@ The modular design makes it easy to add support for new technologies. See [Addin
 
 PIV methodology is designed specifically for **Claude Code** and takes advantage of its unique features like:
 
-- Slash commands (`/piv_loop:prime`, etc.)
+- Slash commands (`/piv-speckit:prime`, etc.)
 - Context-aware agents
 - Structured output parsing
 - Multi-step reasoning
@@ -79,7 +79,7 @@ You can also remove technologies you don't use to save space. For example, if yo
 
 ## Usage
 
-### When should I run `/piv_loop:prime`?
+### When should I run `/piv-speckit:prime`?
 
 **Always prime the workspace in a new session** or when:
 
@@ -90,7 +90,7 @@ You can also remove technologies you don't use to save space. For example, if yo
 
 For simple bug fixes in code you're actively working on, you can skip priming.
 
-### Do I need to run `/piv_loop:plan-feature` for every change?
+### Do I need to run `/piv-speckit:plan-feature` for every change?
 
 **No.** Use planning for:
 
@@ -107,16 +107,16 @@ For simple bug fixes in code you're actively working on, you can skip priming.
 
 ### What if the automatic validation fails?
 
-The validation pipeline runs automatically after `/piv_loop:execute` completes. If it fails:
+The validation pipeline runs automatically after `/piv-speckit:execute` completes. If it fails:
 
 1. **Read the validation report** - It will explain what failed
 2. **Fix the issues** - Address compilation errors, test failures, etc.
-3. **Run manual validation** - Use `/validation:validate` to re-run
+3. **Run manual validation** - Use `/piv-speckit:validate` to re-run
 4. **Get help** - If stuck, open a [GitHub issue](https://github.com/galando/piv-speckit/issues)
 
 You can also run individual validation steps:
-- `/validation:code-review` - Technical code review
-- `/validation:code-review-fix <report>` - Auto-fix code review issues
+- `/piv-speckit:code-review` - Technical code review
+- `/piv-speckit:code-review-fix <report>` - Auto-fix code review issues
 
 ### Can I customize PIV for my team's workflow?
 
@@ -134,7 +134,7 @@ See [Customizing PIV](../extending/02-customizing-piv.md) for details.
 We **strongly recommend keeping automatic validation enabled** - it's a core part of PIV methodology.
 
 However, if you need to disable it temporarily, you can:
-1. Not use `/piv_loop:execute` - use `/piv_loop:plan-feature` then implement manually
+1. Not use `/piv-speckit:execute` - use `/piv-speckit:plan-feature` then implement manually
 2. Or skip validation steps by editing the execute command
 
 **Warning**: Disabling validation reduces the quality guarantees that PIV provides.
@@ -145,7 +145,7 @@ However, if you need to disable it temporarily, you can:
 
 ### How does PIV handle context loading?
 
-The `/piv_loop:prime` command uses Claude Code's context understanding to:
+The `/piv-speckit:prime` command uses Claude Code's context understanding to:
 
 1. **Scan codebase structure** - Understand project layout
 2. **Identify technologies** - Detect frameworks, libraries, tools
@@ -222,7 +222,7 @@ We give **full credit to Cole** for creating the PIV methodology. This is a comm
 
 ### Claude Code doesn't recognize PIV commands
 
-**Symptoms**: Commands like `/piv_loop:prime` aren't available
+**Symptoms**: Commands like `/piv-speckit:prime` aren't available
 
 **Solutions**:
 1. Ensure `.claude/commands/` directory exists in your project root
@@ -252,7 +252,7 @@ chmod +x /tmp/piv/scripts/piv.sh
 
 ### Context loading takes too long
 
-**Symptoms**: `/piv_loop:prime` takes several minutes
+**Symptoms**: `/piv-speckit:prime` takes several minutes
 
 **Solutions**:
 1. **Exclude unnecessary directories** - Add to `.gitignore`

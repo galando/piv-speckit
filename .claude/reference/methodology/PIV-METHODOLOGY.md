@@ -78,7 +78,7 @@ A **constitution** is a one-time document that defines:
 ### Commands
 
 ```
-/piv_loop:constitution
+/piv-speckit:constitution
 ```
 
 ### Artifacts Created
@@ -88,8 +88,8 @@ A **constitution** is a one-time document that defines:
 ### How It's Used
 
 The constitution is automatically read during:
-- `/piv_loop:plan-feature` - Planning respects constitution principles
-- `/piv_loop:prime` - Prime checks for constitution existence
+- `/piv-speckit:plan-feature` - Planning respects constitution principles
+- `/piv-speckit:prime` - Prime checks for constitution existence
 
 ### Success Criteria
 
@@ -119,7 +119,7 @@ The constitution is automatically read during:
 
 ### Commands
 ```
-/piv_loop:prime
+/piv-speckit:prime
 ```
 
 ### Artifacts Created
@@ -152,7 +152,7 @@ The Implement phase combines planning AND execution into a unified flow.
 
 ### What Happens
 
-#### Step 1: Plan (`/piv_loop:plan-feature`)
+#### Step 1: Plan (`/piv-speckit:plan-feature`)
 - Feature requirements are gathered and clarified
 - Technical approach is designed
 - Architecture decisions are documented
@@ -160,7 +160,7 @@ The Implement phase combines planning AND execution into a unified flow.
 - Files to create/modify are listed
 - Verification criteria are defined
 
-#### Step 2: Execute (`/piv_loop:execute`)
+#### Step 2: Execute (`/piv-speckit:execute`)
 - Implementation follows the plan step-by-step
 - Code is written following all applicable rules
 - Changes are made incrementally
@@ -183,12 +183,12 @@ The Implement phase combines planning AND execution into a unified flow.
 
 #### Planning
 ```
-/piv_loop:plan-feature "Feature description"
+/piv-speckit:plan-feature "Feature description"
 ```
 
 #### Execution
 ```
-/piv_loop:execute [plan-name]
+/piv-speckit:execute [plan-name]
 ```
 
 ### Artifacts Created
@@ -810,7 +810,7 @@ Validation happens **automatically** after execution to ensure quality without m
 
 ### What Happens Automatically
 
-The `/validation:validate` command runs a comprehensive validation pipeline:
+The `/piv-speckit:validate` command runs a comprehensive validation pipeline:
 
 #### Level 0: Environment Safety
 - Verify environment (local vs production)
@@ -859,32 +859,32 @@ The `/validation:validate` command runs a comprehensive validation pipeline:
 
 #### Automatic Validation
 ```
-/validation:validate
+/piv-speckit:validate
 ```
 
-This command is **automatically invoked** after `/piv_loop:execute` completes.
+This command is **automatically invoked** after `/piv-speckit:execute` completes.
 
 #### Code Review (Optional)
 ```
-/validation:code-review
+/piv-speckit:code-review
 ```
 Technical code review on changed files.
 
 #### Fix Issues (Optional)
 ```
-/validation:code-review-fix
+/piv-speckit:code-review-fix
 ```
 Automatically fix issues found in code review.
 
 #### Execution Report
 ```
-/validation:execution-report
+/piv-speckit:execution-report
 ```
 Generate comprehensive report after implementing a feature.
 
 #### System Review (Optional)
 ```
-/validation:system-review
+/piv-speckit:system-review
 ```
 Analyze implementation vs plan for process improvements.
 
@@ -1039,17 +1039,17 @@ Tests are our safety net. Allowing test failures undermines:
 The validation is designed to run **automatically** as part of the execution flow:
 
 ```
-/piv_loop:execute
+/piv-speckit:execute
   │
   ├─▶ Implement feature
   │
-  └─▶ /validation:validate (AUTOMATIC)
+  └─▶ /piv-speckit:validate (AUTOMATIC)
       │
       ├─▶ Run all validation levels
       │
       ├─▶ Generate validation report
       │
-      └─▶ /validation:execution-report (AUTOMATIC)
+      └─▶ /piv-speckit:execution-report (AUTOMATIC)
           │
           └─▶ Generate execution report
 ```
@@ -1073,7 +1073,7 @@ After code review completes, the **adaptive-learning skill** automatically sugge
 ```
 ✅ Code review complete.
 
-Capture learnings? Run /validation:learn
+Capture learnings? Run /piv-speckit:learn
 ```
 
 **The Learning System:**
@@ -1088,7 +1088,7 @@ Capture learnings? Run /validation:learn
 #### Learning Analysis
 
 ```bash
-/validation:learn
+/piv-speckit:learn
 ```
 
 Analyze code reviews to extract insights:
@@ -1100,14 +1100,14 @@ Analyze code reviews to extract insights:
 
 **Options:**
 ```bash
-/validation:learn --last=5        # Analyze last 5 reviews only
-/validation:learn --review=path   # Analyze specific review
+/piv-speckit:learn --last=5        # Analyze last 5 reviews only
+/piv-speckit:learn --review=path   # Analyze specific review
 ```
 
 #### Improvement Suggestions
 
 ```bash
-/validation:suggest-improvement <type> "<title>"
+/piv-speckit:suggest-improvement <type> "<title>"
 ```
 
 Generate structured improvement proposals:
@@ -1120,13 +1120,13 @@ Generate structured improvement proposals:
 
 **Example:**
 ```bash
-/validation:suggest-improvement rule "Add N+1 query anti-pattern"
+/piv-speckit:suggest-improvement rule "Add N+1 query anti-pattern"
 ```
 
 #### Learning Status
 
 ```bash
-/validation:learning-status
+/piv-speckit:learning-status
 ```
 
 Display learning metrics dashboard:
@@ -1174,10 +1174,10 @@ Tracks:
 
 | Scenario | Action |
 |----------|--------|
-| After code review | `/validation:learn` (auto-suggested) |
-| Before new feature | `/validation:learning-status` (check known issues) |
-| Recurring issue found | `/validation:suggest-improvement` (create fix) |
-| Periodically | `/validation:learn --last=5` (analyze trends) |
+| After code review | `/piv-speckit:learn` (auto-suggested) |
+| Before new feature | `/piv-speckit:learning-status` (check known issues) |
+| Recurring issue found | `/piv-speckit:suggest-improvement` (create fix) |
+| Periodically | `/piv-speckit:learn --last=5` (analyze trends) |
 
 ### Learning vs. System Review
 
@@ -1208,18 +1208,18 @@ Tracks:
 ### Standard Feature Development
 
 ```
-1. /piv_loop:prime
+1. /piv-speckit:prime
    │
    ├─▶ Load codebase context
    ├─▶ Create context artifact
    │
-2. /piv_loop:plan-feature "Add user authentication"
+2. /piv-speckit:plan-feature "Add user authentication"
    │
    ├─▶ Analyze requirements
    ├─▶ Design approach
    ├─▶ Create plan artifact
    │
-3. /piv_loop:execute
+3. /piv-speckit:execute
    │
    ├─▶ Implement from plan (following RED-GREEN-REFACTOR cycle)
    │   ├─▶ RED: Write failing test first
@@ -1228,14 +1228,14 @@ Tracks:
    ├─▶ Follow all rules (especially TDD rule #22)
    ├─▶ Track progress
    │
-   └─▶ AUTOMATIC: /validation:validate
+   └─▶ AUTOMATIC: /piv-speckit:validate
        ├─▶ Run all validation levels (includes TDD compliance check)
        ├─▶ Generate validation report
        │
-       └─▶ AUTOMATIC: /validation:execution-report
+       └─▶ AUTOMATIC: /piv-speckit:execution-report
            └─▶ Generate execution report
 
-4. (Optional) /validation:learn 🆕
+4. (Optional) /piv-speckit:learn 🆕
    │
    ├─▶ Adaptive-learning skill suggests after code review
    ├─▶ Analyze code reviews for patterns
@@ -1247,15 +1247,15 @@ Tracks:
 ### Quick Bug Fix
 
 ```
-1. /github_bug_fix:rca
+1. /piv-speckit:rca
    │
    ├─▶ Create RCA document
    │
-2. /github_bug_fix:implement-fix
+2. /piv-speckit:implement-fix
    │
    ├─▶ Implement fix
    │
-   └─▶ AUTOMATIC: /validation:validate
+   └─▶ AUTOMATIC: /piv-speckit:validate
        └─▶ Validate fix works
 ```
 
@@ -1358,7 +1358,7 @@ Start
 ### ❌ Manual Validation
 **Problem**: Running tests manually instead of using automatic validation
 **Consequence**: Inconsistent validation, missed checks
-**Solution**: Always use `/validation:validate` (runs automatically)
+**Solution**: Always use `/piv-speckit:validate` (runs automatically)
 
 ### ❌ Ignoring Reports
 **Problem**: Not reading validation or execution reports
@@ -1379,10 +1379,10 @@ Start
 
 ### What Runs Automatically
 
-After `/piv_loop:execute`:
+After `/piv-speckit:execute`:
 
 ```
-1. /validation:validate (AUTOMATIC)
+1. /piv-speckit:validate (AUTOMATIC)
    ├─▶ Environment check
    ├─▶ Compilation
    ├─▶ Unit tests
@@ -1391,7 +1391,7 @@ After `/piv_loop:execute`:
    ├─▶ Coverage check
    └─▶ Build verification
 
-2. /validation:execution-report (AUTOMATIC)
+2. /piv-speckit:execution-report (AUTOMATIC)
    └─▶ Summary of what was done
 ```
 

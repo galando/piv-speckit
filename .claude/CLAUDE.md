@@ -20,13 +20,13 @@
 
 | Command | Purpose |
 |---------|---------|
-| `/piv_loop:constitution` | Create project principles (one-time) |
-| `/piv_loop:prime` | Load context |
-| `/piv_loop:plan-feature "X"` | Plan feature X |
-| `/piv_loop:execute` | Implement plan |
-| `/validation:validate` | Run validation |
-| `/validation:code-review` | Review code |
-| `/validation:learn` | Capture learnings |
+| `/piv-speckit:constitution` | Create project principles (one-time) |
+| `/piv-speckit:prime` | Load context |
+| `/piv-speckit:plan-feature "X"` | Plan feature X |
+| `/piv-speckit:execute` | Implement plan |
+| `/piv-speckit:validate` | Run validation |
+| `/piv-speckit:code-review` | Review code |
+| `/piv-speckit:learn` | Capture learnings |
 | `/commit` | Commit changes |
 
 ---

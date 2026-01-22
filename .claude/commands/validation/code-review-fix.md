@@ -249,13 +249,13 @@ All critical and high priority issues fixed. Code ready to commit.
 **After fixing issues:**
 
 **IF critical or high priority issues were fixed:**
-- Automatically re-run: `/validation:code-review`
+- Automatically re-run: `/piv-speckit:code-review`
 - Verify all issues are resolved
 - Check for new issues introduced
 - **Loop until:** Code review passes with zero critical/high issues
 
 **IF code review is now clean:**
-- Automatically invoke: `/validation:validate`
+- Automatically invoke: `/piv-speckit:validate`
 - Continue to final validation
 
 **Maximum iterations:** 3
@@ -264,7 +264,7 @@ All critical and high priority issues fixed. Code ready to commit.
 - User can manually fix and re-run code review
 
 **If called manually (not from code review):**
-- Ask user: "Run `/validation:code-review` to verify fixes"
+- Ask user: "Run `/piv-speckit:code-review` to verify fixes"
 - Don't auto-chain (user is in control)
 
 This automatic loop ensures code is clean before proceeding to final validation.

@@ -42,7 +42,7 @@ A user registration system with:
 
 **Ask Claude Code**:
 ```
-Run /piv_loop:prime to load the project context
+Run /piv-speckit:prime to load the project context
 ```
 
 **What to Expect**:
@@ -59,7 +59,7 @@ Run /piv_loop:prime to load the project context
 
 **Ask Claude Code**:
 ```
-Use /piv_loop:plan-feature to create a plan for implementing user registration with email validation, password hashing, and database storage
+Use /piv-speckit:plan-feature to create a plan for implementing user registration with email validation, password hashing, and database storage
 ```
 
 **What to Expect**:
@@ -126,7 +126,7 @@ Claude will:
 
 **Ask Claude Code**:
 ```
-Use /piv_loop:execute to implement the user registration plan
+Use /piv-speckit:execute to implement the user registration plan
 ```
 
 **What to Expect**:
@@ -170,7 +170,7 @@ Claude will:
 **Review Results**:
 ```bash
 # View execution report
-/validation:execution-report
+/piv-speckit:execution-report
 ```
 
 **If Validation Fails**:
@@ -293,7 +293,7 @@ tests/
 **Solution**:
 1. Check validation report for details
 2. Ask Claude: "Fix the failing tests"
-3. Re-run validation: `/validation:validate`
+3. Re-run validation: `/piv-speckit:validate`
 
 ### Issue: "Code style doesn't match my project"
 
@@ -352,7 +352,7 @@ Plan user registration with:
 git stash
 
 # Run execute
-/piv_loop:execute
+/piv-speckit:execute
 
 # Review changes
 git diff
@@ -391,33 +391,33 @@ For multi-feature projects:
 
 ```bash
 # 1. Prime once
-/piv_loop:prime
+/piv-speckit:prime
 
 # 2. Plan each feature
-/piv_loop:plan-feature "User authentication"
-/piv_loop:plan-feature "User profile"
-/piv_loop:plan-feature "Password reset"
+/piv-speckit:plan-feature "User authentication"
+/piv-speckit:plan-feature "User profile"
+/piv-speckit:plan-feature "Password reset"
 
 # 3. Execute each plan
-/piv_loop:execute  # Runs with last plan
+/piv-speckit:execute  # Runs with last plan
 # Or execute specific plan
-/piv_loop:execute user-authentication
+/piv-speckit:execute user-authentication
 ```
 
 ### Iterative Development
 
 ```bash
 # Plan basic version
-/piv_loop:plan-feature "User registration (basic)"
+/piv-speckit:plan-feature "User registration (basic)"
 
 # Execute basic version
-/piv_loop:execute
+/piv-speckit:execute
 
 # Plan enhancements
-/piv_loop:plan-feature "Add email verification to registration"
+/piv-speckit:plan-feature "Add email verification to registration"
 
 # Execute enhancements
-/piv_loop:execute
+/piv-speckit:execute
 ```
 
 ---

@@ -37,13 +37,13 @@
 
 | Command | Purpose |
 |---------|---------|
-| `/piv_loop:prime` | Load context |
-| `/piv_loop:plan-feature "desc"` | Create plan |
-| `/piv_loop:execute` | Implement from plan |
-| `/validation:validate` | Run validation |
-| `/validation:learn` | Extract learnings |
-| `/validation:learning-status` | View metrics |
-| `/validation:code-review` | Technical review |
+| `/piv-speckit:prime` | Load context |
+| `/piv-speckit:plan-feature "desc"` | Create plan |
+| `/piv-speckit:execute` | Implement from plan |
+| `/piv-speckit:validate` | Run validation |
+| `/piv-speckit:learn` | Extract learnings |
+| `/piv-speckit:learning-status` | View metrics |
+| `/piv-speckit:code-review` | Technical review |
 
 [→ Complete commands reference](../.claude/commands/)
 
