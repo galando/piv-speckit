@@ -854,7 +854,7 @@
     <header class="header">
         <div class="header-container">
             <a href="#" class="logo">
-                <div class="logo-mark">U</div>
+                <div class="logo-mark">P</div>
                 <span class="logo-text">PIV Spec-Kit</span>
             </a>
 
@@ -899,13 +899,13 @@
         <section class="hero">
             <div class="hero-badge">
                 <span>✨</span>
-                <span>Enhanced with Spec-Kit structured specifications</span>
+                <span>Powered by <a href="https://github.com/github/spec-kit" style="color: inherit; text-decoration: underline;">GitHub Spec-Kit</a> structured specifications</span>
             </div>
             <h1 class="hero-title">
                 PIV + <span class="hero-title-accent">Spec-Kit</span>: Master AI-Assisted Development
             </h1>
             <p class="hero-subtitle">
-                The framework to orchestrate Claude Code for predictable, high-quality engineering. Build better software with structured specs, strict TDD, and adaptive learning.
+                A framework for AI-assisted development with predictable, high-quality engineering. Works with Claude Code, Cursor, GitHub Copilot, and 20+ AI coding tools.
             </p>
             <div class="hero-ctas">
                 <a href="#installation" class="btn btn-primary btn-large">Get Started →</a>
@@ -1011,13 +1011,27 @@
                                 <span class="code-dot"></span>
                                 <span class="code-title">terminal</span>
                             </div>
-                            <div class="code-content"><span class="comment"># Prime your workspace</span>
+                            <div class="code-content"><span class="comment"># Create project principles (one-time)</span>
+<br>
+<span class="command">/piv_loop:constitution</span>
+<br>
+<span class="comment"># Prime your workspace</span>
+<br>
 <span class="command">/piv_loop:prime</span>
 <br>
 <span class="comment"># Plan your feature</span>
+<br>
 <span class="command">/piv_loop:plan-feature "Add user auth"</span>
 <br>
+<span class="comment"># Planning complete. Artifacts created:</span>
+<br>
+<span class="string">  ✓ spec.md</span>      <span class="comment">(WHAT: requirements, user stories)</span>
+<span class="string">  ✓ plan.md</span>      <span class="comment">(HOW: architecture, data model, APIs)</span>
+<span class="string">  ✓ tasks.md</span>     <span class="comment">(DO: step-by-step implementation)</span>
+<span class="string">  ✓ quickstart.md</span> <span class="comment">(TL;DR: quick reference)</span>
+<br>
 <span class="comment"># Execute with TDD enforced</span>
+<br>
 <span class="command">/piv_loop:execute</span>
 <br>
 <span class="comment"># 🔴 test-driven-development SKILL ACTIVATES</span>
@@ -1025,10 +1039,9 @@
 <span class="comment"># → Test FAILS ✅</span>
 <span class="comment"># → Writing minimal code...</span>
 <span class="comment"># → Test PASSES ✅</span>
-<span class="comment"># → Re factoring...</span>
+<span class="comment"># → Refactoring...</span>
 <span class="comment"># → Tests STILL PASS ✅</span>
 <br>
-<span class="comment"># Auto-validation runs automatically</span>
 <span class="keyword"># Done!</span>
                             </div>
                         </div>
@@ -1048,7 +1061,7 @@
 
                 <div class="install-tabs">
                     <button class="install-tab active" data-tab="claude-code">Claude Code</button>
-                    <button class="install-tab" data-tab="cursor">Cursor / Others</button>
+                    <button class="install-tab" data-tab="cursor">Other AI Tools</button>
                 </div>
 
                 <div class="install-content active" id="claude-code">
@@ -1099,7 +1112,7 @@
 
                 <div class="install-content" id="cursor">
                     <div class="install-block">
-                        <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md);">Cursor / Other AI Tools</h3>
+                        <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md);">Other AI Tools (Cursor, Copilot, etc.)</h3>
 
                         <div class="install-command">
                             <code>curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash</code>
@@ -1113,7 +1126,7 @@
                         </div>
 
                         <p style="color: var(--text-secondary); margin-top: var(--space-lg);">
-                            Generates <code>AGENTS.md</code> - universal AI agent instructions that Cursor and other tools read automatically.
+                            Generates <code>AGENTS.md</code> - universal AI agent instructions that Cursor, Copilot, and other tools read automatically.
                         </p>
                     </div>
                 </div>
@@ -1185,8 +1198,8 @@
                         <a href="https://github.com/galando/piv-speckit/blob/main/docs/getting-started/05-cursor-support.md" class="docs-link">
                             <span class="docs-link-icon">🖥️</span>
                             <div class="docs-link-content">
-                                <h4>Cursor Support</h4>
-                                <p>Using PIV with Cursor</p>
+                                <h4>Other AI Tools</h4>
+                                <p>Using PIV with Cursor, Copilot, and more</p>
                             </div>
                         </a>
                     </div>
@@ -1218,8 +1231,8 @@
         <div class="footer-content">
             <div class="footer-column">
                 <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md);">
-                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">U</div>
-                    <span style="font-weight: 600;">Universal AI Dev</span>
+                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">P</div>
+                    <span style="font-weight: 600;">PIV Spec-Kit</span>
                 </div>
                 <p class="footer-attribution">
                     PIV (Prime-Implement-Validate) methodology for AI-assisted development.

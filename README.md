@@ -46,7 +46,6 @@ All artifacts are **structured Markdown** - works with ANY AI tool:
 - **Claude Code** (plugin) - Full experience with commands
 - **Cursor** - Reads files directly
 - **GitHub Copilot** - Reads files directly
-- **ChatGPT/Claude Web** - Copy-paste content
 
 No Claude Code dependency for planning or implementation!
 
@@ -76,7 +75,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 **How it works:**
 - Generates `AGENTS.md` - a single file with PIV methodology instructions
-- Cursor/Copilot reads `AGENTS.md` automatically via their project-aware features
+- Cursor, Copilot, and other tools read `AGENTS.md` automatically via their project-aware features
 - **No slash commands** - type your requests naturally, the AI follows PIV methodology
 
 **Difference from Claude Code:**
@@ -309,7 +308,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 |-------|-------------|
 | [Quick Start](docs/getting-started/02-quick-start.md) | Get started in 5 minutes |
 | [PIV Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) | Complete methodology guide |
-| [Cursor Support](docs/getting-started/05-cursor-support.md) | Using PIV with Cursor |
+| [Cursor Support](docs/getting-started/05-cursor-support.md) | Using PIV with Cursor, Copilot, and more |
 | [All Documentation](docs/README.md) | Full documentation index |
 
 ---
