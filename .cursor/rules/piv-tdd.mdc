@@ -4,129 +4,43 @@ globs: ["*.test.*", "*.spec.*", "__tests__/*", "test/*", "tests/*"]
 alwaysApply: false
 ---
 
-# TDD Workflow (MANDATORY - STOP AT EACH CHECKPOINT)
+# TDD Requirements (MANDATORY)
 
-**RED → GREEN → REFACTOR** - Follow EXACTLY as written. NO shortcuts.
+**RED → GREEN → REFACTOR** - No exceptions.
 
----
+## The Cycle (SEQUENTIAL - NO EXCEPTIONS)
 
-## 🔴 PHASE 1: RED (Write Failing Test)
+| Phase | Action | Tool | Verify |
+|-------|--------|------|--------|
+| 🔴 RED | Write failing test | `Write` / `StrReplace` | Run `Shell` → see failure |
+| 🟢 GREEN | Write minimal implementation | `Write` / `StrReplace` | Run `Shell` → see pass |
+| 🔵 REFACTOR | Improve code | `Write` / `StrReplace` | Run `Shell` → still passes |
 
-### Step 1: Write ONLY the test
-- Create/open the test file
-- Write a SINGLE test with Given-When-Then structure
-- DO NOT write any implementation code yet
+## Critical Rules
 
-### Step 2: Run the test and SHOW IT FAILS
-- Run the test command
-- **STOP** and show the user the failure output
-- **WAIT** for user confirmation before proceeding
+- ❌ **NEVER** write test and implementation in the same tool call
+- ❌ **NEVER** skip running tests between phases
+- ❌ **NEVER** create multiple files at once
+- ✅ **ALWAYS** use `Shell` tool to run tests (e.g., `npm test`)
+- ✅ **ALWAYS** use `Read` tool to check `package.json` for test command first
+- ✅ **ALWAYS** verify test output before proceeding to next phase
 
-❌ FORBIDDEN:
-- Writing implementation before test runs
-- Writing multiple tests at once
-- Creating multiple files simultaneously
-- "I'll add the test later"
+## Checkpoints (ASK user before proceeding)
 
-### Checkpoint: User Confirmation
-**ASK**: "Test is failing as expected. Proceed to GREEN phase?"
-
----
-
-## 🟢 PHASE 2: GREEN (Minimal Implementation)
-
-### Step 3: Write MINIMAL code to pass
-- Implement ONLY what's needed for this ONE test to pass
-- No optimization, no "future-proofing"
-- Return values can be hardcoded if that's all that's needed
-
-### Step 4: Run test and SHOW IT PASSES
-- Run the test command
-- **STOP** and show the user it passes
-- **WAIT** for user confirmation before refactoring
-
-### Checkpoint: User Confirmation
-**ASK**: "Test passes. Proceed to REFACTOR phase (or skip)?"
-
----
-
-## 🔵 PHASE 3: REFACTOR (Improve While Green)
-
-### Step 5: Improve the code
-- Clean up duplication
-- Improve names
-- Extract abstractions ONLY if duplication exists
-- Run tests after EACH small change
-
-### Checkpoint: User Confirmation
-**ASK**: "Refactoring complete. All tests still pass. Ready for next test?"
-
----
-
-## 🛑 CRITICAL RULES
-
-### One Feature at a Time
-- **ONE test file** at a time
-- **ONE assertion** per test (unless testing related behavior)
-- **ONE cycle complete** before starting next
-
-### Stop and Verify
-- **ALWAYS** show test output after running
-- **ALWAYS** wait for user confirmation between phases
-- **ALWAYS** run tests after refactoring
-
-### Never Batch
-- ❌ Don't create multiple files at once
-- ❌ Don't write multiple tests before running any
-- ❌ Don't implement "the rest of the feature"
-- ❌ Don't say "I'll do all the tests at the end"
-
----
+- After RED: "Test fails as expected. Proceed to GREEN phase?"
+- After GREEN: "Test passes. Refactor or move to next test?"
 
 ## Test Structure (Given-When-Then)
 
 ```javascript
 // GIVEN: Setup test data and preconditions
-const userService = new UserService();
-const input = { name: "Test User", email: "test@example.com" };
+const input = { name: "Test", email: "test@example.com" };
 
 // WHEN: Execute the code being tested
-const result = await userService.create(input);
+const result = await service.create(input);
 
 // THEN: Verify expected outcomes
 expect(result.id).toBeDefined();
-expect(result.name).toBe("Test User");
 ```
-
----
-
-## When User Requests "Add Feature X"
-
-**CORRECT workflow:**
-1. Ask: "What should be the FIRST test for this feature?"
-2. Write ONE test
-3. Run it, show failure, wait for confirmation
-4. Implement MINIMAL code
-5. Run it, show it passes, wait for confirmation
-6. Ask: "What's the NEXT test?"
-
-**WRONG workflow:**
-1. ❌ Create all test files
-2. ❌ Create all implementation files
-3. ❌ "Here's the complete feature"
-
----
-
-## New Project Setup
-
-When creating a NEW project with TDD:
-
-1. **Ask user**: "What testing framework? (Jest, JUnit, pytest, etc.)"
-2. **Configure test runner** first
-3. **Create ONE example test** to verify setup works
-4. **Run it** and show it passes
-5. **THEN** ask: "What's the first feature to build?"
-
----
 
 <!-- PIV Spec-Kit v2.1.0 -->

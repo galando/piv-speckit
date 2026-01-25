@@ -8,67 +8,28 @@ alwaysApply: true
 
 Follow these rules for all code in this project.
 
-## 🛑 WORKFLOW RULES (READ FIRST)
+## Workflow Rules
 
-### One Feature at a Time
-- **ONE file** → modify → test → commit → then next file
-- **ONE task** → complete → verify → then next task
-- **NEVER** create multiple files simultaneously
-- **NEVER** batch "similar" changes together
-
-### Stop and Verify
-- After EACH file change: **ASK** if user wants to test/commit
-- After EACH task: **WAIT** for user confirmation
-- After EACH phase: **SHOW** what was changed
-
-### When User Says "Implement X"
-1. **ASK**: "Should I break this into smaller tasks?"
-2. **LIST** the files/changes needed
-3. **CONFIRM** before starting
-4. **WORK** on one file at a time
-5. **PAUSE** after each file for user review
-
----
+- **ONE file** at a time → modify → test → commit → then next
+- **ONE task** at a time → complete → verify → then next
+- **NEVER** batch multiple files or changes together
+- **ASK** before starting: "Should I break this into smaller tasks?"
 
 ## Core Principles
 
-### Understand First
-- **ALWAYS** read existing code before modifying
-- **ASK** about unclear patterns
-- **MATCH** existing code style
-
-### Match Patterns
-- Follow existing codebase conventions
-- Reuse existing patterns (DRY)
-- Don't introduce "your preferred way"
-
-### Minimal Changes
-- **ONE** logical change per file
-- **NO** "while I'm here" refactoring
-- **FOCUS** on the requested task only
-
-### Self-Documenting
-- Clear names over comments
-- Obvious code doesn't need explanation
-- Comments explain "why", not "what"
-
----
+- **Understand first**: Use `Read` tool on existing code before modifying
+- **Match patterns**: Follow existing codebase conventions
+- **Minimal changes**: Only change what's necessary
+- **Self-documenting**: Clear names over comments
 
 ## DRY & KISS
 
 - Check for existing implementations before creating new
 - Prefer simple over clever solutions
 - Single source of truth for each piece of knowledge
-- YAGNI: You Aren't Gonna Need It
-
----
 
 ## When Completing Work
 
-**ALWAYS** ask: "Shall I commit this change?"
-
-**NEVER** say "I also fixed X, Y, Z while I was at it" unless explicitly asked.
-
----
+**ASK**: "Shall I commit this change?"
 
 <!-- PIV Spec-Kit v2.1.0 -->

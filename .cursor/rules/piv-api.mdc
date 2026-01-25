@@ -6,118 +6,44 @@ alwaysApply: false
 
 # API Design Rules
 
-## 🛑 When Creating API Endpoints
+## Workflow
 
-**Follow this workflow for EVERY endpoint:**
-
-1. **Write the API test FIRST** (TDD applies to APIs too)
-2. **Define the request/response contract** before implementing
+1. **Write API test FIRST** (TDD applies to APIs too)
+2. **Define request/response contract** before implementing
 3. **Implement ONE endpoint** → test → confirm → then next
-4. **NEVER** create multiple endpoints in one go
-
----
 
 ## RESTful Principles
 
-### URL Design
-- ✅ **Nouns over verbs**: `/users` not `/getUsers`
-- ✅ **Plural nouns**: `/users` not `/user`
-- ✅ **Resource hierarchy**: `/users/{id}/posts`
-- ❌ **Never nest more than 3 levels**: `/users/{id}/posts/{id}/comments/{id}` is too deep
-
-### HTTP Verbs
-| Verb | Purpose | Idempotent |
-|------|---------|------------|
-| GET | Read resource | Yes |
-| POST | Create resource | No |
-| PUT | Update entire resource | Yes |
-| PATCH | Partial update | Yes |
-| DELETE | Remove resource | Yes |
-
----
+- **Nouns over verbs**: `/users` not `/getUsers`
+- **Plural nouns**: `/users` not `/user`
+- **HTTP verbs**: GET (read), POST (create), PUT (update), DELETE (remove)
+- **Resource hierarchy**: `/users/{id}/posts`
 
 ## Response Format
 
-### Success Response
 ```json
-{
-  "data": { ... },
-  "meta": { "page": 1, "total": 100 }
-}
+// Success
+{ "data": {...}, "meta": {...} }
+
+// Error
+{ "error": "ErrorCode", "message": "Human-readable description" }
 ```
 
-### Error Response
-```json
-{
-  "error": "ErrorCode",
-  "message": "Human-readable description",
-  "details": { ... }
-}
-```
+## HTTP Status Codes
 
-### HTTP Status Codes
 | Code | Use Case |
 |------|----------|
-| 200 | Success (GET, PUT, PATCH, DELETE) |
+| 200 | Success (GET, PUT, PATCH) |
 | 201 | Created (POST) |
-| 204 | No Content (DELETE) |
-| 400 | Bad Request (validation failed) |
-| 401 | Unauthorized (not logged in) |
-| 403 | Forbidden (logged in, no permission) |
+| 400 | Bad Request (validation) |
+| 401 | Unauthorized |
 | 404 | Not Found |
-| 409 | Conflict (duplicate resource) |
 | 500 | Server Error |
-
----
-
-## 🚨 FORBIDDEN Patterns
-
-### ❌ Don't Do This
-```javascript
-// Verbs in URL
-GET /getUsers
-POST /createUser
-
-// Singular nouns
-GET /user/123
-
-// Inconsistent responses
-{ "user": {...} }      // sometimes
-{ "data": {...} }      // sometimes
-{ "result": {...} }    // sometimes
-```
-
-### ✅ Do This Instead
-```javascript
-// Nouns with HTTP verbs
-GET /users
-POST /users
-
-// Plural nouns
-GET /users/123
-
-// Consistent responses
-{ "data": {...}, "meta": {...} }  // always
-```
-
----
 
 ## Best Practices
 
-### Input Validation
-- **ALWAYS** validate request body, params, query
-- **RETURN** 400 with specific error messages
-- **NEVER** trust client-side validation only
-
-### API Versioning
-- Use `/v1/`, `/v2/` prefix for breaking changes
-- Maintain backward compatibility when possible
-- Document deprecation timeline
-
-### Rate Limiting
-- **IMPLEMENT** rate limits on all public endpoints
-- **USE** standard headers: `X-RateLimit-Limit`, `X-RateLimit-Remaining`
-
----
+- Validate all input (body, params, query)
+- Version your API (`/v1/users`)
+- Implement rate limiting on public endpoints
 
 <!-- PIV Spec-Kit v2.1.0 -->
