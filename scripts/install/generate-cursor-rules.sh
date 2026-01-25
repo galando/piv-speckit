@@ -55,7 +55,7 @@ Follow these rules for all code in this project.
 
 **ASK**: "Shall I commit this change?"
 
-<!-- PIV v${version} -->
+<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # TDD rules (auto-attach on test files)
@@ -95,17 +95,22 @@ alwaysApply: false
 ## Test Structure (Given-When-Then)
 
 \`\`\`javascript
-// GIVEN: Setup test data and preconditions
-const input = { name: "Test", email: "test@example.com" };
+describe('UserService', () => {
+  it('should create user with valid input', async () => {
+    // GIVEN: Setup test data
+    const input = { name: 'Test User', email: 'test@example.com' };
 
-// WHEN: Execute the code being tested
-const result = await service.create(input);
+    // WHEN: Execute the code
+    const result = await userService.create(input);
 
-// THEN: Verify expected outcomes
-expect(result.id).toBeDefined();
+    // THEN: Verify outcomes
+    expect(result.id).toBeDefined();
+    expect(result.name).toBe('Test User');
+  });
+});
 \`\`\`
 
-<!-- PIV v${version} -->
+<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # API design rules (auto-attach on controllers/routes)
@@ -135,21 +140,29 @@ alwaysApply: false
 
 \`\`\`json
 // Success
-{ "data": {...}, "meta": {...} }
+{ "data": {...}, "meta": { "page": 1, "total": 100 } }
 
 // Error
-{ "error": "ErrorCode", "message": "Human-readable description" }
+{ "error": "ValidationError", "message": "Email is required" }
 \`\`\`
 
-## HTTP Status Codes
+## HTTP Methods & Status Codes
 
-| Code | Use Case |
-|------|----------|
-| 200 | Success (GET, PUT, PATCH) |
-| 201 | Created (POST) |
-| 400 | Bad Request (validation) |
-| 401 | Unauthorized |
+| Method | Purpose | Success Code |
+|--------|---------|--------------|
+| GET | Read resource | 200 |
+| POST | Create resource | 201 |
+| PUT | Update entire resource | 200 |
+| PATCH | Partial update | 200 |
+| DELETE | Remove resource | 204 |
+
+| Error Code | Use Case |
+|------------|----------|
+| 400 | Bad Request (validation failed) |
+| 401 | Unauthorized (not logged in) |
+| 403 | Forbidden (no permission) |
 | 404 | Not Found |
+| 409 | Conflict (duplicate) |
 | 500 | Server Error |
 
 ## Best Practices
@@ -158,7 +171,7 @@ alwaysApply: false
 - Version your API (\`/v1/users\`)
 - Implement rate limiting on public endpoints
 
-<!-- PIV v${version} -->
+<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # Security rules (auto-attach on auth files)
@@ -177,12 +190,26 @@ alwaysApply: false
 
 Validate EVERYTHING: form submissions, API requests, file uploads, URL params, webhooks.
 
-## Input Validation
+## SQL Injection Prevention
 
-- ✅ Validate structure, type, format, length, range
-- ✅ Sanitize data before use
-- ✅ Use parameterized queries (prevent SQL injection)
-- ✅ Escape output (prevent XSS)
+\`\`\`javascript
+// ❌ VULNERABLE - Never concatenate user input
+const query = \`SELECT * FROM users WHERE id = '\${userId}'\`;
+
+// ✅ SECURE - Use parameterized queries
+const query = 'SELECT * FROM users WHERE id = \$1';
+await db.query(query, [userId]);
+\`\`\`
+
+## XSS Prevention
+
+\`\`\`javascript
+// ❌ VULNERABLE - Never insert raw user input
+div.innerHTML = userInput;
+
+// ✅ SECURE - Use textContent or framework escaping
+div.textContent = userInput;
+\`\`\`
 
 ## Authentication & Passwords
 
@@ -190,8 +217,10 @@ Validate EVERYTHING: form submissions, API requests, file uploads, URL params, w
 // ❌ FORBIDDEN - Never use for passwords
 MD5, SHA1, SHA256, SHA512
 
-// ✅ REQUIRED - Use password hashing
-bcrypt, argon2, scrypt
+// ✅ REQUIRED - Use password hashing (bcrypt example)
+import bcrypt from 'bcrypt';
+const hash = await bcrypt.hash(password, 10);
+const match = await bcrypt.compare(password, hash);
 \`\`\`
 
 - Strong JWT secrets (256+ bits)
@@ -206,7 +235,7 @@ bcrypt, argon2, scrypt
 - ❌ NEVER commit secrets to git
 - ❌ NEVER log sensitive data
 
-<!-- PIV v${version} -->
+<!-- PIV Spec-Kit v${version} -->
 EOF
 
     echo "Generated: $rules_dir/"

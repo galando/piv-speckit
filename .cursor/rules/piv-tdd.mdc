@@ -37,10 +37,10 @@ describe('UserService', () => {
   it('should create user with valid input', async () => {
     // GIVEN: Setup test data
     const input = { name: 'Test User', email: 'test@example.com' };
-    
+
     // WHEN: Execute the code
     const result = await userService.create(input);
-    
+
     // THEN: Verify outcomes
     expect(result.id).toBeDefined();
     expect(result.name).toBe('Test User');
