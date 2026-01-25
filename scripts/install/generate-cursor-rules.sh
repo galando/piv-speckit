@@ -48,7 +48,7 @@ EOF
     cat > "$rules_dir/piv-tdd.mdc" << EOF
 ---
 description: PIV TDD enforcement for test files
-globs: ["*Test*", "*.test.*", "*_test.*", "*.spec.*", "*Spec*"]
+globs: ["*.test.*", "*.spec.*", "__tests__/*", "test/*", "tests/*"]
 alwaysApply: false
 ---
 
@@ -133,7 +133,7 @@ alwaysApply: false
 ## Authentication & Passwords
 - Use bcrypt/Argon2 (NEVER MD5/SHA for passwords)
 - Strong JWT secrets (256+ bits)
-- Short token expiration (1 hour)
+- Token expiration ≤1 hour
 - Implement rate limiting
 
 ## Data Protection

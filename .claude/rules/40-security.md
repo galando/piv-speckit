@@ -44,7 +44,7 @@ await db.query(query, [userId]);
 
 - ✅ Use bcrypt/scrypt/Argon2 for passwords
 - ✅ Strong JWT secrets (256+ bits)
-- ✅ Short token expiration (1 hour)
+- ✅ Token expiration ≤1 hour
 - ❌ NEVER store plain text passwords
 - ❌ NEVER use MD5/SHA1/SHA256 for passwords
 

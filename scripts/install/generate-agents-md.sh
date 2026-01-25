@@ -124,7 +124,7 @@ Types: feat, fix, docs, refactor, test, chore
 ### Authentication & Passwords
 - Use bcrypt/Argon2 (NEVER MD5/SHA for passwords)
 - Strong JWT secrets (256+ bits)
-- Short token expiration (1 hour)
+- Token expiration ≤1 hour
 - Implement rate limiting
 
 ### Data Protection

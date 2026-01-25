@@ -33,7 +33,7 @@ Cursor automatically reads:
 | Rule File | Activates When Editing |
 |-----------|------------------------|
 | `piv-general.mdc` | All files |
-| `piv-tdd.mdc` | `*Test*`, `*.test.*`, `*_test.*`, `*.spec.*` |
+| `piv-tdd.mdc` | `*.test.*`, `*.spec.*`, `__tests__/*`, `test/*`, `tests/*` |
 | `piv-api.mdc` | `*Controller*`, `*Router*`, `routes/*` |
 | `piv-security.mdc` | `*Auth*`, `*Security*`, `*Password*` |
 
