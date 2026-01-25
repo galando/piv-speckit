@@ -6,184 +6,55 @@ alwaysApply: false
 
 # Security Rules
 
-## 🛑 When Implementing Security Features
-
-**Follow this workflow:**
-
-1. **Write security test FIRST** (test for vulnerabilities, not just happy path)
-2. **Implement ONE security feature** → test → verify → then next
-3. **ALWAYS** ask: "Should I add rate limiting/logging here?"
-4. **NEVER** skip security for "internal only" or "MVP"
-
----
-
 ## Golden Rule
 
 **NEVER trust user input.**
 
-Validate EVERYTHING from untrusted sources:
-- Form submissions
-- API requests (even from authenticated users)
-- File uploads
-- URL parameters
-- Webhooks (third-party APIs too)
+Validate EVERYTHING: form submissions, API requests, file uploads, URL params, webhooks.
 
----
+## SQL Injection Prevention
 
-## Input Validation
-
-### Validation Checklist
-- ✅ **Structure**: Is the data shape correct?
-- ✅ **Type**: String, number, boolean as expected?
-- ✅ **Format**: Email, URL, UUID valid?
-- ✅ **Length**: Within min/max bounds?
-- ✅ **Range**: Within acceptable values?
-- ✅ **Sanitize**: Remove dangerous characters
-
-### SQL Injection Prevention
 ```javascript
-// ❌ VULNERABLE - Never concatenate
+// ❌ VULNERABLE - Never concatenate user input
 const query = `SELECT * FROM users WHERE id = '${userId}'`;
 
-// ✅ SECURE - Parameterized query
+// ✅ SECURE - Use parameterized queries
 const query = 'SELECT * FROM users WHERE id = $1';
 await db.query(query, [userId]);
 ```
 
-### XSS Prevention
+## XSS Prevention
+
 ```javascript
-// ❌ VULNERABLE
+// ❌ VULNERABLE - Never insert raw user input
 div.innerHTML = userInput;
 
-// ✅ SECURE
+// ✅ SECURE - Use textContent or framework escaping
 div.textContent = userInput;
-// or use framework auto-escaping (React, Vue)
 ```
-
----
 
 ## Authentication & Passwords
 
-### Password Storage
 ```javascript
-// ❌ FORBIDDEN - Never use these for passwords
+// ❌ FORBIDDEN - Never use for passwords
 MD5, SHA1, SHA256, SHA512
 
-// ✅ REQUIRED - Use password hashing functions
-bcrypt, argon2, scrypt
-```
-
-### Example (bcrypt)
-```javascript
+// ✅ REQUIRED - Use password hashing (bcrypt example)
 import bcrypt from 'bcrypt';
-
-// Hash with cost factor 10+
 const hash = await bcrypt.hash(password, 10);
-
-// Compare
 const match = await bcrypt.compare(password, hash);
 ```
 
-### JWT Tokens
-- **Secret**: Minimum 256 bits (32+ characters)
-- **Expiration**: 1 hour or less for access tokens
-- **Refresh tokens**: Store securely, rotate frequently
-- **Algorithm**: Use RS256 (asymmetric) for production
-
-```javascript
-// ❌ Too short
-const secret = "mysecret";
-
-// ✅ Proper length
-const secret = crypto.randomBytes(32).toString('hex');
-```
-
----
-
-## 🚨 FORBIDDEN Patterns
-
-### ❌ Never Do This
-```javascript
-// Plain text passwords
-users.insert({ password: "password123" })
-
-// Weak hashing
-const hash = md5(password);
-
-// Hardcoded secrets
-const apiKey = "sk_live_1234567890";
-
-// SQL concatenation
-const query = `SELECT * FROM users WHERE id = ${req.params.id}`;
-
-// Unescaped output
-res.send(`<div>${userInput}</div>`);
-```
-
-### ✅ Always Do This Instead
-```javascript
-// Hash passwords
-const hash = await bcrypt.hash(password, 10);
-
-// Environment variables
-const apiKey = process.env.API_KEY;
-
-// Parameterized queries
-const query = 'SELECT * FROM users WHERE id = $1';
-
-// Escaped/templated output
-res.send(`<div>${escape(userInput)}</div>`);
-```
-
----
-
-## Rate Limiting
-
-**IMPLEMENT on ALL authentication endpoints:**
-- POST `/auth/login` - 5 requests per 15 minutes per IP
-- POST `/auth/register` - 3 requests per hour per IP
-- POST `/auth/forgot-password` - 3 requests per hour per email
-
-**USE standard headers:**
-```
-X-RateLimit-Limit: 5
-X-RateLimit-Remaining: 3
-X-RateLimit-Reset: 1640000000
-```
-
----
+- Strong JWT secrets (256+ bits)
+- Token expiration ≤1 hour
+- Implement rate limiting on auth endpoints
 
 ## Data Protection
 
-### Secrets Management
-- ✅ Use `.env` files (add to `.gitignore`)
-- ✅ Use secret managers in production (Vault, AWS Secrets Manager)
-- ❌ Never commit secrets to git
-- ❌ Never hardcode credentials
-
-### Sensitive Data
-- ✅ Encrypt at rest (PII, passwords, tokens)
-- ✅ Use TLS in production (HTTPS only)
-- ✅ Hash passwords before storage
-- ❌ Never log sensitive data
-
----
-
-## Common Vulnerabilities (OWASP Top 10)
-
-| Vulnerability | Prevention |
-|---------------|------------|
-| Injection | Parameterized queries, input validation |
-| Broken Auth | Strong passwords, MFA, rate limiting |
-| XSS | Output escaping, CSP headers |
-| Broken Access Control | Check permissions on EVERY request |
-| Security Misconfiguration | Default deny, disable debug in prod |
-| Sensitive Data Exposure | Encrypt at rest, TLS in transit |
-| XSS | Output escaping, Content-Security-Policy |
-| Insecure Deserialization | Validate input, use safe formats |
-| Using Components with Known Vulnerabilities | `npm audit`, Dependabot |
-| Insufficient Logging & Monitoring | Log auth attempts, errors, rate limits |
-
----
+- ✅ HTTPS in production
+- ✅ Encrypt sensitive data at rest
+- ✅ Environment variables for secrets
+- ❌ NEVER commit secrets to git
+- ❌ NEVER log sensitive data
 
 <!-- PIV Spec-Kit v2.1.0 -->
