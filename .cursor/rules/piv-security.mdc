@@ -39,8 +39,10 @@ div.textContent = userInput;
 // ❌ FORBIDDEN - Never use for passwords
 MD5, SHA1, SHA256, SHA512
 
-// ✅ REQUIRED - Use password hashing
-bcrypt, argon2, scrypt
+// ✅ REQUIRED - Use password hashing (bcrypt example)
+import bcrypt from 'bcrypt';
+const hash = await bcrypt.hash(password, 10);
+const match = await bcrypt.compare(password, hash);
 ```
 
 - Strong JWT secrets (256+ bits)
