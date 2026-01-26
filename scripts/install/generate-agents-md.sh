@@ -6,17 +6,9 @@ set -euo pipefail
 
 generate_agents_md() {
     local output="${1:-AGENTS.md}"
-    local version
-    local script_dir
-
-    # Get script directory (works when sourced or run directly)
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-    # Read version from VERSION file
-    version=$(cat "$script_dir/../../VERSION" 2>/dev/null || echo "dev")
 
     cat > "$output" << HEADER
-<!-- PIV Spec-Kit v${version} - https://github.com/galando/piv-speckit -->
+<!-- PIV Spec-Kit - https://github.com/galando/piv-speckit -->
 # PIV Spec-Kit - Agent Instructions
 
 > PIV: Prime → Implement → Validate methodology for AI-assisted development
@@ -166,7 +158,7 @@ Types: feat, fix, docs, refactor, test, chore
 
 ---
 
-*PIV Spec-Kit v${version} - https://github.com/galando/piv-speckit*
+*PIV Spec-Kit - https://github.com/galando/piv-speckit*
 *Works with: Claude Code, Cursor, GitHub Copilot, OpenAI Codex, and 20+ AI tools*
 HEADER
 

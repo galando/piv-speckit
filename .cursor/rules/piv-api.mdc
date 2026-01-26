@@ -53,5 +53,3 @@ alwaysApply: false
 - Validate all input (body, params, query)
 - Version your API (`/v1/users`)
 - Implement rate limiting on public endpoints
-
-<!-- PIV Spec-Kit v2.1.0 -->

@@ -1,13 +1,35 @@
 #!/bin/bash
-# bump-version.sh - Update VERSION (single source of truth) and propagate to all files
-# Updates: VERSION, .claude-plugin/plugin.json, scripts/piv.sh, AGENTS.md, .cursor/rules/
+# bump-version.sh - Update VERSION (single source of truth)
+# All other files read VERSION dynamically - no hardcoded versions anywhere
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VERSION_FILE="$SCRIPT_DIR/../VERSION"
-PLUGIN_FILE="$SCRIPT_DIR/../.claude-plugin/plugin.json"
-INSTALLER_SCRIPT="$SCRIPT_DIR/piv.sh"
+
+show_usage() {
+    cat << EOF
+Usage: bump-version.sh <major|minor|patch|VERSION>
+
+Bump the PIV framework version.
+VERSION is the single source of truth - all other files read from it.
+
+Arguments:
+  major    Bump major version (e.g., 1.0.0 → 2.0.0)
+  minor    Bump minor version (e.g., 1.0.0 → 1.1.0)
+  patch    Bump patch version (e.g., 1.0.0 → 1.0.1)
+  VERSION  Set exact version (e.g., 2.3.4)
+
+Example:
+  bump-version.sh patch
+  bump-version.sh 2.0.0
+
+Files updated:
+  - VERSION (single source of truth - ONLY place with version number)
+
+Note: All other files (piv.sh, generators, etc.) read VERSION dynamically.
+EOF
+}
 
 show_usage() {
     cat << EOF
@@ -29,6 +51,7 @@ Files updated:
   - VERSION (single source of truth)
   - .claude-plugin/plugin.json
   - scripts/piv.sh
+  - .github/copilot-instructions.md
   - AGENTS.md
   - .cursor/rules/*
 EOF
@@ -75,55 +98,25 @@ bump_version() {
 
     echo "Bumping version: $current_version → $new_version"
 
-    # Update VERSION file
+    # Update VERSION file (ONLY place with version number)
     echo "$new_version" > "$VERSION_FILE"
-    echo "✅ Updated: VERSION"
-
-    # Update plugin.json
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/\"version\": \".*\"/\"version\": \"$new_version\"/" "$PLUGIN_FILE"
-    else
-        sed -i "s/\"version\": \".*\"/\"version\": \"$new_version\"/" "$PLUGIN_FILE"
-    fi
-    echo "✅ Updated: .claude-plugin/plugin.json"
-
-    # Update piv.sh SCRIPT_VERSION
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/readonly SCRIPT_VERSION=\".*\"/readonly SCRIPT_VERSION=\"$new_version\"/" "$INSTALLER_SCRIPT"
-    else
-        sed -i "s/readonly SCRIPT_VERSION=\".*\"/readonly SCRIPT_VERSION=\"$new_version\"/" "$INSTALLER_SCRIPT"
-    fi
-    echo "✅ Updated: scripts/piv.sh"
-
-    # Regenerate AGENTS.md and .cursor/rules/
-    echo ""
-    echo "Regenerating files with new version..."
-
-    # Source generators
-    source "$SCRIPT_DIR/install/generate-agents-md.sh"
-    source "$SCRIPT_DIR/install/generate-cursor-rules.sh"
-
-    # Generate in project root
-    generate_agents_md "$SCRIPT_DIR/../AGENTS.md"
-    generate_cursor_rules "$SCRIPT_DIR/.."
 
     echo ""
     echo "════════════════════════════════════════════════════════════════════"
     echo "✅ Version bump complete!"
     echo "════════════════════════════════════════════════════════════════════"
     echo ""
-    echo "Updated files:"
-    echo "  - VERSION: $new_version"
-    echo "  - .claude-plugin/plugin.json"
-    echo "  - scripts/piv.sh"
-    echo "  - AGENTS.md"
-    echo "  - .cursor/rules/*"
+    echo "Updated: VERSION = $new_version"
+    echo ""
+    echo "All other files read VERSION dynamically:"
+    echo "  - scripts/piv.sh: reads VERSION at runtime"
+    echo "  - .cursor/rules/*: read VERSION at generation time"
+    echo "  - AGENTS.md: reads VERSION at generation time"
     echo ""
     echo "Next steps:"
-    echo "  1. Review changes: git diff"
-    echo "  2. Commit: git add -A && git commit -m 'chore: bump version to $new_version'"
-    echo "  3. Tag: git tag v$new_version"
-    echo "  4. Push: git push --tags"
+    echo "  1. Commit: git add VERSION && git commit -m 'chore: bump version to $new_version'"
+    echo "  2. Tag: git tag v$new_version"
+    echo "  3. Push: git push --tags"
     echo ""
 }
 

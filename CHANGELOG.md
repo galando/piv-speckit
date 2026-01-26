@@ -184,43 +184,6 @@ Major update integrating [GitHub's Spec-Kit](https://github.com/github/spec-kit)
 
 ---
 
-## [Unreleased]
-
-### Planned for v2.1.0
-- [ ] Example constitution.md for reference
-- [ ] FAQ entry: "Why Spec-Kit?"
-- [ ] Migration guide: single-file → split artifacts
-- [ ] Interactive spec artifact generator
-
-### Planned for v2.2.0
-- [ ] Spec artifact validation
-- [ ] Template gallery for common patterns
-- [ ] Spec artifact versioning
-
-### Planned for v3.0.0
-- [ ] Vue.js technology template
-- [ ] Angular technology template
-- [ ] MongoDB technology template
-- [ ] Video tutorials (3-5 minute quick starts)
-- [ ] VS Code extension
-- [ ] Interactive examples
-
-### Planned for v1.2.0
-- [ ] Conditional validation (skip for specific file types)
-- [ ] Incremental prime (only reload changed context)
-- [ ] Plan templates (reusable patterns)
-- [ ] Performance metrics dashboard
-- [ ] Technical debt tracking
-
-### Planned for v2.0.0
-- [ ] Web dashboard (PIV Hub)
-- [ ] Rule marketplace
-- [ ] Template gallery
-- [ ] IDE plugins (JetBrains, VS Code, Neovim)
-- [ ] CLI tool
-
----
-
 ## Links
 
 - **GitHub**: https://github.com/galando/claude-dev-framework

@@ -47,5 +47,3 @@ describe('UserService', () => {
   });
 });
 ```
-
-<!-- PIV Spec-Kit v2.1.0 -->

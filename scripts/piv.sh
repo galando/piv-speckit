@@ -8,9 +8,18 @@ set -euo pipefail
 # CONFIGURATION
 ################################################################################
 
-readonly SCRIPT_VERSION="2.1.0"
 readonly REPO_URL="https://github.com/galando/piv-speckit"
 readonly REPO_NAME="piv-speckit"
+
+# SCRIPT_VERSION is read from VERSION file (single source of truth)
+get_script_version() {
+    local version_file="$SCRIPT_DIR/../VERSION"
+    if [[ -f "$version_file" ]]; then
+        cat "$version_file" | tr -d '[:space:]'
+    else
+        echo "unknown"
+    fi
+}
 
 # User options
 PIV_BRANCH=""
@@ -145,8 +154,8 @@ EXAMPLES:
     # Install all tool configurations
     curl -s $REPO_URL/raw/main/scripts/piv.sh | bash
 
-    # Install specific release for Cursor
-    curl -s $REPO_URL/raw/main/scripts/piv.sh | bash -s -- --tool cursor --tag v2.0.0
+    # Install specific release for Cursor (example: vX.Y.Z)
+    curl -s $REPO_URL/raw/main/scripts/piv.sh | bash -s -- --tool cursor --tag vX.Y.Z
 
 For Claude Code full experience:
     /plugin marketplace add galando/piv-speckit/marketplace
@@ -158,10 +167,9 @@ EOF
 
 show_version() {
     local version
-    version=$(cat "$SCRIPT_DIR/../VERSION" 2>/dev/null || echo "unknown")
+    version=$(get_script_version)
     cat << EOF
-PIV Spec-Kit Installer v$SCRIPT_VERSION
-PIV Framework Version: $version
+PIV Spec-Kit Installer v$version
 Repository: $REPO_URL
 EOF
 }

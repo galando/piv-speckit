@@ -8,14 +8,6 @@ set -euo pipefail
 generate_cursor_rules() {
     local target_dir="${1:-.}"
     local rules_dir="$target_dir/.cursor/rules"
-    local script_dir
-    local version
-
-    # Get script directory (works when sourced or run directly)
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-    # Read version from VERSION file
-    version=$(cat "$script_dir/../../VERSION" 2>/dev/null || echo "dev")
 
     mkdir -p "$rules_dir"
 
@@ -54,8 +46,6 @@ Follow these rules for all code in this project.
 ## When Completing Work
 
 **ASK**: "Shall I commit this change?"
-
-<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # TDD rules (auto-attach on test files)
@@ -109,8 +99,6 @@ describe('UserService', () => {
   });
 });
 \`\`\`
-
-<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # API design rules (auto-attach on controllers/routes)
@@ -170,8 +158,6 @@ alwaysApply: false
 - Validate all input (body, params, query)
 - Version your API (\`/v1/users\`)
 - Implement rate limiting on public endpoints
-
-<!-- PIV Spec-Kit v${version} -->
 EOF
 
     # Security rules (auto-attach on auth files)
@@ -234,8 +220,6 @@ const match = await bcrypt.compare(password, hash);
 - ✅ Environment variables for secrets
 - ❌ NEVER commit secrets to git
 - ❌ NEVER log sensitive data
-
-<!-- PIV Spec-Kit v${version} -->
 EOF
 
     echo "Generated: $rules_dir/"

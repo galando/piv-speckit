@@ -56,5 +56,3 @@ const match = await bcrypt.compare(password, hash);
 - ✅ Environment variables for secrets
 - ❌ NEVER commit secrets to git
 - ❌ NEVER log sensitive data
-
-<!-- PIV Spec-Kit v2.1.0 -->

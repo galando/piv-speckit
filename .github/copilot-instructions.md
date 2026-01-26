@@ -111,4 +111,4 @@ See `AGENTS.md` in project root for full PIV methodology.
 
 ---
 
-*PIV Spec-Kit v2.1.0 - https://github.com/galando/piv-speckit*
+*PIV Spec-Kit - https://github.com/galando/piv-speckit*

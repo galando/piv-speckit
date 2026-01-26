@@ -7,14 +7,6 @@ set -euo pipefail
 generate_copilot_instructions() {
     local target_dir="${1:-.}"
     local github_dir="$target_dir/.github"
-    local script_dir
-    local version
-
-    # Get script directory (works when sourced or run directly)
-    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-    # Read version from VERSION file
-    version=$(cat "$script_dir/../../VERSION" 2>/dev/null || echo "dev")
 
     # Create .github directory if it doesn't exist
     mkdir -p "$github_dir"
@@ -133,7 +125,7 @@ See \`AGENTS.md\` in project root for full PIV methodology.
 
 ---
 
-*PIV Spec-Kit v${version} - https://github.com/galando/piv-speckit*
+*PIV Spec-Kit - https://github.com/galando/piv-speckit*
 EOF
 
     echo "Generated: $github_dir/copilot-instructions.md"
