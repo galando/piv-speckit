@@ -55,4 +55,4 @@ await db.query(query, [userId]);
 - ✅ Use environment variables for secrets
 - ❌ NEVER commit secrets to git
 
-**For complete OWASP coverage:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/security-full.md`
+**Full version:** See `.claude/reference/rules-full/security-full.md` in plugin source.

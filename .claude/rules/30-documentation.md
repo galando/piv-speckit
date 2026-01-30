@@ -41,4 +41,4 @@
 - Tech stack
 - How to contribute
 
-**For complete guide:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/documentation-full.md`
+**Full version:** See `.claude/reference/rules-full/documentation-full.md` in plugin source.

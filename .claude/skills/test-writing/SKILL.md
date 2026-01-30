@@ -17,4 +17,4 @@ triggers:
 
 **Requirements:** Independent, Fast (<100ms), Edge cases
 
-`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/test-writing-full.md`
+*Full version: See `.claude/reference/skills-full/test-writing-full.md` in plugin source.*

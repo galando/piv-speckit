@@ -23,4 +23,4 @@ triggers:
 - Error handling
 - DRY principle
 
-`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/code-review-full.md`
+*Full version: See `.claude/reference/skills-full/code-review-full.md` in plugin source.*

@@ -50,10 +50,12 @@ VALIDATE → Runs automatically
 
 ## For Full Details
 
-- **Methodology:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/methodology/PIV-METHODOLOGY.md`
-- **Rules:** `Read .claude/rules/` (compressed) or `.claude/reference/rules-full/` (complete)
-- **Execution:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/[command].md`
+> **Claude Code users:** Reference docs auto-load via hooks when commands are invoked.
+> **Other AI tools:** See compressed methodology in each command file.
+
+- **Rules:** Loaded from `.claude/rules/` (compressed versions)
+- **Full docs:** Available in plugin source at `.claude/reference/`
 
 ---
 
-**PIV Version:** 3.0 | **Claude Code Plugin Available**
+**PIV Version:** 3.0.4 | **Claude Code Plugin Available**

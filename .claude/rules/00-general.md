@@ -41,4 +41,4 @@
 - **LOG** errors with context
 - **FAIL** safely (secure by default)
 
-**For full guide:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/general-full.md`
+**Full version:** See `.claude/reference/rules-full/general-full.md` in plugin source.
