@@ -1,7 +1,7 @@
 {
   "name": "piv-speckit",
   "description": "PIV + Spec-Kit: PIV methodology with structured specs and strict TDD",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": {
     "name": "galando",
     "url": "https://github.com/galando/piv-speckit"
@@ -33,10 +33,5 @@
     "./.claude/skills/security/SKILL.md",
     "./.claude/skills/test-driven-development/SKILL.md",
     "./.claude/skills/test-writing/SKILL.md"
-  ],
-  "references": [
-    "./.claude/CLAUDE.md",
-    "./.claude/reference/**",
-    "./.claude/rules/**"
   ]
 }
