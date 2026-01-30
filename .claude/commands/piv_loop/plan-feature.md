@@ -15,7 +15,7 @@ argument-hint: "<feature-name>"
 
 ## Execution
 
-`Read .claude/reference/execution/plan-feature.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/plan-feature.md`
 
 Contains full planning methodology with phases:
 - **Phase 0: Auto-Prime** (automatic — loads/refreshes codebase context silently)

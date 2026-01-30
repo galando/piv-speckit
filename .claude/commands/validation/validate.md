@@ -8,7 +8,7 @@ description: Run comprehensive validation of the Example project in LOCAL DEV MO
 
 ## Execution
 
-`Read .claude/reference/execution/validate.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/validate.md`
 
 **⚠️ CRITICAL:** Always validate in LOCAL DEV MODE, never production.
 

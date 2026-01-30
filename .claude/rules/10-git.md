@@ -40,4 +40,4 @@ type(scope): description
 - ❌ No broken code
 - ❌ No "wip" commits
 
-**For full guide with examples:** `Read .claude/reference/rules-full/git-full.md`
+**For full guide with examples:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/git-full.md`

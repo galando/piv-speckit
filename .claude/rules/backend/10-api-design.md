@@ -36,4 +36,4 @@
 - ❌ Never expose internal IDs in URLs
 - ❌ Don't nest resources more than 3 levels
 
-**For complete guide:** `Read .claude/reference/rules-full/api-design-full.md`
+**For complete guide:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/api-design-full.md`

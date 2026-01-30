@@ -14,4 +14,4 @@ triggers:
 - ❌ Never trust user input
 - ❌ Never commit secrets
 
-`Read .claude/reference/skills-full/security-full.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/security-full.md`

@@ -50,9 +50,9 @@ VALIDATE → Runs automatically
 
 ## For Full Details
 
-- **Methodology:** `Read .claude/reference/methodology/PIV-METHODOLOGY.md`
+- **Methodology:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/methodology/PIV-METHODOLOGY.md`
 - **Rules:** `Read .claude/rules/` (compressed) or `.claude/reference/rules-full/` (complete)
-- **Execution:** `Read .claude/reference/execution/[command].md`
+- **Execution:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/[command].md`
 
 ---
 

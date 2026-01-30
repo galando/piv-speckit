@@ -40,4 +40,4 @@ Apply these principles to EVERY feature and code change:
 - Ship working software
 - Iterate based on feedback
 
-**For full guide with examples:** `Read .claude/reference/rules-full/pragmatic-principles-full.md`
+**For full guide with examples:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/pragmatic-principles-full.md`

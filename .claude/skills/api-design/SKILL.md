@@ -15,4 +15,4 @@ triggers:
 - Error handling
 - Auth on protected endpoints
 
-`Read .claude/reference/skills-full/api-design-full.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/api-design-full.md`
