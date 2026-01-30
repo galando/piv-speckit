@@ -33,10 +33,5 @@
     "./.claude/skills/security/SKILL.md",
     "./.claude/skills/test-driven-development/SKILL.md",
     "./.claude/skills/test-writing/SKILL.md"
-  ],
-  "references": [
-    "./.claude/CLAUDE.md",
-    "./.claude/reference/**",
-    "./.claude/rules/**"
   ]
 }
