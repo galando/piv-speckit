@@ -1,0 +1,84 @@
+{
+  "description": "Maps skill/command names to their reference documentation files",
+  "note": "Paths are relative to plugin root (.claude/reference/)",
+
+  "mappings": {
+    "piv_loop:plan-feature": [
+      "execution/plan-feature.md",
+      "methodology/PIV-METHODOLOGY.md",
+      "rules-full/database-full.md",
+      "rules-full/git-full.md"
+    ],
+    "piv_loop:execute": [
+      "execution/execute.md",
+      "rules-full/tdd-full.md",
+      "rules-full/database-full.md"
+    ],
+    "piv_loop:prime": [
+      "methodology/PIV-METHODOLOGY.md"
+    ],
+
+    "validation:code-review": [
+      "execution/code-review.md",
+      "skills-full/code-review-full.md"
+    ],
+    "validation:validate": [
+      "execution/validate.md",
+      "rules-full/testing-full.md"
+    ],
+    "validation:code-review-fix": [
+      "skills-full/code-review-full.md"
+    ],
+    "validation:learn": [
+      "skills-full/adaptive-learning-full.md"
+    ],
+    "validation:learning-status": [
+      "skills-full/adaptive-learning-full.md"
+    ],
+    "validation:system-review": [
+      "rules-full/general-full.md",
+      "rules-full/pragmatic-principles-full.md"
+    ],
+    "validation:execution-report": [
+      "rules-full/documentation-full.md"
+    ],
+    "validation:suggest-improvement": [
+      "rules-full/pragmatic-principles-full.md"
+    ],
+
+    "test-driven-development": [
+      "skills-full/test-driven-development-full.md",
+      "rules-full/tdd-full.md"
+    ],
+    "test-writing": [
+      "skills-full/test-writing-full.md",
+      "rules-full/testing-gwt-full.md"
+    ],
+    "security": [
+      "skills-full/security-full.md",
+      "rules-full/security-full.md"
+    ],
+    "api-design": [
+      "skills-full/api-design-full.md",
+      "rules-full/api-design-full.md"
+    ],
+    "code-review": [
+      "skills-full/code-review-full.md"
+    ],
+    "adaptive-learning": [
+      "skills-full/adaptive-learning-full.md"
+    ],
+
+    "bug_fix:rca": [
+      "rules-full/general-full.md"
+    ],
+    "bug_fix:implement-fix": [
+      "rules-full/tdd-full.md",
+      "rules-full/database-full.md"
+    ],
+
+    "product:create-prd": [
+      "rules-full/documentation-full.md"
+    ]
+  }
+}
