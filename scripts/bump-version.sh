@@ -27,7 +27,7 @@ Files updated:
   - VERSION (single source of truth)
 
 Note: All other files read VERSION dynamically (scripts/piv.sh, .cursor/rules/*, AGENTS.md).
-Note: .claude-plugin/plugin.json uses __VERSION__ placeholder (replaced during install/release).
+Note: .claude-plugin/plugin.json version is kept in sync by this script.
 EOF
 }
 
@@ -75,6 +75,14 @@ bump_version() {
     # Update VERSION file (single source of truth)
     echo "$new_version" > "$VERSION_FILE"
 
+    # Update plugin.json (also needs explicit version)
+    local plugin_json="$SCRIPT_DIR/../.claude-plugin/plugin.json"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$new_version\"/" "$plugin_json"
+    else
+        sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$new_version\"/" "$plugin_json"
+    fi
+
     echo ""
     echo "════════════════════════════════════════════════════════════════════"
     echo "✅ Version bump complete!"
@@ -82,6 +90,7 @@ bump_version() {
     echo ""
     echo "Updated files:"
     echo "  - VERSION = $new_version"
+    echo "  - .claude-plugin/plugin.json = $new_version"
     echo ""
     echo "Files that read VERSION dynamically:"
     echo "  - scripts/piv.sh: reads VERSION at runtime"
@@ -89,7 +98,7 @@ bump_version() {
     echo "  - AGENTS.md: reads VERSION at generation time"
     echo ""
     echo "Next steps:"
-    echo "  1. Commit: git add VERSION && git commit -m 'chore: bump version to $new_version'"
+    echo "  1. Commit: git add VERSION .claude-plugin/plugin.json && git commit -m 'chore: bump version to $new_version'"
     echo "  2. Tag: git tag v$new_version"
     echo "  3. Push: git push --tags"
     echo ""
