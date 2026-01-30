@@ -12,4 +12,4 @@ triggers:
 
 ❌ Code before tests → DELETE
 
-`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/tdd-full.md`
+*Full version: See `.claude/reference/skills-full/tdd-full.md` in plugin source.*

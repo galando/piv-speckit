@@ -42,4 +42,4 @@ Before committing:
 ❌ Testing third-party code
 ❌ Shared state between tests
 
-**For complete guide with examples:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/testing-full.md`
+**Full version:** See `.claude/reference/rules-full/testing-full.md` in plugin source.

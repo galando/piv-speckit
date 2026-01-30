@@ -35,4 +35,4 @@
 - **Code review rejects** violations
 - **Code written before tests WILL BE DELETED**
 
-**For complete guide with examples:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/tdd-full.md`
+**Full version:** See `.claude/reference/rules-full/tdd-full.md` in plugin source.
