@@ -21,7 +21,8 @@ fi
 
 # Config and reference paths
 CONFIG_FILE="${CLAUDE_PLUGIN_ROOT}/hooks/reference-mappings.json"
-REFERENCE_BASE="${CLAUDE_PLUGIN_ROOT}/.claude/reference"
+# Reference files are in .claude-plugin/reference/ for plugin distribution
+REFERENCE_BASE="${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference"
 
 # Check if config exists
 if [ ! -f "$CONFIG_FILE" ]; then

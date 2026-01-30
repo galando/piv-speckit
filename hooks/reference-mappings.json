@@ -1,6 +1,6 @@
 {
   "description": "Maps skill/command names to their reference documentation files",
-  "note": "Paths are relative to plugin root (.claude/reference/)",
+  "note": "Paths are relative to .claude-plugin/reference/",
 
   "mappings": {
     "piv_loop:plan-feature": [
@@ -70,11 +70,16 @@
     ],
 
     "bug_fix:rca": [
-      "rules-full/general-full.md"
+      "rules-full/general-full.md",
+      "lib/issue-tracker/detector.md",
+      "lib/issue-tracker/github.md",
+      "lib/issue-tracker/jira.md",
+      "lib/issue-tracker/formatter.md"
     ],
     "bug_fix:implement-fix": [
       "rules-full/tdd-full.md",
-      "rules-full/database-full.md"
+      "rules-full/database-full.md",
+      "lib/issue-tracker/formatter.md"
     ],
 
     "product:create-prd": [
