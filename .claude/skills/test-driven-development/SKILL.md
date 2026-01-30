@@ -12,4 +12,4 @@ triggers:
 
 ❌ Code before tests → DELETE
 
-`Read .claude/reference/skills-full/tdd-full.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/tdd-full.md`

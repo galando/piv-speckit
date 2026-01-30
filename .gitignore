@@ -33,3 +33,4 @@ Thumbs.db
 .claude/agents/reviews/
 .claude/agents/code-reviews/
 .claude/agents/learning/
+*.log

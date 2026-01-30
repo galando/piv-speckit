@@ -10,4 +10,4 @@ triggers:
 
 Captures patterns to improve framework over time.
 
-`Read .claude/reference/skills-full/adaptive-learning-full.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/skills-full/adaptive-learning-full.md`

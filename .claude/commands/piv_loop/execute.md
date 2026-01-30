@@ -21,7 +21,7 @@ argument-hint: "<path-to-plan.md | path-to-tasks.md>"
 
 ## Execution
 
-`Read .claude/reference/execution/execute.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/execute.md`
 
 Contains full execution instructions:
 1. Read and understand plan/tasks
