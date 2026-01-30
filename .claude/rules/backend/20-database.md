@@ -33,4 +33,4 @@ public void createUserWithProfile(User user, Profile profile) {
 - ✅ Use `@Query` for complex queries
 - ❌ Never concatenate user input into SQL
 
-**For complete patterns:** `Read .claude/reference/rules-full/database-full.md`
+**For complete patterns:** `Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/rules-full/database-full.md`

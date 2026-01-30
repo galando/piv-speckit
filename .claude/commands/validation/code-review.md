@@ -8,7 +8,7 @@ description: Technical code review for quality and bugs that runs pre-commit
 
 ## Execution
 
-`Read .claude/reference/execution/code-review.md`
+`Read {CLAUDE_PLUGIN_ROOT}/.claude/reference/execution/code-review.md`
 
 Checks:
 - TDD compliance
