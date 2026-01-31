@@ -1,7 +1,7 @@
 # PIV Spec-Kit
 
 [![PIV Spec-Kit](https://img.shields.io/badge/PIV_Spec--Kit-Framework-blue?style=for-the-badge)](https://github.com/galando/piv-speckit)
-[![Version](https://img.shields.io/badge/Version-3.0.0-green?style=for-the-badge)](https://github.com/galando/piv-speckit/blob/main/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-4.1.0-green?style=for-the-badge)](https://github.com/galando/piv-speckit/blob/main/CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Visual Guide](https://img.shields.io/badge/🌐_Visual_Guide-Interactive-467fd9?style=for-the-badge)](https://galando.github.io/piv-speckit/)
 [![Inspired by Spec-Kit](https://img.shields.io/badge/Inspired_By-Spec--Kit-blue?style=for-the-badge)](https://github.com/github/spec-kit)
@@ -9,7 +9,7 @@
 
 **PIV (Prime-Implement-Validate) + Spec-Kit: Structured specs, strict TDD, for AI-assisted development.**
 
-**NEW v3.0:** Zero-setup workflow - just run `/piv-speckit:plan-feature` and context loads automatically!
+**Zero-setup workflow** - just run `/piv-speckit:plan-feature` and context loads automatically!
 
 **A Claude Code plugin for structured AI-assisted development.**
 
@@ -21,11 +21,11 @@
 
 A development methodology for AI-assisted software development:
 
-- **Prime (v3.0: Auto)**: Context loads automatically when planning
+- **Prime (Auto)**: Context loads automatically when planning
 - **Implement**: Write tests FIRST (strict TDD), then minimal code
 - **Validate**: Automatic testing and verification
 
-[→ Interactive Visual Guide](https://galando.github.io/piv-speckit/) | [→ Full Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) | [→ v3.0 Changelog](CHANGELOG.md)
+[→ Interactive Visual Guide](https://galando.github.io/piv-speckit/) | [→ Full Methodology](.claude/reference/methodology/PIV-METHODOLOGY.md) | [→ Changelog](CHANGELOG.md)
 
 ---
 
@@ -71,7 +71,7 @@ All artifacts are **structured Markdown** - human-readable and version-controlle
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                      PIV SPEC-KIT WORKFLOW (v3.0)                           │
+│                      PIV SPEC-KIT WORKFLOW                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  1. PLAN (Auto-Primes + Structured Specs)                                  │
