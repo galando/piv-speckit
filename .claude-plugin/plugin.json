@@ -1,7 +1,7 @@
 {
   "name": "piv-speckit",
   "description": "PIV + Spec-Kit: PIV methodology with structured specs and strict TDD",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": {
     "name": "galando",
     "url": "https://github.com/galando/piv-speckit"

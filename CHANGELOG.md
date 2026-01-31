@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.1] - 2026-01-31
+
+### 🗑️ Removed
+
+Removed all installer-related files and orphaned directories (Claude Code plugin is installed via `/plugin install`):
+
+- **scripts/** - Entire installer directory (piv.sh, bump-version.sh, install/, test fixtures)
+- **AGENTS.md** - Compressed methodology for other AI tools (no longer needed)
+- **technologies/** - Redundant tech docs (already in `.claude-plugin/reference/`)
+- **.claude/specs/** - Source templates for the deleted installer
+- **marketplace/** - Empty directory
+
+### 📐 What Remains
+
+The plugin is now streamlined to only Claude Code essentials:
+
+```
+.claude/              # Commands, skills, rules
+.claude-plugin/       # Plugin manifest + reference docs
+hooks/                # Auto-load reference docs
+docs/                 # User documentation
+```
+
+---
+
 ## [4.0.0] - 2026-01-31
 
 ### ⚠️ Breaking Changes
