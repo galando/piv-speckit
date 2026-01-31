@@ -5,6 +5,9 @@ argument-hint: "<path-to-code-review-report>"
 
 # Code Review Fix: Implement Review Recommendations
 
+> **Code review methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/execution/code-review.md`
+> **Rules reference:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/rules-full/`
+
 ## Code Review Report
 
 Read code review report: `$ARGUMENTS`

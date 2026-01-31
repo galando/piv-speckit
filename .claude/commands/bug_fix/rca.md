@@ -5,6 +5,12 @@ argument-hint: "<github-issue-url-or-number | JIRA-123 | \"direct:<bug-descripti
 
 # Root Cause Analysis (RCA)
 
+> **Issue tracker operations:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/lib/issue-tracker/`
+> - `detector.md` - Detect issue type (GitHub/Jira/Direct)
+> - `github.md` - GitHub operations
+> - `jira.md` - Jira operations
+> - `formatter.md` - Branch/commit naming patterns
+
 ## Issue Tracker Detection
 
 **First, detect the issue tracker type from `$ARGUMENTS`:**

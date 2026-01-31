@@ -8,8 +8,7 @@ description: Technical code review for quality and bugs that runs pre-commit
 
 ## Execution
 
-> **Claude Code users:** Full methodology is auto-loaded via hooks.
-> **Other AI tools:** Use the compressed methodology below.
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/execution/code-review.md`
 
 ### Review Checklist
 

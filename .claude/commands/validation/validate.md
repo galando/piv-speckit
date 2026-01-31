@@ -8,8 +8,7 @@ description: Run comprehensive validation of the Example project in LOCAL DEV MO
 
 ## Execution
 
-> **Claude Code users:** Full methodology is auto-loaded via hooks.
-> **Other AI tools:** Use the compressed methodology below.
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/execution/validate.md`
 
 **⚠️ CRITICAL:** Always validate in LOCAL DEV MODE, never production.
 

@@ -5,6 +5,9 @@ argument-hint: "<path-to-rca-document>"
 
 # Implement Fix: Execute RCA Solution
 
+> **Issue tracker formatter:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/lib/issue-tracker/formatter.md`
+> **Testing rules:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/rules-full/testing-full.md`
+
 ## RCA Document
 
 Read RCA document: `$ARGUMENTS`

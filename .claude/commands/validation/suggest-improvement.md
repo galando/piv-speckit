@@ -5,6 +5,8 @@ argument-hint: "<type> <title>"
 
 # Suggest Improvement: Generate Rule/Validation/Skill Enhancement
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/skills-full/adaptive-learning-full.md`
+
 ## Purpose
 
 Create a structured improvement suggestion artifact that proposes changes to:

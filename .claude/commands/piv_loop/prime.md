@@ -4,6 +4,8 @@ description: "Manually refresh codebase context (optional — plan-feature auto-
 
 # Prime: Refresh Project Context (Optional)
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/methodology/PIV-METHODOLOGY.md`
+
 ## When to Use
 
 **This command is optional.** `/piv-speckit:plan-feature` now auto-primes silently before planning.

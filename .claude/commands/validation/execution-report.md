@@ -5,6 +5,8 @@ argument-hint: "<path-to-plan.md>"
 
 # Execution Report: Implementation Summary
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/methodology/PIV-METHODOLOGY.md`
+
 ## Plan
 
 Read the executed plan: `$ARGUMENTS`

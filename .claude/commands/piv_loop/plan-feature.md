@@ -17,8 +17,7 @@ argument-hint: "<feature-name>"
 
 ## Execution
 
-> **Claude Code users:** Full methodology is auto-loaded via hooks.
-> **Other AI tools:** Use the compressed methodology below.
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/execution/plan-feature.md`
 
 ### Planning Phases
 - **Phase 0: Auto-Prime** (automatic — loads/refreshes codebase context silently)
