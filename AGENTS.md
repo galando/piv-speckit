@@ -149,4 +149,4 @@ Types: feat, fix, docs, refactor, test, chore
 ---
 
 *PIV Spec-Kit - https://github.com/galando/piv-speckit*
-*Works with: Claude Code, Cursor, GitHub Copilot, OpenAI Codex, and 20+ AI tools*
+*A Claude Code plugin for AI-assisted development*

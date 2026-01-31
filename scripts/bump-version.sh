@@ -26,7 +26,7 @@ Example:
 Files updated:
   - VERSION (single source of truth)
 
-Note: All other files read VERSION dynamically (scripts/piv.sh, .cursor/rules/*, AGENTS.md).
+Note: All other files read VERSION dynamically (scripts/piv.sh, AGENTS.md).
 Note: .claude-plugin/plugin.json version is kept in sync by this script.
 EOF
 }
@@ -94,7 +94,6 @@ bump_version() {
     echo ""
     echo "Files that read VERSION dynamically:"
     echo "  - scripts/piv.sh: reads VERSION at runtime"
-    echo "  - .cursor/rules/*: read VERSION at generation time"
     echo "  - AGENTS.md: reads VERSION at generation time"
     echo ""
     echo "Next steps:"

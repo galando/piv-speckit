@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.0] - 2026-01-31
+
+### ⚠️ Breaking Changes
+
+**Framework is now Claude Code exclusive.**
+
+- Removed all multi-IDE support (Cursor, Copilot, and other AI tools)
+- Removed `.cursor/rules/` directory and all Cursor-specific configuration
+- Removed `.github/copilot-instructions.md` Copilot integration
+- Removed IDE-specific documentation guides
+- Removed tool selection from installer script
+- Removed `generate-cursor-rules.sh` and `generate-copilot-instructions.sh` scripts
+
+### ✨ Changed
+
+- **Repository focus**: Now exclusively a Claude Code plugin
+- **Installer (`piv.sh`)**: Simplified to generate only `AGENTS.md` and spec templates
+- **Documentation**: All references to multi-AI compatibility removed
+- **GitHub Pages**: Simplified installation page (no tool tabs)
+- **README**: Updated to reflect Claude-only positioning
+
+### 🗑️ Removed
+
+- `.cursor/rules/` directory (piv-api.mdc, piv-general.mdc, piv-security.mdc, piv-tdd.mdc)
+- `.github/copilot-instructions.md`
+- `docs/getting-started/05-cursor-guide.md`
+- `docs/getting-started/06-cursor-guide.md`
+- `docs/getting-started/06-copilot-guide.md`
+- `docs/getting-started/07-copilot-guide.md`
+- `scripts/install/generate-cursor-rules.sh`
+- `scripts/install/generate-copilot-instructions.sh`
+
+### 📝 Migration
+
+If you were using PIV Spec-Kit with Cursor or Copilot:
+- **Claude Code**: `/plugin marketplace add galando/piv-speckit` and `/plugin install piv@piv-speckit`
+- **Other tools**: The `AGENTS.md` file can still be generated via `curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash`, but active development and features are Claude Code only
+
+---
+
 ## [3.0.0] - 2026-01-28
 
 ### 🎉 Zero-Setup: Auto-Prime in plan-feature

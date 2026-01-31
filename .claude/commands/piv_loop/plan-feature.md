@@ -61,11 +61,3 @@ Creates `.claude/specs/{XXX-feature-name}/` with:
 **Backward Compatible:**
 - Old single-file plans still work
 - Old plans can be migrated to split format
-
-## Multi-AI Compatibility
-
-All artifacts are **structured Markdown** - works with ANY AI tool:
-- **Claude Code** (plugin) - Full experience
-- **Cursor** - Reads files directly
-- **GitHub Copilot** - Reads files directly
-- **ChatGPT/Claude Web** - Copy-paste content

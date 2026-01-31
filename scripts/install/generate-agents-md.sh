@@ -1,5 +1,5 @@
 #!/bin/bash
-# generate-agents-md.sh - Generate compact AGENTS.md for Cursor/other AI tools
+# generate-agents-md.sh - Generate compact AGENTS.md
 # Target: < 500 lines for minimal context overhead
 
 set -euo pipefail
@@ -159,7 +159,7 @@ Types: feat, fix, docs, refactor, test, chore
 ---
 
 *PIV Spec-Kit - https://github.com/galando/piv-speckit*
-*Works with: Claude Code, Cursor, GitHub Copilot, OpenAI Codex, and 20+ AI tools*
+*A Claude Code plugin for AI-assisted development*
 HEADER
 
     local lines=$(wc -l < "$output")

@@ -1,6 +1,6 @@
 #!/bin/bash
 # generate-specs-templates.sh - Generate .specs/ directory with templates
-# For Cursor, Copilot, and other AI tools to use PIV workflow
+# Generates spec, plan, and task templates
 
 set -euo pipefail
 
