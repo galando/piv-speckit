@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PIV Spec-Kit - PIV methodology for Claude Code, Cursor, GitHub Copilot, and 20+ AI tools. Master AI-assisted development with the Prime-Implement-Validate methodology.">
+    <meta name="description" content="PIV Spec-Kit - A Claude Code plugin for structured AI-assisted development. Master the Prime-Implement-Validate methodology.">
     <title>PIV Spec-Kit - Master AI-Assisted Development</title>
 
     <!-- Fonts: Inter (body) + JetBrains Mono (code) -->
@@ -542,40 +542,7 @@
             background: var(--bg-secondary);
         }
 
-        .install-tabs {
-            display: flex;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-xl);
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-        }
-
-        .install-tab {
-            padding: var(--space-md) var(--space-lg);
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .install-tab:hover {
-            color: var(--text-primary);
-        }
-
-        .install-tab.active {
-            color: var(--accent-primary);
-            border-bottom-color: var(--accent-primary);
-        }
-
         .install-content {
-            display: none;
-        }
-
-        .install-content.active {
             display: block;
         }
 
@@ -905,7 +872,7 @@
                 PIV + <span class="hero-title-accent">Spec-Kit</span>: Master AI-Assisted Development
             </h1>
             <p class="hero-subtitle">
-                A framework for AI-assisted development with predictable, high-quality engineering. Works with Claude Code, Cursor, GitHub Copilot, and 20+ AI coding tools.
+                A Claude Code plugin for AI-assisted development with predictable, high-quality engineering. Master the Prime-Implement-Validate methodology.
             </p>
             <div class="hero-ctas">
                 <a href="#installation" class="btn btn-primary btn-large">Get Started →</a>
@@ -1047,17 +1014,12 @@
                 <div class="section-label">Installation</div>
                 <h2 class="section-title">Get started in 5 minutes</h2>
                 <p class="section-description">
-                    Install the framework and start building with PIV methodology. Choose your AI tool below.
+                    Install the plugin and start building with the PIV methodology.
                 </p>
-
-                <div class="install-tabs">
-                    <button class="install-tab active" data-tab="claude-code">Claude Code</button>
-                    <button class="install-tab" data-tab="cursor">Other AI Tools</button>
-                </div>
 
                 <div class="install-content active" id="claude-code">
                     <div class="install-block">
-                        <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md);">Claude Code (Full Experience) ⭐</h3>
+                        <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md);">Claude Code Plugin</h3>
 
                         <div class="install-command">
                             <code>/plugin marketplace add galando/piv-speckit</code>
@@ -1098,27 +1060,6 @@
                                 <div class="install-step-desc">Build with TDD enforced</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="install-content" id="cursor">
-                    <div class="install-block">
-                        <h3 style="font-size: 1.125rem; margin-bottom: var(--space-md);">Other AI Tools (Cursor, Copilot, etc.)</h3>
-
-                        <div class="install-command">
-                            <code>curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash</code>
-                            <button class="copy-btn">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                </svg>
-                                <span>Copy</span>
-                            </button>
-                        </div>
-
-                        <p style="color: var(--text-secondary); margin-top: var(--space-lg);">
-                            Generates <code>AGENTS.md</code> - universal AI agent instructions that Cursor, Copilot, and other tools read automatically.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -1184,13 +1125,6 @@
                             <div class="docs-link-content">
                                 <h4>Project Instructions</h4>
                                 <p>Quick reference for Claude Code</p>
-                            </div>
-                        </a>
-                        <a href="https://github.com/galando/piv-speckit/blob/main/docs/getting-started/05-cursor-support.md" class="docs-link">
-                            <span class="docs-link-icon">🖥️</span>
-                            <div class="docs-link-content">
-                                <h4>Other AI Tools</h4>
-                                <p>Using PIV with Cursor, Copilot, and more</p>
                             </div>
                         </a>
                     </div>
@@ -1291,22 +1225,6 @@
         themeToggle.addEventListener('click', () => {
             const current = html.getAttribute('data-theme');
             setTheme(current === 'dark' ? 'light' : 'dark');
-        });
-
-        // Tab Switching
-        const tabs = document.querySelectorAll('.install-tab');
-        const contents = document.querySelectorAll('.install-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.getAttribute('data-tab');
-
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-
-                tab.classList.add('active');
-                document.getElementById(targetId).classList.add('active');
-            });
         });
 
         // Copy Buttons

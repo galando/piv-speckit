@@ -33,4 +33,4 @@ public void createUserWithProfile(User user, Profile profile) {
 - ✅ Use `@Query` for complex queries
 - ❌ Never concatenate user input into SQL
 
-**Full version:** See `.claude/reference/rules-full/database-full.md` in plugin source.
+**For complete database rules:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/database-full.md`

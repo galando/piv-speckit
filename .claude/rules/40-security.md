@@ -55,4 +55,4 @@ await db.query(query, [userId]);
 - ✅ Use environment variables for secrets
 - ❌ NEVER commit secrets to git
 
-**Full version:** See `.claude/reference/rules-full/security-full.md` in plugin source.
+**For complete security rules:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/security-full.md`

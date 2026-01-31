@@ -40,4 +40,4 @@ Apply these principles to EVERY feature and code change:
 - Ship working software
 - Iterate based on feedback
 
-**Full version:** See `.claude/reference/rules-full/pragmatic-principles-full.md` in plugin source.
+**For complete pragmatic programmer principles:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/pragmatic-principles-full.md`

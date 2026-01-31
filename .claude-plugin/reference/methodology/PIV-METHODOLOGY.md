@@ -10,7 +10,7 @@ A development methodology designed specifically for AI-assisted software develop
 
 PIV (Prime-Implement-Validate) is a methodology designed for AI-assisted software development with Claude Code. It ensures proper context, systematic implementation, and automatic validation. An optional Simplify phase helps maintain code quality over time.
 
-**Enhanced with Spec-Kit:** This framework integrates structured specification artifacts (constitution, spec, plan, tasks) for better organization and multi-AI compatibility.
+**Enhanced with Spec-Kit:** This framework integrates structured specification artifacts (constitution, spec, plan, tasks) for better organization and documentation.
 
 The methodology is designed to minimize misunderstandings, reduce rework, and maintain code quality through systematic planning and automatic validation.
 

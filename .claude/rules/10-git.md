@@ -40,4 +40,4 @@ type(scope): description
 - ❌ No broken code
 - ❌ No "wip" commits
 
-**Full version:** See `.claude/reference/rules-full/git-full.md` in plugin source.
+**For complete git workflow rules:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/git-full.md`

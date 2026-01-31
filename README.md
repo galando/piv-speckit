@@ -11,7 +11,7 @@
 
 **NEW v3.0:** Zero-setup workflow - just run `/piv-speckit:plan-feature` and context loads automatically!
 
-Works with **Claude Code**, **Cursor**, **GitHub Copilot**, **OpenAI Codex**, and 20+ AI coding tools.
+**A Claude Code plugin for structured AI-assisted development.**
 
 ---
 
@@ -43,20 +43,13 @@ This framework integrates best practices from [GitHub's Spec-Kit](https://github
 | `quickstart.md` | TL;DR for humans | `/piv-speckit:plan-feature` |
 | `prime-context.md` | Codebase context (auto-generated) | Auto-prime in plan-feature |
 
-### Multi-AI Compatibility
+### Artifact Format
 
-All artifacts are **structured Markdown** - works with ANY AI tool:
-- **Claude Code** (plugin) - Full experience with commands
-- **Cursor** - Reads files directly
-- **GitHub Copilot** - Reads files directly
-
-No Claude Code dependency for planning or implementation!
+All artifacts are **structured Markdown** - human-readable and version-controlled.
 
 ---
 
 ## Installation
-
-### Claude Code (Full Experience) ⭐ Recommended
 
 ```bash
 # Add marketplace
@@ -69,42 +62,6 @@ No Claude Code dependency for planning or implementation!
 **Commands:** `/piv-speckit:plan-feature` (auto-primes), `/piv-speckit:execute`, `/piv-speckit:prime` (optional)
 
 **Features:** Auto-activating skills (TDD, code-review, security), full reference docs, agent context system.
-
-### Cursor / GitHub Copilot / Other AI Tools
-
-```bash
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
-```
-
-**How it works:**
-- Generates `AGENTS.md` - a single file with PIV methodology instructions
-- Cursor, Copilot, and other tools read `AGENTS.md` automatically via their project-aware features
-- **No slash commands** - type your requests naturally, the AI follows PIV methodology
-
-**Difference from Claude Code:**
-
-| Feature | Claude Code | Cursor / Copilot |
-|---------|-------------|-------------------|
-| Slash commands | ✅ `/piv-speckit:*` | ❌ (natural language) |
-| Auto-prime | ✅ Built into plan-feature | ❌ Manual |
-| Auto-skills | ✅ TDD, security | ❌ |
-| Spec templates | ✅ **Embedded in plugin** | ✅ Included |
-| PIV methodology | ✅ Full | ✅ Compact (AGENTS.md) |
-
-**Note:** Plugin templates are embedded directly in command files - they work immediately after installation without needing external template files.
-
----
-
-## Tool Comparison
-
-| Feature | Claude Code (Plugin) | Cursor / Copilot (Script) |
-|---------|---------------------|----------------------------|
-| Commands | `/piv-speckit:plan-feature` (auto-primes), `/piv-speckit:execute`, `/piv-speckit:prime` (optional) | Natural language (AI reads AGENTS.md) |
-| Auto-Prime | ✅ Built into plan-feature | ❌ Manual context loading |
-| Auto-Skills | ✅ TDD, code-review, security activate automatically | ❌ |
-| Spec Templates | ✅ Included | ✅ Included |
-| Context Loading | Auto-prime (~50 lines, reference-based) | AGENTS.md (~500 lines, always loaded) |
-| Updates | `/plugin update` | Re-run script |
 
 ---
 
@@ -184,16 +141,15 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 │  └── reference/         # Complete methodology docs           │
 └───────────────────────────────┬─────────────────────────────────┘
                                 │
-        ┌───────────────────────┼───────────────────────────────┐
-        ▼                       ▼                               ▼
-┌───────────────┐      ┌───────────────┐              ┌───────────────┐
-│  CLAUDE CODE  │      │    CURSOR     │              │ OTHER TOOLS   │
-│   (Plugin)    │      │   (Script)    │              │   (Script)    │
-│               │      │               │              │               │
-│ Full commands │      │  AGENTS.md    │              │  AGENTS.md    │
-│ Auto-skills   │      │  (< 500 lines)│              │               │
-│ Smart context │      │               │              │               │
-└───────────────┘      └───────────────┘              └───────────────┘
+                                ▼
+┌───────────────────────────────────────────────────────────────────┐
+│                        CLAUDE CODE PLUGIN                         │
+│                                                                   │
+│  • Full slash commands (/piv-speckit:*)                           │
+│  • Auto-activating skills (TDD, security, code-review)            │
+│  • Smart context loading (reference-based)                        │
+│  • Embedded templates and methodology docs                        │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
 ### Key Principles
@@ -204,7 +160,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 | **Spec Artifacts** | Split WHAT (spec), HOW (plan), DO (tasks) for clarity |
 | **Strict TDD** | RED → GREEN → REFACTOR - never write code before tests |
 | **Auto-Validation** | Quality checks run automatically after implementation |
-| **Multi-AI Compatible** | All artifacts are Markdown - works with any AI tool |
+| **Artifact-Driven** | All work captured in structured Markdown files |
 
 ---
 
@@ -296,12 +252,6 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 **[→ Documentation Hub](docs/README.md)** — Full index: Features, Commands, Support, Extending
 
-### Tool-Specific Guides
-| Guide | Description |
-|-------|-------------|
-| [Cursor Guide](docs/getting-started/05-cursor-guide.md) | Complete guide for Cursor users |
-| [GitHub Copilot Guide](docs/getting-started/06-copilot-guide.md) | Complete guide for Copilot users |
-
 ---
 
 ## Supported Technologies
@@ -318,7 +268,7 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 ```
 piv-speckit/
-├── .claude/                     # Claude Code configuration
+├── .claude/                     # Claude Code plugin configuration
 │   ├── CLAUDE.md                # Project instructions
 │   ├── agents/                  # Artifact directories
 │   ├── commands/                # PIV command definitions
@@ -327,9 +277,6 @@ piv-speckit/
 │   └── skills/                  # Auto-activating behaviors
 ├── .claude-plugin/              # Claude Code plugin manifest
 ├── marketplace/                 # Plugin marketplace catalog
-├── AGENTS.md                    # PIV methodology for AI tools
-├── .cursor/rules/               # Cursor auto-attach rules
-├── .github/                     # GitHub configuration
 ├── docs/                        # Comprehensive documentation
 ├── scripts/                     # Utility scripts
 ├── technologies/                # Technology templates
