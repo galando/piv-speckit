@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.0] - 2026-01-31
+
+### ✨ Simplified Architecture
+
+**Removed complex hooks system** - replaced with inline `${CLAUDE_PLUGIN_ROOT}` references.
+
+### 🔄 Changed
+
+- **Skills**: All 6 skills now use inline references (e.g., `Read ${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/skills-full/tdd-full.md`)
+- **Rules**: All 9 rule files updated with proper inline references
+- **On-demand loading**: Reference docs are loaded when needed, not auto-injected
+
+### 🗑️ Removed
+
+- **hooks/** - Entire directory (hooks.json, load-reference.sh, reference-mappings.json)
+  - Shell script that auto-injected content before Skill execution
+  - JSON mapping of skills to reference files
+  - ~150 lines of bash + JSON complexity
+
+### 💡 Benefits
+
+- **Simpler**: No shell scripts, no JSON mappings
+- **More efficient**: Only load reference docs when explicitly needed
+- **More transparent**: References visible in skill/rule files
+- **Portable**: Works on any system via `${CLAUDE_PLUGIN_ROOT}` env var
+
+---
+
 ## [4.0.1] - 2026-01-31
 
 ### 🗑️ Removed

@@ -12,4 +12,4 @@ triggers:
 
 ❌ Code before tests → DELETE
 
-*Full version: See `.claude/reference/skills-full/tdd-full.md` in plugin source.*
+**For complete TDD methodology:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/skills-full/test-driven-development-full.md`

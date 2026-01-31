@@ -15,4 +15,4 @@ triggers:
 - Error handling
 - Auth on protected endpoints
 
-*Full version: See `.claude/reference/skills-full/api-design-full.md` in plugin source.*
+**For complete API design guidelines:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/skills-full/api-design-full.md`

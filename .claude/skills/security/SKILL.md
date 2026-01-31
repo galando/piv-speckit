@@ -14,4 +14,4 @@ triggers:
 - ❌ Never trust user input
 - ❌ Never commit secrets
 
-*Full version: See `.claude/reference/skills-full/security-full.md` in plugin source.*
+**For complete security guidelines:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/skills-full/security-full.md`
