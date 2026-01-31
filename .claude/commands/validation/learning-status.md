@@ -4,6 +4,8 @@ description: Display learning metrics dashboard and progress
 
 # Learning Status: View Learning Metrics Dashboard
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/skills-full/adaptive-learning-full.md`
+
 ## Purpose
 
 Display the current state of the learning system:

@@ -5,6 +5,8 @@ argument-hint: "[--last=N] [--review=path]"
 
 # Learning Analysis: Extract Insights from Code Reviews
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/skills-full/adaptive-learning-full.md`
+
 ## Purpose
 
 Analyze code review artifacts to:

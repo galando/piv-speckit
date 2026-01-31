@@ -50,12 +50,11 @@ VALIDATE → Runs automatically
 
 ## For Full Details
 
-> **Claude Code users:** Reference docs auto-load via hooks when commands are invoked.
-> **Other AI tools:** See compressed methodology in each command file.
+> **Reference docs:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/`
 
 - **Rules:** Loaded from `.claude/rules/` (compressed versions)
-- **Full docs:** Available in plugin source at `.claude/reference/`
+- **Full docs:** Available at `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/`
 
 ---
 
-**PIV Version:** 3.0.4 | **Claude Code Plugin Available**
+**PIV Version:** 4.2.0 | **Claude Code Plugin Available**

@@ -5,6 +5,8 @@ argument-hint: [output-filename]
 
 # Create PRD: Generate Product Requirements Document
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/methodology/PIV-METHODOLOGY.md`
+
 ## Overview
 
 Generate a comprehensive Product Requirements Document (PRD) based on the current conversation context and requirements discussed. Use the structure and sections defined below to create a thorough, professional PRD.

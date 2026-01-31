@@ -23,8 +23,7 @@ argument-hint: "<path-to-plan.md | path-to-tasks.md>"
 
 ## Execution
 
-> **Claude Code users:** Full methodology is auto-loaded via hooks.
-> **Other AI tools:** Use the compressed methodology below.
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/execution/execute.md`
 
 ### Execution Steps
 

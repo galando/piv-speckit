@@ -5,6 +5,8 @@ argument-hint: "<path-to-plan.md> <path-to-execution-report.md>"
 
 # System Review: Process Improvement Analysis
 
+> **Full methodology:** `$CLAUDE_PLUGIN_ROOT/.claude-plugin/reference/methodology/PIV-METHODOLOGY.md`
+
 ## Inputs
 
 **Plan:** `$ARGUMENTS_1` (path to plan)
