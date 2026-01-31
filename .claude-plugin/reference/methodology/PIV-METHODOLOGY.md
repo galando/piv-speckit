@@ -182,7 +182,7 @@ The Implement phase combines planning AND execution into a unified flow.
 
 #### Plan Artifacts (Spec-Kit Split Artifacts)
 
-**NEW:** `.claude/specs/{XXX-feature-name}/` with split artifacts:
+`.claude/specs/{XXX-feature-name}/` with split artifacts:
 
 - `spec.md` - WHAT: User stories, requirements, workflows
 - `plan.md` - HOW: Technical approach, architecture, APIs

@@ -45,7 +45,7 @@
 | `/piv-speckit:learning-status` | View metrics |
 | `/piv-speckit:code-review` | Technical review |
 
-**NEW in v3.0:** `plan-feature` now auto-primes silently - no separate prime step needed!
+**Auto-prime:** `plan-feature` automatically loads context - no separate prime step needed!
 
 [→ Complete commands reference](../.claude/commands/)
 
@@ -88,4 +88,4 @@
 
 ---
 
-**Last Updated:** 2025-01-28 (v3.0 - Auto-Prime)
+**Last Updated:** 2025-01-28

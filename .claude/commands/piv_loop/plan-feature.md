@@ -50,7 +50,7 @@ argument-hint: "<feature-name>"
 
 ## Output Structure
 
-**NEW: Split Artifacts** (Inspired by [GitHub's Spec-Kit](https://github.com/github/spec-kit))
+**Split Artifacts** (Inspired by [GitHub's Spec-Kit](https://github.com/github/spec-kit))
 
 Creates `.claude/specs/{XXX-feature-name}/` with:
 - `spec.md` - WHAT: User stories, requirements, workflows
