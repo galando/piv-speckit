@@ -1,26 +1,29 @@
-# Contributing to Claude Dev Framework
+# Contributing to PIV Spec-Kit
 
 **Thank you for your interest in contributing!**
 
-This project is a community-driven resource for AI-assisted software development using the PIV (Prime-Implement-Validate) methodology with Claude Code. We welcome contributions of all kinds.
+PIV Spec-Kit is a community-driven framework for AI-assisted software development using the PIV (Prime-Implement-Validate) methodology with Claude Code. We welcome contributions of all kinds.
 
 ---
 
 ## Ways to Contribute
 
-### 1. Add New Technologies
-Add support for your favorite technology stack by creating templates, rules, and examples.
-
-### 2. Improve Documentation
+### 1. Improve Documentation
 Fix typos, clarify explanations, add examples, improve getting started guides.
 
-### 3. Share Examples
+### 2. Add New Skills
+Create auto-activating behaviors that enforce best practices.
+
+### 3. Add New Rules
+Contribute coding rules for specific technologies or practices.
+
+### 4. Share Examples
 Add real-world implementation examples showing PIV methodology in action.
 
-### 4. Report Issues
-Found a bug or have a suggestion? [Open an issue](https://github.com/YOUR_USERNAME/claude-dev-framework/issues).
+### 5. Report Issues
+Found a bug or have a suggestion? [Open an issue](https://github.com/galando/piv-speckit/issues).
 
-### 5. Submit PRs
+### 6. Submit PRs
 Pull requests are welcome! See below for guidelines.
 
 ---
@@ -30,17 +33,11 @@ Pull requests are welcome! See below for guidelines.
 ### 1. Fork and Clone
 ```bash
 # Fork the repository on GitHub
-git clone https://github.com/YOUR_USERNAME/claude-dev-framework.git
-cd claude-dev-framework
+git clone https://github.com/YOUR_USERNAME/piv-speckit.git
+cd piv-speckit
 ```
 
-### 2. Set Up Your Environment
-```bash
-# Install dependencies (if any)
-# No build process needed - this is a documentation/rules repository
-```
-
-### 3. Create a Branch
+### 2. Create a Branch
 ```bash
 git checkout -b feature/your-feature-name
 # or
@@ -53,76 +50,76 @@ git checkout -b fix/your-bug-fix
 
 ## Contribution Types
 
-### Adding a New Technology
+### Adding a New Skill
+
+Skills are auto-activating behaviors that enforce best practices.
 
 #### Directory Structure
-Create a new technology directory:
+Create a new skill directory:
 ```
-technologies/
-├── backend/
-│   └── your-tech/          # Create this
-│       ├── README.md
-│       ├── .claude/
-│       │   └── rules/
-│       ├── reference/
-│       └── examples/
+.claude/skills/
+└── your-skill/
+    └── SKILL.md
 ```
 
-#### Required Files
-
-1. **README.md** - Technology overview
+#### Skill Template
 ```markdown
-# [Technology Name]
+# Your Skill Name
 
-## Overview
-[Brief description]
+**Trigger**: When does this skill activate?
 
-## Installation
-[How to install and setup]
+## Purpose
+[Brief description of what this skill enforces]
 
-## PIV Integration
-[How this integrates with PIV methodology]
+## Activation Conditions
+- Condition 1
+- Condition 2
 
-## Rules Included
-[List of rule files and their purposes]
+## Rules
+1. **Rule 1**: Description
+2. **Rule 2**: Description
+
+## Reference
+${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/skills-full/your-skill-full.md
+```
+
+### Adding New Rules
+
+Rules are coding guidelines that Claude follows.
+
+#### Directory Structure
+```
+.claude/rules/
+├── 00-general.md
+├── 10-git.md
+├── 20-testing.md
+└── backend/
+    └── your-rules.md
+```
+
+#### Rule Template
+```markdown
+# Rule Category
+
+## Core Principles
+
+### Principle Name
+- **Rule**: What to do
+- **Rationale**: Why
 
 ## Examples
-[Description of examples provided]
 
-## Contributing
-[How to contribute to this technology]
+**Good:**
+```example
+// Correct approach
 ```
 
-2. **Rules** (`technologies/your-tech/.claude/rules/`)
-- Use numeric prefix: `NN-name.md` (NN = load order)
-- Follow rule template structure
-- Include patterns and anti-patterns
+**Bad:**
+```example
+// Wrong approach
+```
 
-3. **Reference Documentation** (`technologies/your-tech/reference/`)
-- `patterns.md` - Design patterns specific to technology
-- `integration.md` - How to integrate with PIV
-
-4. **Examples** (`technologies/your-tech/examples/`)
-- Minimal working examples
-- Demonstrates all rules in practice
-- Well-commented
-
-#### Technology Metadata
-Create `tech.yaml`:
-```yaml
-name: "Technology Name"
-version: "version+"
-type: backend|frontend|database|devops
-languages:
-  - Language1
-  - Language2
-dependencies: []
-related:
-  - related-tech-1
-  - related-tech-2
-piv_support: full|partial
-rules_count: N
-examples_count: N
+**For complete rules:** Read `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/category-full.md`
 ```
 
 ### Improving Documentation
@@ -136,41 +133,12 @@ Create in `docs/` directory:
 ```
 docs/
 ├── getting-started/
-├── methodology/
+├── features/
 ├── extending/
 └── examples/
 ```
 
 Follow existing documentation structure and style.
-
-#### Adding Examples
-Add to `docs/examples/`:
-```markdown
-# Example: [Title]
-
-## Overview
-[Brief description]
-
-## Tech Stack
-[List technologies]
-
-## Implementation
-[Step-by-step guide]
-
-## PIV Workflow
-[How PIV methodology was used]
-
-## Lessons Learned
-[What you learned]
-```
-
-### Adding Universal Rules
-
-Add to `.claude/rules/`:
-- Use numeric prefix (00-99)
-- Follow existing rule structure
-- Test with multiple technologies
-- Document rationale
 
 ---
 
@@ -213,7 +181,7 @@ Add to `.claude/rules/`:
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
-- [ ] Technology addition
+- [ ] Skill addition
 - [ ] Rule addition/modification
 
 ## What Changed
@@ -230,12 +198,6 @@ Add to `.claude/rules/`:
 ## Related Issues
 Closes #123
 Related to #456
-
-## Checklist
-- [ ] Code follows project conventions
-- [ ] Documentation updated
-- [ ] Examples tested
-- [ ] No breaking changes (or documented if intentional)
 ```
 
 ---
@@ -247,11 +209,6 @@ Related to #456
 - Include tables for comparisons
 - Use code blocks with language tags
 - Add descriptive headers
-
-### YAML
-- Use 2-space indentation
-- Quote strings when necessary
-- Add comments for clarity
 
 ### File Naming
 - Use kebab-case for files: `my-file.md`
@@ -279,11 +236,6 @@ Related to #456
    - Is documentation complete?
    - Are examples functional?
 
-### Timeline
-- Review typically within 1-3 days
-- Complex changes may take longer
-- Feel free to bump with a friendly reminder
-
 ---
 
 ## Questions?
@@ -294,19 +246,11 @@ Related to #456
 2. **GitHub Issues** - Bugs, feature requests
 3. **Pull Request** - Questions about specific PR
 
-### Getting Help
-
-- Read existing documentation first
-- Search for similar issues/PRs
-- Be specific in your questions
-- Provide context and examples
-
 ---
 
 ## Recognition
 
 Contributors will be:
-- Listed in CONTRIBUTORS.md
 - Credited in release notes
 - Thanked in relevant documentation
 
@@ -318,37 +262,11 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-## Code of Conduct
-
-### Our Pledge
-
-We pledge to make participation in our project a harassment-free experience.
-
-### Our Standards
-
-**Positive behavior**:
-- Using welcoming and inclusive language
-- Being respectful of differing viewpoints
-- Gracefully accepting constructive criticism
-- Focusing on what is best for the community
-
-**Unacceptable behavior**:
-- Use of sexualized language or imagery
-- Personal attacks or insults
-- Trolling or disrespectful comments
-- Public or private harassment
-
-### Responsibility
-
-Project maintainers are responsible for clarifying standards and taking appropriate action.
-
----
-
 ## Summary
 
 Thank you for contributing! Key points:
 
-1. **Fork** the repository
+1. **FORK** the repository
 2. **BRANCH** for your work
 3. **FOLLOW** conventions
 4. **TEST** your changes
