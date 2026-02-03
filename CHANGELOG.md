@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.3.0] - 2026-02-03
+
+### 📝 Documentation
+
+- **Complete documentation overhaul** for plugin-based installation
+  - Removed all installer script references
+  - Updated installation guides to use `/plugin install`
+  - Updated troubleshooting guide for plugin workflow
+  - Updated FAQ with plugin-based answers
+- **Rewrote contributing guide** for skills/rules/commands instead of technology templates
+- **Updated extending guide** for custom skills and rules
+- **Fixed command references** - updated `${CLAUDE_PLUGIN_ROOT}` paths
+
+### 🔧 Fixed
+
+- All documentation now reflects current plugin architecture
+- Release workflow updated for plugin distribution
+- Removed outdated `.claude-piv` validations
+
+### 🔄 Changed
+
+- `docs/extending/01-adding-technologies.md` → Now covers adding skills, rules, commands
+- All installation instructions now use marketplace commands
+
+---
+
+## [4.2.0] - 2026-02-03
+
+### 📝 Documentation
+
+- Updated all version references to 4.2.0
+- Updated README folder structure to match actual project layout
+- Added `archive/`, `lib/`, and `.github/` directories to structure docs
+- Removed references to deleted `scripts/`, `technologies/`, and `marketplace/` directories
+
+### 🔧 Fixed
+
+- Folder structure documentation now accurately reflects current state
+
+---
+
 ## [4.1.0] - 2026-01-31
 
 ### ✨ Simplified Architecture

@@ -57,4 +57,4 @@ VALIDATE → Runs automatically
 
 ---
 
-**PIV Version:** 4.2.0 | **Claude Code Plugin Available**
+**PIV Version:** 4.3.0 | **Claude Code Plugin Available**

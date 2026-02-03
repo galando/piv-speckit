@@ -1,7 +1,7 @@
 # PIV Spec-Kit
 
 [![PIV Spec-Kit](https://img.shields.io/badge/PIV_Spec--Kit-Framework-blue?style=for-the-badge)](https://github.com/galando/piv-speckit)
-[![Version](https://img.shields.io/badge/Version-4.1.0-green?style=for-the-badge)](https://github.com/galando/piv-speckit/blob/main/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-4.3.0-green?style=for-the-badge)](https://github.com/galando/piv-speckit/blob/main/CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Visual Guide](https://img.shields.io/badge/🌐_Visual_Guide-Interactive-467fd9?style=for-the-badge)](https://galando.github.io/piv-speckit/)
 [![Inspired by Spec-Kit](https://img.shields.io/badge/Inspired_By-Spec--Kit-blue?style=for-the-badge)](https://github.com/github/spec-kit)
@@ -237,7 +237,7 @@ All artifacts are **structured Markdown** - human-readable and version-controlle
 **This is the PIV difference:**
 - ✅ **Active enforcement** - Skills activate in real-time
 - ✅ **Captures learning** - Framework gets smarter
-- ✅ **Technology-aware** - Loads patterns from `technologies/`
+- ✅ **Reference-based** - Loads patterns from `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/`
 - ✅ **Full trace** - Every step recorded and reviewable
 
 ---
@@ -270,16 +270,45 @@ All artifacts are **structured Markdown** - human-readable and version-controlle
 piv-speckit/
 ├── .claude/                     # Claude Code plugin configuration
 │   ├── CLAUDE.md                # Project instructions
-│   ├── agents/                  # Artifact directories
+│   ├── agents/                  # Artifact directories (plans, reviews, learning)
+│   ├── archive/                 # Archived configurations
 │   ├── commands/                # PIV command definitions
-│   ├── reference/               # Complete guides
+│   │   ├── bug_fix/             # RCA, implement-fix
+│   │   ├── piv_loop/            # prime, plan-feature, execute
+│   │   ├── product/             # create-prd
+│   │   └── validation/          # validate, code-review, learn, etc.
+│   ├── lib/                     # Shared libraries (issue-tracker)
+│   ├── reference/               # Complete methodology docs
 │   ├── rules/                   # Coding rules
+│   │   └── backend/             # Backend-specific rules
 │   └── skills/                  # Auto-activating behaviors
+│       ├── adaptive-learning/
+│       ├── api-design/
+│       ├── code-review/
+│       ├── security/
+│       ├── test-driven-development/
+│       └── test-writing/
 ├── .claude-plugin/              # Claude Code plugin manifest
-├── marketplace/                 # Plugin marketplace catalog
+│   ├── plugin.json              # Plugin configuration
+│   ├── marketplace.json         # Marketplace listing
+│   └── reference/               # Full reference documentation
+├── .github/                     # GitHub configuration
+│   ├── workflows/               # CI/CD workflows
+│   └── ISSUE_TEMPLATE/          # Issue templates
 ├── docs/                        # Comprehensive documentation
-├── scripts/                     # Utility scripts
-├── technologies/                # Technology templates
+│   ├── assets/                  # Documentation assets
+│   ├── examples/                # Code examples
+│   ├── extending/               # Extension guides
+│   ├── features/                # Feature documentation
+│   ├── getting-started/         # Getting started guides
+│   ├── images/                  # Documentation images
+│   ├── methodology/             # Methodology deep dives
+│   └── index.html               # Visual interactive guide
+├── video/                       # Video content
+├── CHANGELOG.md                 # Version history
+├── CONTRIBUTING.md              # Contributing guidelines
+├── LICENSE                      # MIT License
+├── README.md                    # This file
 └── VERSION                      # Single source of truth for versioning
 ```
 

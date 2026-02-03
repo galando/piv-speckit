@@ -1,47 +1,37 @@
 # Installing PIV to Existing Projects
 
-**How to add the PIV (Prime-Implement-Validate) methodology to your existing project**
+**How to add the PIV methodology to your existing project**
 
 ---
 
 ## Overview
 
-This guide walks you through installing the PIV (Prime-Implement-Validate) methodology into an existing project. The unified installer will:
+PIV Spec-Kit is installed as a **Claude Code plugin** from the marketplace. It integrates directly into your existing project without complex installation scripts.
 
-- ✅ **Auto-detect** whether you need fresh install or update
-- ✅ **Detect your technology stack** automatically (Spring Boot, React, Node.js, etc.)
-- ✅ **Preserve your existing configuration** (creates automatic backup)
-- ✅ **Install PIV commands** for Prime-Implement-Validate workflow
-- ✅ **Add coding rules** specific to your technology
-- ✅ **Verify installation** to ensure everything works
-- ✅ **Support updates** with version tracking
-
-**Installation time**: 1-2 minutes
+**Installation time**: ~30 seconds
 
 ---
 
 ## Quick Install
 
-### One-Line Install (Recommended)
+### One-Line Install
 
 ```bash
-# From your project directory
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
+# In Claude Code, from your project directory:
+/plugin marketplace add galando/piv-speckit
+/plugin install piv-speckit
 ```
 
-That's it! The installer:
-- Auto-detects if you need installation or update
-- Preserves your existing configuration
-- Creates a backup before making changes
-- Sets up version tracking for future updates
+That's it! The plugin is now installed and ready to use.
 
-### Updating
-
-Run the same command to update:
+### Verify Installation
 
 ```bash
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
+# In Claude Code, run:
+/piv-speckit:prime
 ```
+
+You should see context loading from your project.
 
 ---
 
@@ -49,239 +39,86 @@ curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.s
 
 Before installing, ensure you have:
 
-- **Existing project** with business logic (backend, frontend, or both)
+- **Claude Code** - The Claude CLI tool (installed and configured)
+- **Existing project** - Any software project with code
 - **Git** repository (optional but recommended)
-- **Bash** shell (macOS, Linux, or Windows with WSL)
-- **Write permissions** in your project directory
 
-**No other dependencies required** - the installer uses only standard Unix tools.
+No other dependencies required.
 
 ---
 
-## Advanced Installation Options
+## What Gets Installed
 
-```bash
-# Clone first (if you want to inspect the script)
-git clone https://github.com/galando/piv-speckit.git /tmp/piv
-cd /path/to/your-project
-/tmp/piv/scripts/piv.sh
+When you install the plugin, Claude Code automatically makes available:
 
-# Pin to a specific version
-curl -s .../piv.sh | bash -s -- --version 1.1.0 --pin
+### PIV Commands
 
-# Preview changes without applying
-curl -s .../piv.sh | bash -s -- --dry-run
+| Command | Purpose |
+|---------|---------|
+| `/piv-speckit:plan-feature "desc"` | Create structured plans (auto-primes) |
+| `/piv-speckit:execute` | Implement from plans |
+| `/piv-speckit:prime` | Force context refresh |
+| `/piv-speckit:validate` | Run validation checks |
+| `/piv-speckit:code-review` | Technical code review |
+| `/piv-speckit:learn` | Capture learnings |
+| `/piv-speckit:learning-status` | View learning metrics |
+| `/piv-speckit:rca` | Root cause analysis |
+| `/piv-speckit:implement-fix` | Implement bug fixes |
 
-# Update without confirmation prompts
-curl -s .../piv.sh | bash -s -- --force
-```
+### Auto-Activating Skills
+
+Skills automatically activate to enforce best practices:
+
+| Skill | Activates When |
+|-------|----------------|
+| `test-driven-development` | Writing or implementing code |
+| `code-review` | Reviewing code changes |
+| `security` | Handling sensitive data |
+| `api-design` | Designing APIs |
+| `test-writing` | Writing tests |
+| `adaptive-learning` | After code reviews |
+
+### Coding Rules
+
+Rules are automatically loaded from the plugin:
+
+- General development rules
+- Git workflow rules
+- Testing philosophy
+- Strict TDD rules
+- Documentation standards
+- Security guidelines
+- Backend-specific rules (API design, database)
 
 ---
 
-## Installation Walkthrough
+## How It Works
 
-### Step 1: Welcome Screen
+### Plugin vs. Project Files
 
-```
-╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║         PIV Methodology Installer for Existing Projects   ║
-║                                                           ║
-║    This will install the PIV (Prime-Implement-Validate)   ║
-║    methodology into your existing project.                ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-```
+**Plugin Files (read-only, managed by plugin):**
+- `.claude-plugin/` - Plugin manifest and reference docs
+- Commands definitions
+- Skill definitions
+- Full methodology documentation
 
-The installer will:
-- Detect your technology stack
-- Install PIV commands and rules
-- Preserve your existing configuration
-- Create a backup before making changes
+**Your Project (where you customize):**
+- `.claude/CLAUDE.md` - Your project instructions
+- `.claude/rules/` - Your custom rules (optional overrides)
+- `.claude/agents/` - Generated artifacts (plans, reviews, learnings)
 
-### Step 2: Prerequisites Check
+### Reference Paths
 
-The installer automatically checks:
-- ✅ Git repository (optional)
-- ✅ Required commands (bash, cp, mkdir, rm)
-- ✅ Write permissions
-
-If any check fails, fix the issue and run the installer again.
-
-### Step 3: Technology Detection
-
-The installer scans your project for:
-
-**Backend Technologies:**
-- Spring Boot (pom.xml, build.gradle)
-- Node.js/Express (package.json)
-- Python/FastAPI (requirements.txt, pyproject.toml)
-- Go (go.mod)
-- Rust (Cargo.toml)
-- Ruby (Gemfile)
-
-**Frontend Technologies:**
-- React (package.json)
-- Vue.js (package.json)
-- Angular (package.json)
-- Svelte (package.json)
-- Next.js (package.json)
-
-**Databases:**
-- PostgreSQL (dependencies, docker-compose)
-- MySQL/MariaDB (dependencies, docker-compose)
-- MongoDB (dependencies, docker-compose)
-- Redis (dependencies, docker-compose)
-
-**DevOps:**
-- Docker (Dockerfile, docker-compose.yml)
-- Kubernetes (k8s/ directory, YAML files)
-- Terraform (*.tf files)
-
-Example output:
-```
-Detected Technologies:
-Backend:
-  ✓ spring-boot
-
-Frontend:
-  ✓ react
-
-Database:
-  ✓ postgresql
-
-DevOps:
-  ✓ docker
-```
-
-### Step 4: Confirm Technologies
+The plugin uses `${CLAUDE_PLUGIN_ROOT}` references to load documentation:
 
 ```
-Is this correct? [Y/n]:
+Read ${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/tdd-full.md
 ```
 
-- Press **Enter** or **Y** to accept detected technologies
-- Press **N** to select technologies manually
-
-If you choose manual selection, you'll be prompted to pick your backend, frontend, database, and DevOps tools from a menu.
-
-### Step 5: Choose Installation Mode
-
-```
-Choose how PIV should be installed:
-
-  MERGE MODE (Recommended)
-    • Integrates PIV into your existing .claude/ directory
-    • Merges with your current configuration
-    • Preserves your existing CLAUDE.md content
-    • Best for: Full integration with PIV
-
-  SEPARATE MODE
-    • Creates a new .claude-piv/ directory
-    • Keeps your .claude/ completely separate
-    • Links PIV commands to your .claude/commands/
-    • Best for: Trying PIV without changing existing setup
-
-Select installation mode:
-  [1] Merge mode (integrate with existing .claude/)
-  [2] Separate mode (keep .claude-piv/ separate)
-```
-
-**Which mode should you choose?**
-
-| Your Situation | Recommended Mode |
-|----------------|------------------|
-| New to PIV, want to try it | Separate mode |
-| Want full integration | Merge mode |
-| Have custom `.claude/` setup | Separate mode |
-| Ready to commit to PIV | Merge mode |
-
-### Step 6: Backup
-
-If you have an existing `.claude/` directory, the installer automatically creates a backup:
-
-```
-Backing up existing .claude/ to .claude-backup-20250109-143022
-✓ Backup created: .claude-backup-20250109-143022
-```
-
-The backup includes:
-- All files in `.claude/`
-- Metadata about the installation (mode, technologies, date)
-
-You can restore this backup anytime if needed.
-
-### Step 7: Installation
-
-The installer now copies PIV files to your project:
-
-**Merge Mode:**
-```
-Installing universal rules...
-Installing PIV commands...
-Installing PIV methodology documentation...
-Installing technology-specific rules...
-Updating CLAUDE.md...
-✓ PIV installed successfully in merge mode
-```
-
-**Separate Mode:**
-```
-Copying PIV files to .claude-piv/...
-Creating links to PIV commands...
-Adding PIV reference to CLAUDE.md...
-✓ PIV installed successfully in separate mode
-```
-
-### Step 8: Verification
-
-The installer automatically verifies the installation:
-
-```
-Verifying PIV Installation
-────────────────────────────────────────────────────────────
-
-✓ Claude configuration directory
-✓ PIV methodology documentation
-✓ Project instructions
-✓ Commands directory
-✓ PIV loop commands
-✓ Prime command
-✓ Plan command
-✓ Execute command
-✓ Validation commands
-✓ Validate command
-✓ Rules directory
-✓ General rules
-✓ Git rules
-✓ Testing rules
-✓ Documentation rules
-✓ Security rules
-✓ CLAUDE.md contains PIV reference
-
-────────────────────────────────────────────────────────────
-Verification Summary
-
-✓ Passed: 16
-✓ All verification checks passed!
-```
-
-### Step 9: Success!
-
-```
-╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║                    Installation Complete!                 ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-
-✓ PIV has been installed successfully!
-```
-
-The installer shows:
-- Installation summary
-- Next steps
-- Backup location (if created)
+This means:
+- Plugin docs are always available
+- No local copies needed
+- Updates are automatic
 
 ---
 
@@ -289,13 +126,12 @@ The installer shows:
 
 ### Your First PIV Command
 
-Start using PIV with Claude Code:
-
+```bash
+# In Claude Code:
+/piv-speckit:prime
 ```
-Ask Claude: "Run /piv-speckit:prime to load project context"
-```
 
-This will load your project's context into Claude's working memory, including:
+This loads your project's context:
 - Project structure
 - Technology stack
 - Coding rules
@@ -303,246 +139,193 @@ This will load your project's context into Claude's working memory, including:
 
 ### Plan Your First Feature
 
-```
-Ask Claude: "Use /piv-speckit:plan-feature to plan adding user authentication"
+```bash
+# In Claude Code:
+/piv-speckit:plan-feature "add user authentication"
 ```
 
-Claude will create a detailed implementation plan saved to `.claude/agents/plans/`.
+Claude will create structured artifacts in `.claude/specs/{feature}/`:
+- `spec.md` - Requirements (WHAT)
+- `plan.md` - Technical approach (HOW)
+- `tasks.md` - Implementation steps (DO)
+- `quickstart.md` - TL;DR reference
 
 ### Implement Your Feature
 
-```
-Ask Claude: "Use /piv-speckit:execute to implement the plan"
+```bash
+# In Claude Code:
+/piv-speckit:execute
 ```
 
 Claude will:
-1. Execute the plan step by step
-2. Write tests alongside code
-3. Automatically validate the implementation
-4. Generate execution and validation reports
+1. Follow RED-GREEN-REFACTOR TDD cycle
+2. Execute tasks step by step
+3. Auto-validate implementation
+4. Generate execution report
 
 ---
 
-## Installation Modes Explained
+## Customization
 
-### Merge Mode
+### Add Project-Specific Rules
 
-**What happens:**
-- PIV files are copied into your existing `.claude/` directory
-- Universal rules are added (if not present)
-- Technology-specific rules are installed
-- Your existing `CLAUDE.md` is preserved and merged with PIV content
-- PIV commands are added to `.claude/commands/`
-
-**Directory structure after install:**
-```
-your-project/
-├── .claude/
-│   ├── CLAUDE.md                         # Your config + PIV section
-│   ├── .piv-version                      # Version tracking
-│   ├── reference/
-│   │   └── methodology/
-│   │       └── PIV-METHODOLOGY.md        # PIV methodology
-│   ├── commands/
-│   │   ├── piv_loop/                     # PIV commands
-│   │   ├── validation/                   # Validation commands
-│   │   ├── bug_fix/                      # Bug fix commands
-│   │   └── [your existing commands]
-│   └── rules/
-│       ├── 00-general.md                 # Universal rules
-│       ├── 10-git.md
-│       ├── 20-testing.md
-│       ├── 30-documentation.md
-│       ├── 40-security.md
-│       ├── backend/                      # Backend rules (if detected)
-│       └── [your existing rules]
-```
-
-**Best for:**
-- Projects ready to fully adopt PIV
-- Teams comfortable integrating new methodology
-- Projects without extensive existing `.claude/` configuration
-
-### Separate Mode
-
-**What happens:**
-- PIV files are copied to `.claude-piv/` directory (separate)
-- Your existing `.claude/` is untouched
-- Symlinks are created from `.claude/commands/` to `.claude-piv/commands/`
-- A reference to `.claude-piv/` is added to your `CLAUDE.md`
-
-**Directory structure after install:**
-```
-your-project/
-├── .claude/                              # Your existing config (unchanged)
-│   ├── CLAUDE.md                        # Your config + PIV reference
-│   └── commands/
-│       ├── piv_loop -> ../.claude-piv/commands/piv_loop
-│       ├── validation -> ../.claude-piv/commands/validation
-│       └── bug_fix -> ../.claude-piv/commands/bug_fix
-│
-└── .claude-piv/                          # Complete PIV installation
-    ├── .piv-version                     # Version tracking
-    ├── reference/
-    │   └── methodology/
-    │       └── PIV-METHODOLOGY.md        # PIV methodology
-    ├── HOW-TO-USE.md
-    ├── commands/
-    ├── rules/
-    └── technologies/
-```
-
-**Best for:**
-- Trying out PIV without commitment
-- Projects with extensive existing `.claude/` configuration
-- Teams who want to evaluate PIV before full adoption
-
-**Switching modes:**
-You can easily switch from separate to merge mode:
-1. Uninstall PIV: `./scripts/uninstall-piv.sh`
-2. Reinstall: `./scripts/piv.sh`
-3. Choose merge mode
-
----
-
-## What Gets Installed
-
-### Core Files (Both Modes)
-
-| File | Purpose |
-|------|---------|
-| `.claude/reference/methodology/PIV-METHODOLOGY.md` | Complete PIV methodology guide |
-| `.claude/.piv-version` | Version tracking for updates |
-| `.claude/commands/piv_loop/prime.md` | Prime phase command |
-| `.claude/commands/piv_loop/plan-feature.md` | Plan phase command |
-| `.claude/commands/piv_loop/execute.md` | Execute phase command |
-| `.claude/commands/validation/validate.md` | Validation command |
-| `.claude/rules/00-general.md` | General development rules |
-| `.claude/rules/10-git.md` | Git workflow rules |
-| `.claude/rules/20-testing.md` | Testing philosophy |
-| `.claude/rules/22-tdd-strict.md` | Strict TDD rules |
-| `.claude/rules/30-documentation.md` | Documentation standards |
-| `.claude/rules/40-security.md` | Security guidelines |
-
-### Technology-Specific Files (Based on Detection)
-
-| Technology | Files Installed |
-|------------|-----------------|
-| Spring Boot | `.claude/rules/backend/10-api-design.md`, `.claude/rules/backend/20-database.md` |
-| React | `.claude/rules/frontend/react-best-practices.md` |
-| PostgreSQL | `.claude/rules/database/postgresql-best-practices.md` |
-| Docker | Technology templates in `.claude-piv/technologies/devops/docker/` (separate mode) |
-
----
-
-## Verification
-
-After installation, verify PIV is working:
+Create `.claude/rules/` in your project:
 
 ```bash
-# Check that commands are available
-ls -la .claude/commands/piv_loop/
-ls -la .claude/commands/validation/
+# Create custom rules directory
+mkdir -p .claude/rules
 
-# Read the methodology
-cat .claude/reference/methodology/PIV-METHODOLOGY.md
+# Add your project-specific rules
+echo "# My Project Rules
 
-# Or for separate mode:
-cat .claude-piv/reference/methodology/PIV-METHODOLOGY.md
+- Always use TypeScript strict mode
+- Maximum function length: 50 lines
+- All API responses must be typed
+" > .claude/rules/99-project-specific.md
 ```
 
-**With Claude Code:**
-```
-Ask: "List available PIV commands"
+### Customize Project Instructions
+
+Edit `.claude/CLAUDE.md`:
+
+```markdown
+# My Project
+
+## Technology Stack
+- Backend: Spring Boot 3.2
+- Frontend: React 19 + TypeScript
+- Database: PostgreSQL 15
+
+## Project Structure
+- src/main/java/ - Backend code
+- src/frontend/ - React application
+- src/db/migrations/ - Database migrations
+
+## Coding Standards
+- Follow existing patterns
+- Write tests first (TDD)
+- Keep PRs small and focused
 ```
 
-Claude should show:
-- `/piv-speckit:prime`
-- `/piv-speckit:plan-feature "description"`
-- `/piv-speckit:execute`
-- `/piv-speckit:validate`
-- `/piv-speckit:rca`
-- `/piv-speckit:implement-fix`
+---
+
+## Updating the Plugin
+
+```bash
+# In Claude Code:
+/plugin update piv-speckit
+```
+
+Or reinstall:
+
+```bash
+/plugin marketplace remove galando/piv-speckit
+/plugin marketplace add galando/piv-speckit
+/plugin install piv-speckit
+```
+
+---
+
+## Uninstalling
+
+```bash
+# In Claude Code:
+/plugin uninstall piv-speckit
+```
+
+This removes the plugin but keeps your:
+- `.claude/` directory (your customizations)
+- `.claude/agents/` (your artifacts)
+- Generated specs and plans
+
+To completely remove all PIV files:
+
+```bash
+# After uninstalling plugin:
+rm -rf .claude/agents/
+rm -rf .claude/specs/
+```
 
 ---
 
 ## Troubleshooting
 
-### Installer Fails: "Permission Denied"
+### Commands Not Found
 
-**Problem:** Script doesn't have execute permission
+**Problem:** PIV commands not recognized
 
 **Solution:**
 ```bash
-chmod +x /tmp/piv/scripts/piv.sh
-/tmp/piv/scripts/piv.sh
+# Verify plugin is installed
+/plugin list
+
+# Reinstall if needed
+/plugin install piv-speckit
 ```
 
-### Technology Detection is Wrong
+### Rules Not Loading
 
-**Problem:** Installer detects incorrect technologies
-
-**Solution:** When prompted "Is this correct?", press **N** and select technologies manually from the menu.
-
-### Backup Creation Fails
-
-**Problem:** Can't create backup of existing `.claude/`
+**Problem:** Custom rules not being applied
 
 **Solution:**
-1. Check available disk space: `df -h`
-2. Ensure write permissions: `ls -la .claude/`
-3. Manually backup: `cp -r .claude .claude-manual-backup`
+- Verify `.claude/rules/` exists
+- Check rules have `.md` extension
+- Restart Claude Code
 
-### Installation Completes But Commands Don't Work
+### Context Not Loading
 
-**Problem:** Claude Code doesn't recognize PIV commands
-
-**Solution:**
-1. Restart Claude Code
-2. Check `.claude/commands/` directory exists
-3. Verify command files have `.md` extension
-4. Check `.claude/CLAUDE.md` references PIV
-
-### Verification Fails
-
-**Problem:** Installation verification shows errors
+**Problem:** Prime command shows no output
 
 **Solution:**
-1. Check the log: `cat .piv-install.log`
-2. Restore backup: `./scripts/uninstall-piv.sh`
-3. Run installer again
+- Verify `.claude/CLAUDE.md` exists
+- Check your project has code files
+- Try running `/piv-speckit:plan-feature` directly (it auto-primes)
+
+### Skills Not Activating
+
+**Problem:** Skills don't auto-activate
+
+**Solution:**
+- Skills activate based on context (coding, reviewing, etc.)
+- Trigger manually by asking for a code review or test
+- Check skill definitions in `.claude/skills/`
 
 ---
 
-## Uninstalling PIV
+## Verification Checklist
 
-If you want to remove PIV from your project:
+After installation, verify:
 
-```bash
-# If you still have the PIV skeleton
-/tmp/piv/scripts/uninstall-piv.sh
-
-# Or download uninstall script
-curl -sSL https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/uninstall-piv.sh | bash
-```
-
-The uninstaller will:
-1. Check for backup and offer to restore it
-2. Remove PIV files (`.claude-piv/`, PIV commands, rules)
-3. Clean up backup metadata
-4. Show you any manual cleanup needed (like editing `CLAUDE.md`)
-
-**Note:** Backup directories (`.claude-backup-*`) are not automatically deleted. You can remove them manually if satisfied with uninstall.
+- [ ] `/plugin list` shows `piv-speckit`
+- [ ] `/piv-speckit:prime` loads context
+- [ ] `/piv-speckit:plan-feature "test"` creates a spec
+- [ ] `.claude/agents/` directory exists
+- [ ] `.claude/CLAUDE.md` exists (with your project info)
 
 ---
 
 ## Next Steps
 
-1. **Read the methodology**: `.claude/reference/methodology/PIV-METHODOLOGY.md` (or `.claude-piv/reference/methodology/PIV-METHODOLOGY.md`)
-2. **Prime your workspace**: Ask Claude to "Run `/piv-speckit:prime`"
-3. **Plan your first feature**: Use `/piv-speckit:plan-feature` to create a plan
-4. **Implement**: Use `/piv-speckit:execute` to build your feature
-5. **Learn more**: Check out [other guides](../)
+1. **Customize CLAUDE.md** - Add your project specifics
+2. **Add custom rules** - Create `.claude/rules/99-project-specific.md`
+3. **Plan a feature** - Run `/piv-speckit:plan-feature` for real work
+4. **Read the methodology** - Check out the [full PIV methodology](../../.claude/reference/methodology/PIV-METHODOLOGY.md)
+
+---
+
+## FAQ
+
+**Q: Does this modify my existing `.claude/` setup?**
+A: No, it adds PIV commands alongside your existing configuration.
+
+**Q: Can I use my own rules?**
+A: Yes, create `.claude/rules/` and the plugin will load them.
+
+**Q: What if I don't want to use TDD?**
+A: The TDD skill enforces strict TDD. You can disable it by removing or renaming `.claude/skills/test-driven-development/`.
+
+**Q: Does this work with any technology?**
+A: Yes, it's technology-agnostic. Backend-specific rules load automatically when Spring Boot files are detected.
 
 ---
 

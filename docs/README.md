@@ -75,7 +75,7 @@
 
 | Guide | Description |
 |-------|-------------|
-| [Adding Technologies](extending/01-adding-technologies.md) | Create new tech templates |
+| [Extending PIV Spec-Kit](extending/01-adding-technologies.md) | Add custom skills, rules, commands |
 | [Customizing Rules](../.claude/rules/) | Modify PIV behavior |
 | [Creating Skills](../.claude/skills/) | Add enforcement behaviors |
 
@@ -88,4 +88,4 @@
 
 ---
 
-**Last Updated:** 2025-01-28
+**Last Updated:** 2026-02-03
