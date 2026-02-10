@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.4.0] - 2026-02-09
+
+### 🔧 Fixed - Command Executability
+
+**All 14 commands now have explicit execution instructions** instead of just checklists or template references.
+
+#### Commands Updated
+
+| Command | Fix |
+|---------|------|
+| `code-review.md` | Added 6-step execution process: Prerequisites → Gather Context → Identify Files → Read Files → Analyze → Generate Report |
+| `validate.md` | Added 7-step execution with per-step output reporting format |
+| `learning-status.md` | Added 4-step execution: Read → Parse → Display → Recommendations |
+| `execution-report.md` | Added 5-step execution: Read Plan → Review Implementation → Review Validation → Review Code Review → Generate Report |
+
+#### What Changed
+
+- **Before**: Commands had checklists, template structures, or reference links only
+- **After**: Commands have explicit "Step 1, Step 2, Step 3..." execution instructions with bash commands to run
+
+#### Documentation Updates
+
+- Fixed version tracking path reference (`.claude/.piv-version` → `VERSION`)
+
+#### Impact
+
+All commands now properly execute when invoked, rather than just displaying methodology documentation.
+
+---
+
 ## [4.3.0] - 2026-02-03
 
 ### 📝 Documentation

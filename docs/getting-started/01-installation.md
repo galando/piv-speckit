@@ -123,6 +123,7 @@ After installation, your project includes:
 - ✅ Issue tracker integration (`.claude/lib/issue-tracker/`)
 - ✅ Project instructions (`.claude/CLAUDE.md`)
 - ✅ Methodology documentation (`.claude/reference/methodology/`)
+- ✅ Version tracking (`VERSION` in repo root)
 
 ### Plugin Configuration
 - ✅ Plugin manifest (`.claude-plugin/plugin.json`)
