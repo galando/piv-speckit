@@ -2,7 +2,6 @@
 
 [![PIV Spec-Kit](https://img.shields.io/badge/PIV_Spec--Kit-Framework-blue?style=for-the-badge)](https://github.com/galando/piv-speckit)
 [![Version](https://img.shields.io/badge/Version-4.4.0-green?style=for-the-badge)](https://github.com/galando/piv-speckit/blob/main/CHANGELOG.md)
->>>>>>> c8e7424c181607d0bca70de4506025f6498e3691
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Visual Guide](https://img.shields.io/badge/🌐_Visual_Guide-Interactive-467fd9?style=for-the-badge)](https://galando.github.io/piv-speckit/)
 [![Inspired by Spec-Kit](https://img.shields.io/badge/Inspired_By-Spec--Kit-blue?style=for-the-badge)](https://github.com/github/spec-kit)
