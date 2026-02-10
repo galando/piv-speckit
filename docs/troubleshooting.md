@@ -6,104 +6,36 @@
 
 ## Installation Issues
 
-### Permission Denied When Running Installer
+### Plugin Not Found
 
 **Symptoms:**
-```bash
-bash: /tmp/piv/scripts/piv.sh: Permission denied
+```
+Error: Plugin 'piv-speckit' not found
 ```
 
-**Cause:** Script doesn't have execute permissions
+**Cause:** Plugin not added to marketplace or not installed
 
 **Solutions:**
-```bash
-# Make script executable
-chmod +x /tmp/piv/scripts/piv.sh
 
-# Then run it
-/tmp/piv/scripts/piv.sh
+1. **Add marketplace first:**
+```bash
+/plugin marketplace add galando/piv-speckit
+```
+
+2. **Then install:**
+```bash
+/plugin install piv-speckit
+```
+
+3. **Verify installation:**
+```bash
+/plugin list
+# Should show piv-speckit
 ```
 
 ---
 
-### Installer Fails: "Command Not Found: gh"
-
-**Symptoms:**
-```bash
-Error: gh command not found
-```
-
-**Cause:** GitHub CLI (`gh`) is not installed
-
-**Solutions:**
-
-**macOS:**
-```bash
-brew install gh
-```
-
-**Linux:**
-```bash
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update
-sudo apt install gh
-```
-
-**Windows:**
-Download from [GitHub CLI website](https://cli.github.com/)
-
----
-
-### Installer Detected Wrong Technology
-
-**Symptoms:**
-Installer says "Detected: Spring Boot" but you're using React
-
-**Cause:** Detection heuristics found files from both technologies
-
-**Solutions:**
-
-1. **Clean install** - Remove unwanted technology directories:
-```bash
-# After installer completes
-rm -rf technologies/backend/spring-boot
-rm -rf technologies/backend/node-express
-# Keep only what you need
-```
-
-2. **Manual install** - Copy only the technology templates you need:
-```bash
-# Instead of running installer
-cp -r /tmp/piv/.claude your-project/
-cp -r /tmp/piv/technologies/frontend/react your-project/.claude/rules/
-```
-
----
-
-### Installer Creates Files in Wrong Location
-
-**Symptoms:** `.claude` directory created in subdirectory instead of project root
-
-**Cause:** Installer was run from wrong directory
-
-**Solutions:**
-```bash
-# Navigate to your project root FIRST
-cd your-project
-
-# Verify you're in the right place (should see git repo, package.json, etc.)
-ls
-
-# Then run installer
-/tmp/piv/scripts/piv.sh
-```
-
----
-
-## Claude Code Issues
-
-### PIV Commands Not Recognized
+### Commands Not Recognized
 
 **Symptoms:**
 ```
@@ -111,29 +43,26 @@ User: /piv-speckit:prime
 Claude: I don't recognize that command
 ```
 
-**Cause:** Commands directory not found or not in project root
+**Cause:** Plugin not installed or not loaded
 
 **Solutions:**
 
-1. **Verify commands directory exists:**
+1. **Verify plugin is installed:**
 ```bash
-ls .claude/commands/piv_loop/
-# Should see: prime.md, plan-feature.md, execute.md
+/plugin list
+# Should show piv-speckit
 ```
 
-2. **Check project structure:**
+2. **Reinstall if needed:**
 ```bash
-# Commands must be in project root, not subdirectory
-# Correct:
-project-root/.claude/commands/
-
-# Incorrect:
-project-root/backend/.claude/commands/
+/plugin install piv-speckit
 ```
 
-3. **Restart Claude Code** - Sometimes it needs to reload the project
+3. **Restart Claude Code** - Sometimes it needs to reload
 
 ---
+
+## Claude Code Issues
 
 ### Context Loading Takes Too Long
 
@@ -157,52 +86,38 @@ echo "build/" >> .gitignore
 echo ".next/" >> .gitignore
 ```
 
-3. **Reduce scan scope** - Edit `.claude/commands/piv_loop/prime.md`:
-```markdown
-# Only scan specific directories
-Focus scanning on:
-- src/
-- app/
-- lib/
-```
-
 ---
 
-### Technology Rules Not Loading
+### Rules Not Loading
 
 **Symptoms:** Spring Boot rules don't apply when working on Java files
 
-**Cause:** Rules not in correct location or wrong file format
+**Cause:** Rules not in correct location or plugin not loaded
 
 **Solutions:**
 
-1. **Verify rule file location:**
+1. **Verify plugin is installed:**
 ```bash
-# Technology rules should be in:
-ls .claude/rules/backend/spring-boot/
-# Should see: 10-api-design.md, 20-database.md, etc.
+/plugin list
 ```
 
-2. **Check rule file format:**
-```markdown
-# First line must be:
-## Rule: backend/**/*.java
-
-# Not:
-# Backend Rules for Spring Boot
+2. **Check for custom rules:**
+```bash
+ls .claude/rules/
+# Your custom rules go here
 ```
 
-3. **Copy rules if missing:**
+3. **Plugin rules load from:**
 ```bash
-# From skeleton to your project
-cp -r technologies/backend/spring-boot/rules/* .claude/rules/backend/
+# Plugin provides base rules via:
+${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/
 ```
 
 ---
 
 ### Prime Context File Not Created
 
-**Symptoms:** After running `/piv-speckit:prime`, no `.claude/agents/context/prime-context.md` file
+**Symptoms:** After running `/piv-speckit:prime`, no `.claude/agents/context/` file
 
 **Cause:** Prime command failed or didn't complete
 
@@ -210,12 +125,7 @@ cp -r technologies/backend/spring-boot/rules/* .claude/rules/backend/
 
 1. **Run prime again** - Sometimes it fails silently the first time
 2. **Check for errors** - Look at Claude's output for error messages
-3. **Create directory manually:**
-```bash
-mkdir -p .claude/agents/context
-```
-
-4. **Verify prime command exists:**
+3. **Verify prime command exists:**
 ```bash
 cat .claude/commands/piv_loop/prime.md
 # Should contain the prime command definition
@@ -318,7 +228,7 @@ Use /piv-speckit:validate
 2. **Use automatic fix:**
 ```bash
 # Ask Claude to fix issues
-Use /piv-speckit:code-review-fix .claude/agents/reviews/code-report-123456.md
+Use /piv-speckit:code-review-fix
 ```
 
 3. **Manual fixes** - Address issues that can't be auto-fixed
@@ -361,41 +271,6 @@ pytest --cov=. --cov-report=html
 ---
 
 ## Git Issues
-
-### Pre-commit Hooks Not Working
-
-**Symptoms:** Commits accepted without running validation
-
-**Cause:** Pre-commit hooks not installed or configured
-
-**Solutions:**
-
-1. **Install pre-commit hooks:**
-```bash
-# If using pre-commit framework
-pip install pre-commit
-pre-commit install
-```
-
-2. **Create git hook manually:**
-```bash
-# Create .git/hooks/pre-commit
-cat > .git/hooks/pre-commit << 'EOF'
-#!/bin/bash
-# Run validation before commit
-echo "Running PIV validation..."
-# Add your validation commands here
-EOF
-
-chmod +x .git/hooks/pre-commit
-```
-
-3. **Bypass pre-commit if needed** (not recommended):
-```bash
-git commit --no-verify -m "message"
-```
-
----
 
 ### Git Status Shows PIV Files as Untracked
 
@@ -557,6 +432,33 @@ const express = require('express');
 
 ---
 
+## Skills Not Activating
+
+### TDD Skill Not Enforcing RED-GREEN-REFACTOR
+
+**Symptoms:** Writing code before tests doesn't trigger warning
+
+**Cause:** Skill may be disabled or not loading
+
+**Solutions:**
+
+1. **Verify skill exists:**
+```bash
+ls .claude/skills/test-driven-development/
+```
+
+2. **Check skill definition:**
+```bash
+cat .claude/skills/test-driven-development/SKILL.md
+```
+
+3. **Skills activate based on context** - They trigger when:
+   - Writing implementation code
+   - Creating or modifying tests
+   - Reviewing code changes
+
+---
+
 ## Getting Help
 
 ### Still Having Issues?
@@ -569,7 +471,7 @@ const express = require('express');
 ### When Opening an Issue
 
 Include:
-- **PIV Skeleton version** (e.g., v1.0.0)
+- **PIV Spec-Kit version** (e.g., v4.3.0)
 - **Claude Code version** (if known)
 - **Operating system**
 - **Technology stack**
@@ -585,7 +487,7 @@ This helps us help you faster! 🚀
 
 ### Best Practices to Avoid Issues
 
-1. **Always run prime** in new sessions
+1. **Keep plugin updated** - Run `/plugin update piv-speckit` regularly
 2. **Keep `.gitignore` updated** - Exclude generated files and dependencies
 3. **Run validation** before committing
 4. **Read error messages** - They usually contain solutions
@@ -595,6 +497,6 @@ This helps us help you faster! 🚀
 
 ---
 
-**Last Updated**: 2025-01-12
+**Last Updated**: 2026-02-03
 
 **Found this guide helpful?** ⭐ Consider [starring the repo](https://github.com/galando/piv-speckit)

@@ -1,6 +1,6 @@
 # Frequently Asked Questions (FAQ)
 
-**Common questions about PIV methodology and this skeleton**
+**Common questions about PIV Spec-Kit**
 
 ---
 
@@ -18,47 +18,46 @@ This methodology prevents common AI-assisted development issues like lack of con
 
 ### Can I use PIV with an existing project?
 
-**Yes!** The unified installer can add PIV to existing projects without disrupting your workflow:
+**Yes!** Install the plugin to add PIV to any existing project:
 
 ```bash
-cd your-project
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
+# In Claude Code, from your project directory:
+/plugin marketplace add galando/piv-speckit
+/plugin install piv-speckit
 ```
 
-The installer will:
-- Auto-detect if you need installation or update
-- Detect your technology stack
-- Install only the relevant PIV components
-- Preserve your existing configuration
-- Create an automatic backup
-
-See [Installing to Existing Projects](getting-started/04-installing-to-existing-projects.md) for detailed guide.
+The plugin installs without disrupting your existing workflow. See [Installing to Existing Projects](getting-started/04-installing-to-existing-projects.md) for a detailed guide.
 
 ### What technologies are supported?
 
-PIV skeleton supports multiple technologies out of the box:
+PIV Spec-Kit is **technology-agnostic** and works with any stack:
 
 **Backend:**
 - Spring Boot (Java/Kotlin)
 - Node.js + Express
 - Python + FastAPI
+- And more...
 
 **Frontend:**
 - React + TypeScript
+- Vue.js
+- Angular
+- And more...
 
 **Database:**
 - PostgreSQL
+- MySQL
+- MongoDB
+- And more...
 
-**DevOps:**
-- Docker
-
-The modular design makes it easy to add support for new technologies. See [Adding Technologies](../extending/01-adding-technologies.md) for guidance.
+The plugin provides base rules that apply universally, plus technology-specific rules that load automatically when relevant files are detected.
 
 ### Does PIV work with other AI coding tools?
 
-PIV methodology is designed specifically for **Claude Code** and takes advantage of its unique features like:
+PIV Spec-Kit is designed specifically for **Claude Code** and takes advantage of its unique features like:
 
 - Slash commands (`/piv-speckit:prime`, etc.)
+- Plugin system
 - Context-aware agents
 - Structured output parsing
 - Multi-step reasoning
@@ -67,13 +66,12 @@ While the principles (context loading, planning, validation) could apply to othe
 
 ### How much disk space does PIV require?
 
-The skeleton is quite lightweight:
+The plugin is quite lightweight:
 
-- **Core PIV files**: ~500 KB
-- **Documentation**: ~2 MB
-- **Technology templates**: Varies (typically 100-500 KB each)
+- **Plugin files**: ~1 MB (installed via marketplace)
+- **Generated artifacts**: Varies by usage (typically < 1 MB)
 
-You can also remove technologies you don't use to save space. For example, if you only use Spring Boot, you can delete the `technologies/frontend/` and `technologies/backend/node-express/` directories.
+The plugin reference documentation is stored centrally and loaded on-demand, so you don't need local copies of technology templates.
 
 ---
 
@@ -81,14 +79,13 @@ You can also remove technologies you don't use to save space. For example, if yo
 
 ### When should I run `/piv-speckit:prime`?
 
-**Always prime the workspace in a new session** or when:
+**Prime is optional** - `/piv-speckit:plan-feature` auto-primes automatically.
 
-- You haven't worked on the project in a while
+Run `/piv-speckit:prime` manually when:
+- You want to force a context refresh
 - You've context-switched from another project
 - Significant changes have been made by others
 - You're starting work on a new feature area
-
-For simple bug fixes in code you're actively working on, you can skip priming.
 
 ### Do I need to run `/piv-speckit:plan-feature` for every change?
 
@@ -100,7 +97,7 @@ For simple bug fixes in code you're actively working on, you can skip priming.
 - Complex authentication/authorization changes
 
 **Skip planning for:**
-- Simple bug fixes (use `/bug_fix:rca` instead)
+- Simple bug fixes (use `/piv-speckit:rca` instead)
 - Typo fixes
 - Minor improvements to existing code
 - Adding a single field to an existing form
@@ -116,7 +113,7 @@ The validation pipeline runs automatically after `/piv-speckit:execute` complete
 
 You can also run individual validation steps:
 - `/piv-speckit:code-review` - Technical code review
-- `/piv-speckit:code-review-fix <report>` - Auto-fix code review issues
+- `/piv-speckit:code-review-fix` - Auto-fix code review issues
 
 ### Can I customize PIV for my team's workflow?
 
@@ -124,10 +121,10 @@ You can also run individual validation steps:
 
 1. **Add team-specific rules** - Create new rule files in `.claude/rules/`
 2. **Customize commands** - Modify command definitions in `.claude/commands/`
-3. **Technology-specific patterns** - Add templates for your stack
+3. **Create custom skills** - Add auto-activating behaviors in `.claude/skills/`
 4. **Validation thresholds** - Adjust coverage requirements, test frameworks, etc.
 
-See [Customizing PIV](../extending/02-customizing-piv.md) for details.
+See [Extending PIV Spec-Kit](extending/01-adding-technologies.md) for details.
 
 ### How do I disable automatic validation?
 
@@ -150,7 +147,7 @@ The `/piv-speckit:prime` command uses Claude Code's context understanding to:
 1. **Scan codebase structure** - Understand project layout
 2. **Identify technologies** - Detect frameworks, libraries, tools
 3. **Load relevant rules** - Only load rules applicable to your tech stack
-4. **Create context artifact** - Save to `.claude/agents/context/prime-context.md`
+4. **Create context artifact** - Save to `.claude/agents/context/`
 
 This context is then used by subsequent commands to make informed decisions.
 
@@ -190,29 +187,29 @@ monorepo/
 
 PIV doesn't replace traditional practices - it **augments** them with AI assistance while maintaining quality standards.
 
-### Can I contribute my own technology templates?
+### Can I contribute my own skills and rules?
 
-**Yes, we welcome contributions!** To add a new technology:
+**Yes, we welcome contributions!** To add new content:
 
-1. Follow the [Adding Technologies guide](../extending/01-adding-technologies.md)
-2. Create the technology directory structure
-3. Add rules, examples, and documentation
-4. Submit a PR with your template
+1. Follow the [Extending guide](extending/01-adding-technologies.md)
+2. Create the skill or rule files
+3. Test them thoroughly
+4. Submit a PR with your contribution
 
-See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
 
-### What's the relationship between this skeleton and Cole Medin's work?
+### What's the relationship between this framework and Cole Medin's work?
 
-This skeleton is an **implementation** of the PIV methodology created by [Cole Medin (coleam00)](https://github.com/coleam00). Cole's original work includes:
+This framework is an **implementation** of the PIV methodology created by [Cole Medin (coleam00)](https://github.com/coleam00). Cole's original work includes:
 
 - [context-engineering-intro](https://github.com/coleam00/context-engineering-intro) - PIV methodology introduction
 - [habit-tracker](https://github.com/coleam00/habit-tracker) - PIV demonstration project
 
-This skeleton extends Cole's work by providing:
+This framework extends Cole's work by providing:
 - **Universal implementation** - Works with any technology stack
-- **Comprehensive templates** - Pre-built configurations for popular stacks
-- **Installer for existing projects** - Easy adoption
-- **Modular design** - Pick only what you need
+- **Plugin distribution** - Easy installation via Claude Code marketplace
+- **Skills system** - Auto-activating behaviors for quality enforcement
+- **Reference-based docs** - On-demand loading of full documentation
 
 We give **full credit to Cole** for creating the PIV methodology. This is a community implementation to make PIV accessible to everyone.
 
@@ -225,20 +222,19 @@ We give **full credit to Cole** for creating the PIV methodology. This is a comm
 **Symptoms**: Commands like `/piv-speckit:prime` aren't available
 
 **Solutions**:
-1. Ensure `.claude/commands/` directory exists in your project root
-2. Check that command files (`.md`) are present and readable
+1. Verify plugin is installed: `/plugin list`
+2. Reinstall if needed: `/plugin install piv-speckit`
 3. Try restarting Claude Code
-4. Verify the commands directory is at the correct level (project root, not subdirectory)
+4. Check that you're in the correct project directory
 
-### Installer script fails with permission errors
+### Plugin installation fails
 
-**Symptoms**: `Permission denied` when running `piv.sh`
+**Symptoms**: Cannot install piv-speckit plugin
 
-**Solution**:
-```bash
-chmod +x /tmp/piv/scripts/piv.sh
-/tmp/piv/scripts/piv.sh
-```
+**Solutions**:
+1. Add marketplace first: `/plugin marketplace add galando/piv-speckit`
+2. Check your internet connection
+3. Try: `/plugin marketplace remove galando/piv-speckit` then add again
 
 ### Validation fails with "No tests found"
 
@@ -257,7 +253,6 @@ chmod +x /tmp/piv/scripts/piv.sh
 **Solutions**:
 1. **Exclude unnecessary directories** - Add to `.gitignore`
 2. **Reduce scan scope** - Edit prime command to focus on specific directories
-3. **Remove unused technologies** - Delete technology templates you don't use
 
 Most projects should prime in under 30 seconds.
 
@@ -266,10 +261,10 @@ Most projects should prime in under 30 seconds.
 **Symptoms**: Technology-specific rules don't seem to apply
 
 **Solutions**:
-1. Check that rule files are in the correct location (`technologies/*/rules/`)
-2. Verify file naming follows the pattern (`## Rule: /path/pattern`)
-3. Ensure rule files are in your project's `.claude/rules/` directory
-4. Check the rule file syntax matches other rule files
+1. Check that plugin is installed: `/plugin list`
+2. Verify rules are loading from: `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/`
+3. Add custom rules to `.claude/rules/` for project-specific patterns
+4. Check the rule file syntax matches expected format
 
 ---
 
@@ -281,16 +276,16 @@ Most projects should prime in under 30 seconds.
 - **GitHub Discussions** - For questions, ideas, and sharing experiences
 - **Claude Code communities** - Check Claude's official channels
 
-### How can I stay updated on PIV skeleton development?
+### How can I stay updated on PIV Spec-Kit development?
 
 - ⭐ **Star the repo** - GitHub will notify you of new releases
 - 👀 **Watch the repo** - See all issues and PRs
 - Join [GitHub Discussions](https://github.com/galando/piv-speckit/discussions)
-- Check the [ROADMAP](ROADMAP.md) for planned features
+- Check the [CHANGELOG](../CHANGELOG.md) for version history
 
-### Can I use PIV skeleton for commercial projects?
+### Can I use PIV Spec-Kit for commercial projects?
 
-**Yes!** PIV skeleton is released under the [MIT License](../../LICENSE), which permits:
+**Yes!** PIV Spec-Kit is released under the [MIT License](../LICENSE), which permits:
 
 - Commercial use
 - Modification
@@ -303,11 +298,11 @@ No attribution is required (though appreciated!).
 
 ## Still Have Questions?
 
-- Check the [main documentation](../README.md)
+- Check the [main documentation](README.md)
 - Search [existing GitHub issues](https://github.com/galando/piv-speckit/issues)
 - Start a [GitHub Discussion](https://github.com/galando/piv-speckit/discussions)
 - Open a [new issue](https://github.com/galando/piv-speckit/issues/new)
 
 ---
 
-**Last Updated**: 2025-01-12
+**Last Updated**: 2026-02-03

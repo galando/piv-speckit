@@ -137,7 +137,7 @@ git branch --show-current
 **Check project standards:**
 - Read `.claude/rules/backend/` (if backend fix)
 - Read `.claude/rules/20-testing.md` (for tests)
-- Read relevant reference docs from `technologies/*/reference/`
+- Read relevant reference docs from `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/reference/rules-full/`
 
 ### 5. Implement the Fix
 

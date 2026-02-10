@@ -87,29 +87,30 @@ jobs:
           cat > release_notes.md << 'NOTES'
           ## Installation
 
-          ### Quick Install (latest)
+          PIV Spec-Kit is distributed as a Claude Code plugin.
+
+          ### Install from Marketplace
           ```bash
-          curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash
+          # In Claude Code:
+          /plugin marketplace add galando/piv-speckit
+          /plugin install piv-speckit
           ```
 
-          ### Install This Release ({TAG})
+          ### Update to This Release
           ```bash
-          curl -s https://raw.githubusercontent.com/galando/claude-dev-framework/main/scripts/piv.sh | bash -s -- --tag {TAG}
+          # In Claude Code:
+          /plugin update piv-speckit
           ```
 
-          ### Download Standalone Installer
-          Download `piv-installer-{TAG}.sh` below and run:
+          ### Verify Installation
           ```bash
-          chmod +x piv-installer-{TAG}.sh
-          ./piv-installer-{TAG}.sh
-          ```
-
-          ### Pin to This Version
-          ```bash
-          bash piv.sh --tag {TAG} --version {VERSION} --pin
+          # In Claude Code:
+          /plugin list
+          # Should show: piv-speckit {VERSION}
           ```
 
           ---
+
           ## What's Changed
 
           NOTES
@@ -124,79 +125,13 @@ jobs:
           cat release_notes.md >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Create standalone installer artifact
-        if: steps.check_tag.outputs.exists == 'false'
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          TAG="v${VERSION}"
-
-          # Create standalone installer that downloads the release
-          cat > "piv-installer-${TAG}.sh" << 'INSTALLER'
-          #!/bin/bash
-          # PIV Framework Standalone Installer for {TAG}
-          # Generated automatically by GitHub Actions
-
-          set -euo pipefail
-
-          readonly VERSION="{VERSION}"
-          readonly TAG="{TAG}"
-          readonly REPO="galando/claude-dev-framework"
-
-          echo "PIV Framework ${VERSION} Installer"
-          echo "================================"
-          echo ""
-
-          # Check for git
-          if ! command -v git &> /dev/null; then
-              echo "Error: git is required but not installed"
-              exit 1
-          fi
-
-          # Create temp directory
-          TEMP_DIR=$(mktemp -d) || {
-              echo "Error: Cannot create temp directory"
-              exit 1
-          }
-
-          # Cleanup on exit
-          trap "rm -rf '$TEMP_DIR'" EXIT
-
-          echo "Downloading PIV Framework ${VERSION}..."
-          if ! git clone --depth 1 --branch "$TAG" -q "https://github.com/${REPO}.git" "$TEMP_DIR" 2>/dev/null; then
-              echo "Error: Failed to download tag '${TAG}'"
-              echo "Please check the release exists at: https://github.com/${REPO}/releases/tag/${TAG}"
-              exit 1
-          fi
-
-          echo "Download complete!"
-          echo ""
-          echo "Running installer..."
-          echo ""
-
-          # Run the installer
-          ORIGINAL_DIR="$(pwd)"
-          cd "$ORIGINAL_DIR" || cd /
-          bash "$TEMP_DIR/scripts/piv.sh" --tag "$TAG" "$@" < /dev/tty
-
-          echo ""
-          echo "Installation complete!"
-          echo "Version ${VERSION} has been installed."
-          INSTALLER
-
-          # Replace placeholders
-          sed -i "s/{VERSION}/${VERSION}/g" "piv-installer-${TAG}.sh"
-          sed -i "s/{TAG}/${TAG}/g" "piv-installer-${TAG}.sh"
-
-          # Make executable
-          chmod +x "piv-installer-${TAG}.sh"
-
       - name: Create tag
         if: steps.check_tag.outputs.exists == 'false'
         run: |
           TAG="v${{ steps.version.outputs.version }}"
 
           # Create and push tag
-          # Note: plugin.json version is kept in sync by bump-version.sh
+          # Note: plugin.json version is kept in sync via VERSION file
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag -a "$TAG" -m "Release $TAG"
@@ -209,7 +144,6 @@ jobs:
           tag_name: v${{ steps.version.outputs.version }}
           name: v${{ steps.version.outputs.version }}
           body: ${{ steps.release_notes.outputs.notes }}
-          files: piv-installer-v${{ steps.version.outputs.version }}.sh
           generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

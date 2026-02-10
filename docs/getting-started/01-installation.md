@@ -6,9 +6,7 @@
 
 ## Overview
 
-This guide covers two ways to get started:
-1. **One-line install** - Add PIV to an existing project (recommended)
-2. **Clone and customize** - Fork the framework and customize it
+PIV Spec-Kit is a **Claude Code plugin** installed directly from the marketplace.
 
 ---
 
@@ -16,49 +14,31 @@ This guide covers two ways to get started:
 
 Before you begin, ensure you have:
 
-- **Git** - For version control
 - **Claude Code** - The Claude CLI tool (installed and configured)
-- **Bash** - For running the installer (available on macOS, Linux, WSL)
+- **Git** - For version control
 
 ---
 
-## Method 1: One-Line Install (Recommended)
+## Method 1: Install from Marketplace (Recommended)
 
-**For existing projects** - Add PIV to your current project with a single command.
-
-```bash
-# From your project directory
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
-```
-
-That's it! The installer will:
-- Detect your technology stack
-- Install PIV commands and rules
-- Preserve your existing configuration
-- Set up version tracking for future updates
-
-### Updating
-
-Run the same command to update:
+**For any project** - Add PIV to your current project with a single command.
 
 ```bash
-curl -s https://raw.githubusercontent.com/galando/piv-speckit/main/scripts/piv.sh | bash
+# In Claude Code, run:
+/plugin marketplace add galando/piv-speckit
+/plugin install piv-speckit
 ```
 
-The script auto-detects if you need installation or update.
+That's it! The plugin is now installed and ready to use.
 
-### Advanced Options
+### Verify Installation
 
 ```bash
-# Pin to a specific version
-curl -s .../piv.sh | bash -s -- --version 1.1.0 --pin
-
-# Preview changes without applying
-curl -s .../piv.sh | bash -s -- --dry-run
-
-# Update without confirmation prompts
-curl -s .../piv.sh | bash -s -- --force
+# In Claude Code, run:
+/piv-speckit:prime
 ```
+
+You should see context loading from your project.
 
 ---
 
@@ -126,58 +106,9 @@ Add project-specific information at the top:
 [Brief description of your structure]
 ```
 
-### 4. Select Your Technologies
+### 4. Customize Rules
 
-The skeleton includes templates for multiple technologies. Choose what you need:
-
-#### Backend Technologies
-
-```bash
-# Keep only what you need
-technologies/backend/spring-boot/     # Java/Kotlin
-technologies/backend/node-express/    # Node.js
-technologies/backend/python-fastapi/  # Python
-```
-
-#### Frontend Technologies
-
-```bash
-technologies/frontend/react/          # React + TypeScript
-```
-
-#### Database Technologies
-
-```bash
-technologies/database/postgresql/     # PostgreSQL
-```
-
-#### DevOps Technologies
-
-```bash
-technologies/devops/docker/           # Docker
-```
-
-**Remove unused technology directories** to keep your project clean.
-
-### 5. Install Your Technology Stack
-
-Follow technology-specific guides in the `technologies/` directories:
-
-- **Spring Boot**: See `technologies/backend/spring-boot/README.md`
-- **Node.js/Express**: See `technologies/backend/node-express/README.md`
-- **Python/FastAPI**: See `technologies/backend/python-fastapi/README.md`
-- **React**: See `technologies/frontend/react/README.md`
-
-### 6. Verify Setup
-
-Test that Claude Code recognizes your PIV setup:
-
-```bash
-# In Claude Code, run:
-/piv-speckit:prime
-```
-
-You should see context loading from your project.
+Edit `.claude/rules/` to match your project's coding standards and preferences.
 
 ---
 
@@ -186,24 +117,54 @@ You should see context loading from your project.
 After installation, your project includes:
 
 ### Core PIV Infrastructure
-- ✅ Universal rules (`.claude/rules/`)
 - ✅ PIV commands (`.claude/commands/`)
-- ✅ Agent artifact templates (`.claude/agents/`)
+- ✅ Skills for auto-activating behaviors (`.claude/skills/`)
+- ✅ Coding rules (`.claude/rules/`)
+- ✅ Issue tracker integration (`.claude/lib/issue-tracker/`)
 - ✅ Project instructions (`.claude/CLAUDE.md`)
 - ✅ Methodology documentation (`.claude/reference/methodology/`)
 - ✅ Version tracking (`VERSION` in repo root)
 
-### Technology Templates
-- ✅ Backend templates (Spring Boot, Node.js, Python)
-- ✅ Frontend templates (React)
-- ✅ Database templates (PostgreSQL)
-- ✅ DevOps templates (Docker)
+### Plugin Configuration
+- ✅ Plugin manifest (`.claude-plugin/plugin.json`)
+- ✅ Marketplace listing (`.claude-plugin/marketplace.json`)
+- ✅ Complete reference docs (`.claude-plugin/reference/`)
 
 ### Documentation
 - ✅ This installation guide
 - ✅ Quick start guide
 - ✅ Your first feature walkthrough
-- ✅ Extending guides
+- ✅ Feature documentation
+- ✅ Troubleshooting guide
+
+---
+
+## Available Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/piv-speckit:plan-feature "desc"` | Create plan (auto-primes context) |
+| `/piv-speckit:execute` | Implement from plan |
+| `/piv-speckit:prime` | Force context refresh (optional) |
+| `/piv-speckit:validate` | Run validation |
+| `/piv-speckit:learn` | Extract learnings |
+| `/piv-speckit:learning-status` | View metrics |
+| `/piv-speckit:code-review` | Technical review |
+
+---
+
+## Auto-Activating Skills
+
+PIV Spec-Kit includes skills that automatically activate to enforce best practices:
+
+| Skill | Purpose |
+|-------|---------|
+| `test-driven-development` | Enforces RED-GREEN-REFACTOR cycle |
+| `code-review` | Technical quality checks |
+| `security` | Security best practices |
+| `api-design` | REST API patterns |
+| `test-writing` | Given-When-Then test structure |
+| `adaptive-learning` | Captures learnings from your work |
 
 ---
 
@@ -223,27 +184,27 @@ After installation, your project includes:
 **Problem**: PIV commands not found
 
 **Solution**:
-- Verify `.claude/commands/` directory exists
-- Check command files have `.md` extension
+- Verify `/plugin install piv-speckit` was run
+- Check `.claude/commands/` directory exists
 - Restart Claude Code
 
 ### Rules Not Loading
 
-**Problem**: Technology-specific rules not being applied
+**Problem**: Rules not being applied
 
 **Solution**:
-- Verify technology directory structure
+- Verify `.claude/rules/` directory exists
 - Check rules have numeric prefix (NN-name.md)
-- Ensure `.claude/rules/` exists in technology directory
+- Restart Claude Code
 
 ### Context Not Loading
 
 **Problem**: Prime command doesn't load context
 
 **Solution**:
-- Check `.claude/agents/context/` directory exists
 - Verify `.claude/CLAUDE.md` is present
-- Run prime command again with verbose output
+- Check `.claude/reference/` directory exists
+- Run prime command again
 
 ---
 

@@ -37,38 +37,44 @@ All commands now properly execute when invoked, rather than just displaying meth
 
 ---
 
-## [4.3.0] - 2026-02-09
+## [4.3.0] - 2026-02-03
 
-### 🔧 Fixed - Command Executability
+### 📝 Documentation
 
-**All 14 commands now have explicit execution instructions** instead of just checklists or template references.
+- **Complete documentation overhaul** for plugin-based installation
+  - Removed all installer script references
+  - Updated installation guides to use `/plugin install`
+  - Updated troubleshooting guide for plugin workflow
+  - Updated FAQ with plugin-based answers
+- **Rewrote contributing guide** for skills/rules/commands instead of technology templates
+- **Updated extending guide** for custom skills and rules
+- **Fixed command references** - updated `${CLAUDE_PLUGIN_ROOT}` paths
 
-#### Commands Updated
+### 🔧 Fixed
 
-| Command | Fix |
-|---------|------|
-| `code-review.md` | Added 6-step execution process: Prerequisites → Gather Context → Identify Files → Read Files → Analyze → Generate Report |
-| `validate.md` | Added 7-step execution with per-step output reporting format |
-| `learning-status.md` | Added 4-step execution: Read → Parse → Display → Recommendations |
-| `execution-report.md` | Added 5-step execution: Read Plan → Review Implementation → Review Validation → Review Code Review → Generate Report |
-
-#### What Changed
-
-- **Before**: Commands had checklists, template structures, or reference links only
-- **After**: Commands have explicit "Step 1, Step 2, Step 3..." execution instructions with bash commands to run
-
-#### Impact
-
-All commands now properly execute when invoked, rather than just displaying methodology documentation.
-
----
-
-## [4.2.0] - 2026-01-31
+- All documentation now reflects current plugin architecture
+- Release workflow updated for plugin distribution
+- Removed outdated `.claude-piv` validations
 
 ### 🔄 Changed
 
-- **Reference paths**: Updated `${CLAUDE_PLUGIN_ROOT}` references throughout codebase
-- **Documentation**: Removed outdated hooks references, added proper CLAUDE_PLUGIN_ROOT paths
+- `docs/extending/01-adding-technologies.md` → Now covers adding skills, rules, commands
+- All installation instructions now use marketplace commands
+
+---
+
+## [4.2.0] - 2026-02-03
+
+### 📝 Documentation
+
+- Updated all version references to 4.2.0
+- Updated README folder structure to match actual project layout
+- Added `archive/`, `lib/`, and `.github/` directories to structure docs
+- Removed references to deleted `scripts/`, `technologies/`, and `marketplace/` directories
+
+### 🔧 Fixed
+
+- Folder structure documentation now accurately reflects current state
 
 ---
 
