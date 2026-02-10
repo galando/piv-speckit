@@ -191,7 +191,7 @@ After installation, your project includes:
 - ✅ Agent artifact templates (`.claude/agents/`)
 - ✅ Project instructions (`.claude/CLAUDE.md`)
 - ✅ Methodology documentation (`.claude/reference/methodology/`)
-- ✅ Version tracking (`.claude/.piv-version`)
+- ✅ Version tracking (`VERSION` in repo root)
 
 ### Technology Templates
 - ✅ Backend templates (Spring Boot, Node.js, Python)

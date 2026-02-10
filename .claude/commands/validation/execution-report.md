@@ -24,7 +24,64 @@ This report:
 - Identifies areas for improvement
 - Provides metrics for process improvement
 
-## Report Content
+## Execution Steps
+
+### Step 1: Read the Plan
+
+```bash
+Read $ARGUMENTS
+```
+
+Extract from the plan:
+- Feature name and description
+- All tasks that were listed
+- Expected outcomes
+- Validation commands specified
+
+### Step 2: Review Implementation
+
+Check what was actually implemented:
+
+```bash
+# Get list of changed files
+git status
+
+# Get summary of changes
+git diff --stat HEAD
+
+# List new files
+git ls-files --others --exclude-standard
+```
+
+Identify:
+- Files created
+- Files modified
+- Tests added
+- Any deviations from the plan
+
+### Step 3: Review Validation Results
+
+Check if validation commands were run and their results:
+- Compilation: ✅/❌
+- Unit tests: ✅/❌ with count
+- Integration tests: ✅/❌ with count
+- Coverage: percentage
+- Frontend build: ✅/❌
+
+### Step 4: Review Code Review Results
+
+If code review was run, check:
+- Issues found by severity
+- Issues fixed
+- Final assessment
+
+### Step 5: Generate Report
+
+Create report at: `.claude/agents/execution-reports/{feature-name}-report.md`
+
+Use the structure below to document the implementation.
+
+## Report Structure
 
 ### 1. Implementation Summary
 

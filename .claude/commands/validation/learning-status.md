@@ -15,70 +15,106 @@ Display the current state of the learning system:
 - Applied improvements and their effectiveness
 - Learning effectiveness metrics
 
-## Process
+## Execution Steps
 
-### Step 1: Read Metrics
+### Step 1: Read Metrics File
 
-Read `.claude/agents/learning/learning-metrics.md`
-
-### Step 2: Display Dashboard
-
-Format and display the metrics in a user-friendly format:
-
-```
-╔══════════════════════════════════════════════════════════════╗
-║                   LEARNING METRICS DASHBOARD                  ║
-╠══════════════════════════════════════════════════════════════╣
-║ Last Updated: {timestamp}                                     ║
-║ Reviews Analyzed: {N}                                         ║
-╠══════════════════════════════════════════════════════════════╣
-║ ISSUE TRENDS                                                  ║
-╠─────────────┬───────┬────────────────┬───────────────────────╣
-║ Category    │ Total │ Last 5 Reviews │ Trend                  ║
-╠─────────────┼───────┼────────────────┼───────────────────────╣
-║ Logic       │ {N}   │ {N}            │ {↑↓→}                  ║
-║ Security    │ {N}   │ {N}            │ {↑↓→}                  ║
-║ Performance │ {N}   │ {N}            │ {↑↓→}                  ║
-║ Quality     │ {N}   │ {N}            │ {↑↓→}                  ║
-╠══════════════════════════════════════════════════════════════╣
-║ RECURRING ISSUES (Need Attention)                             ║
-╠══════════════════════════════════════════════════════════════╣
-║ 1. {Issue title} - {N} occurrences                           ║
-║ 2. {Issue title} - {N} occurrences                           ║
-╠══════════════════════════════════════════════════════════════╣
-║ IMPROVEMENT SUGGESTIONS                                       ║
-╠──────────────┬──────────┬─────────────────────────────────────╣
-║ Generated    │ Applied  │ Pending                             ║
-║ {N}          │ {N}      │ {N}                                 ║
-╠══════════════════════════════════════════════════════════════╣
-║ LEARNING EFFECTIVENESS                                        ║
-╠══════════════════════════════════════════════════════════════╣
-║ Issues Prevented (est.): {N}                                  ║
-║ Rules Updated: {N}                                            ║
-║ Skills Enhanced: {N}                                          ║
-╚══════════════════════════════════════════════════════════════╝
+```bash
+Read .claude/agents/learning/learning-metrics.md
 ```
 
-### Step 3: Recommendations
-
-Based on metrics, suggest actions:
-
+**If file doesn't exist:**
 ```
-## Recommendations
+## Learning Metrics Dashboard
+
+**Status:** No learning data yet
+
+**First Steps:**
+1. Run code reviews: `/piv-speckit:code-review`
+2. Analyze reviews: `/piv-speckit:learn`
+3. Check back here for metrics
+
+---
+
+**Why no data?** Learning metrics are populated after analyzing code review artifacts.
+```
+
+### Step 2: Parse and Display Metrics
+
+Extract these values from the metrics file:
+- Total Reviews Analyzed
+- Last Updated timestamp
+- Issue counts by category and severity
+- Recurring issues list
+- Improvement suggestions count
+- Learning effectiveness indicators
+
+### Step 3: Display Dashboard
+
+Format as:
+
+```markdown
+## Learning Metrics Dashboard
+
+**Last Updated:** {timestamp}
+**Reviews Analyzed:** {N}
+
+### Issue Trends
+
+| Category | Total | Last 5 Reviews | Trend |
+|----------|-------|----------------|-------|
+| Logic | {N} | {N} | {↑↓→} |
+| Security | {N} | {N} | {↑↓→} |
+| Performance | {N} | {N} | {↑↓→} |
+| Quality | {N} | {N} | {↑↓→} |
+
+### Recurring Issues (Need Attention)
 
 {If recurring issues exist}
+1. **{Issue title}** - {N} occurrences
+   - Category: {category}
+   - Last seen: {date}
+
+2. **{Issue title}** - {N} occurrences
+   - Category: {category}
+   - Last seen: {date}
+
+{If no recurring issues}
+✅ No recurring issues detected
+
+### Improvement Suggestions
+
+| Generated | Applied | Pending |
+|-----------|---------|---------|
+| {N} | {N} | {N} |
+
+{If pending > 0}
+**Pending suggestions:** {N} awaiting review in `.claude/agents/learning/suggestions/`
+```
+
+### Step 4: Provide Recommendations
+
+Based on the metrics state:
+
+```markdown
+## Recommendations
+
+{If recurring issues > 0}
 - **Address recurring issues:** Run `/piv-speckit:suggest-improvement` for top recurring issues
 
-{If no recent analysis}
-- **Run learning analysis:** No reviews analyzed recently. Run `/piv-speckit:learn`
+{If last_analysis > 7 days ago}
+- **Run learning analysis:** No recent analysis. Run `/piv-speckit:learn` to update metrics
 
-{If suggestions pending}
-- **Review pending suggestions:** {N} suggestions awaiting approval in `.claude/agents/learning/suggestions/`
+{If pending_suggestions > 0}
+- **Review pending suggestions:** {N} suggestions await approval
+
+{If total_reviews < 5}
+- **Build learning base:** More code reviews needed for meaningful insights
 ```
 
 ## Output
 
-Formatted dashboard display with recommendations.
+Provide the formatted dashboard followed by specific recommendations based on actual metrics state.
 
 ## Example
 

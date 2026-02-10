@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIV Spec-Kit — One Pager</title>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=libre-baskerville@700&f[]=satoshi@400,500,600,700">
+    <style>
+        :root {
+            --bg-primary: #0a0f1c;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #00ffcc;
+            --accent-glow: rgba(0, 255, 204, 0.3);
+            --accent-dim: rgba(0, 255, 204, 0.1);
+            --gold: #fbbf24;
+            --border: rgba(255, 255, 255, 0.06);
+            --font-display: 'Libre Baskerville', serif;
+            --font-body: 'Satoshi', sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.4;
+            min-height: 100vh;
+        }
+
+        /* Background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 85%, rgba(0, 255, 204, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(251, 191, 36, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 1rem;
+        }
+
+        /* Header */
+        .header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .version {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        h1 .accent {
+            color: var(--accent);
+            text-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .header-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s var(--ease-out);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Main grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-header .icon {
+            font-size: 1rem;
+        }
+
+        .card-header h3 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* PIV Flow */
+        .piv-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .piv-step {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            background: rgba(0, 255, 204, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .piv-step:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .piv-step h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .piv-step p {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        .piv-arrow {
+            display: none;
+        }
+
+        /* Features */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .feature:hover {
+            background: rgba(0, 255, 204, 0.03);
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 0.75rem;
+        }
+
+        .feature-text strong {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .feature-text span {
+            color: var(--text-secondary);
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(0, 255, 204, 0.02);
+            border-radius: 5px;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Code block */
+        .code-block {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 0.75rem;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.7rem;
+            overflow-x: auto;
+        }
+
+        .code-block .cmd {
+            color: var(--accent);
+        }
+
+        .code-block .comment {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .header-links {
+                flex-wrap: wrap;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .piv-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .piv-arrow {
+                display: block;
+                text-align: center;
+                color: var(--text-secondary);
+                font-size: 0.8rem;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <span class="version">v4.4.0</span>
+                <div>
+                    <h1>PIV <span class="accent">Spec-Kit</span></h1>
+                    <p class="tagline">Structured AI-assisted development with strict TDD & adaptive learning</p>
+                </div>
+            </div>
+            <div class="header-links">
+                <a href="https://github.com/galando/piv-speckit" class="btn btn-primary">GitHub →</a>
+                <a href="https://galando.github.io/piv-speckit/" class="btn btn-secondary">Guide</a>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div style="display: grid; gap: 1rem;">
+                <!-- PIV Methodology -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon">⚡</span>
+                        <h3>The PIV Methodology</h3>
+                    </div>
+                    <div class="piv-flow">
+                        <div class="piv-step">
+                            <h4>PRIME</h4>
+                            <p>Auto-loads relevant context. Zero manual setup.</p>
+                        </div>
+                        <span class="piv-arrow">→</span>
+                        <div class="piv-step">
+                            <h4>IMPLEMENT</h4>
+                            <p>Strict TDD. Tests first, always.</p>
+                        </div>
+                        <span class="piv-arrow">→</span>
+                        <div class="piv-step">
+                            <h4>VALIDATE</h4>
+                            <p>Auto-verification. Quality gates.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-value">14</div>
+                        <div class="stat-label">Commands</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Auto-Skills</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Stacks</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">TDD</div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon">🧩</span>
+                        <h3>Core Capabilities</h3>
+                    </div>
+                    <div class="features-list">
+                        <div class="feature">
+                            <div class="feature-icon">🚨</div>
+                            <div class="feature-text"><strong>Strict TDD</strong><span>RED→GREEN→REFACTOR enforced</span></div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-text"><strong>Skills System</strong><span>Auto-activating quality guards</span></div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🧠</div>
+                            <div class="feature-text"><strong>Adaptive Learning</strong><span>Gets smarter every feature</span></div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">📋</div>
+                            <div class="feature-text"><strong>Structured Specs</strong><span>WHAT/HOW/DO artifacts</span></div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🔧</div>
+                            <div class="feature-text"><strong>Tech Agnostic</strong><span>Spring • Node • Python • React</span></div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">✅</div>
+                            <div class="feature-text"><strong>Auto-Validation</strong><span>Tests • Coverage • Security</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div style="display: grid; gap: 1rem;">
+                <!-- Install -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon">📦</span>
+                        <h3>Quick Install</h3>
+                    </div>
+                    <div class="code-block">
+                        <span class="comment"># Add marketplace</span><br>
+                        <span class="cmd">/plugin marketplace add galando/piv-speckit</span><br><br>
+                        <span class="comment"># Install</span><br>
+                        <span class="cmd">/plugin install piv-speckit</span><br><br>
+                        <span class="comment"># Start building</span><br>
+                        <span class="cmd">/piv-speckit:plan-feature "your feature"</span>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon">🛡️</span>
+                        <h3>Auto-Activating Skills</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.7rem;">
+                            <span>TDD Enforcement</span>
+                            <span style="color: var(--accent);">Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.7rem;">
+                            <span>Security Review</span>
+                            <span style="color: var(--accent);">Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.7rem;">
+                            <span>API Design</span>
+                            <span style="color: var(--accent);">Active</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.4rem; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.7rem;">
+                            <span>Code Review</span>
+                            <span style="color: var(--accent);">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artifacts -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon">📄</span>
+                        <h3>Generated Artifacts</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.7rem;">
+                        <div style="padding: 0.5rem; background: rgba(0,255,204,0.03); border-radius: 4px;">
+                            <span style="color: var(--gold);">spec.md</span>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Requirements</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: rgba(0,255,204,0.03); border-radius: 4px;">
+                            <span style="color: var(--gold);">plan.md</span>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Architecture</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: rgba(0,255,204,0.03); border-radius: 4px;">
+                            <span style="color: var(--gold);">tasks.md</span>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Implementation</p>
+                        </div>
+                        <div style="padding: 0.5rem; background: rgba(0,255,204,0.03); border-radius: 4px;">
+                            <span style="color: var(--gold);">quickstart.md</span>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">TL;DR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>PIV Spec-Kit — MIT License</span>
+            <span>Methodology by <a href="https://github.com/coleam00">Cole Medin</a> • Enhanced with Spec-Kit</span>
+        </footer>
+    </div>
+</body>
+</html>

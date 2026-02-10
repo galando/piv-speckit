@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIV Spec-Kit - Interactive Presentation</title>
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --border: #30363d;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79b8ff;
+      --success: #3fb950;
+      --warning: #d29922;
+      --danger: #f85149;
+      --purple: #a371f7;
+      --prime: #58a6ff;
+      --implement: #3fb950;
+      --validate: #a371f7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--prime), var(--purple));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .logo-text h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Main Container */
+    .container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 220px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 1rem 0;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      font-size: 0.85rem;
+      border-left: 2px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: rgba(88, 166, 255, 0.1);
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    .nav-item .icon {
+      font-size: 1rem;
+    }
+
+    /* Slide Container */
+    .slide-container {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Content */
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* PIV Cycle Diagram */
+    .piv-cycle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .piv-phase {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .piv-phase:hover {
+      transform: scale(1.1);
+    }
+
+    .piv-phase.prime {
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(88, 166, 255, 0.05));
+      border: 2px solid var(--prime);
+    }
+
+    .piv-phase.implement {
+      background: linear-gradient(135deg, rgba(63, 185, 80, 0.2), rgba(63, 185, 80, 0.05));
+      border: 2px solid var(--implement);
+    }
+
+    .piv-phase.validate {
+      background: linear-gradient(135deg, rgba(163, 113, 247, 0.2), rgba(163, 113, 247, 0.05));
+      border: 2px solid var(--validate);
+    }
+
+    .piv-phase.active {
+      box-shadow: 0 0 30px currentColor;
+    }
+
+    .piv-phase .phase-icon {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .piv-phase .phase-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .piv-phase .phase-desc {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .piv-arrow {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+    }
+
+    /* TDD Cycle */
+    .tdd-cycle {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .tdd-step {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .tdd-step.red {
+      background: rgba(248, 81, 73, 0.15);
+      border: 2px solid var(--danger);
+    }
+
+    .tdd-step.green {
+      background: rgba(63, 185, 80, 0.15);
+      border: 2px solid var(--success);
+    }
+
+    .tdd-step.refactor {
+      background: rgba(210, 153, 34, 0.15);
+      border: 2px solid var(--warning);
+    }
+
+    .tdd-step .step-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .tdd-step .step-desc {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    .tdd-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    /* Command List */
+    .command-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .command-item {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.2s;
+    }
+
+    .command-item:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .command-code {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.8rem;
+      background: var(--bg-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .command-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .feature-item {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .feature-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Stack Pills */
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stack-pill {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+    }
+
+    .stack-pill.backend {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .stack-pill.frontend {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .stack-pill.database {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--prime), var(--implement), var(--validate));
+      transition: width 0.3s;
+    }
+
+    /* Slide Counter */
+    .slide-counter {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Prompt Output */
+    .prompt-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .prompt-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .copy-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .copy-btn.copied {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    /* Stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .stat-card {
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    /* Highlight Box */
+    .highlight {
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(163, 113, 247, 0.1));
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .highlight-title {
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .highlight-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Auto Skills */
+    .skill-tag {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin: 0.2rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+    }
+
+    .skill-tag.auto {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .piv-cycle {
+        flex-direction: column;
+      }
+      .piv-arrow {
+        transform: rotate(90deg);
+      }
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">PIV</div>
+      <div class="logo-text">
+        <h1>PIV Spec-Kit</h1>
+        <span>AI-Assisted Development Framework</span>
+      </div>
+    </div>
+    <div style="font-size: 0.8rem; color: var(--text-secondary);">
+      v4.4.0
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="nav-item active" data-slide="0">
+        <span class="icon">🏠</span> Overview
+      </div>
+      <div class="nav-item" data-slide="1">
+        <span class="icon">🔄</span> PIV Methodology
+      </div>
+      <div class="nav-item" data-slide="2">
+        <span class="icon">✅</span> TDD Cycle
+      </div>
+      <div class="nav-item" data-slide="3">
+        <span class="icon">⚡</span> Commands
+      </div>
+      <div class="nav-item" data-slide="4">
+        <span class="icon">🛠️</span> Features
+      </div>
+      <div class="nav-item" data-slide="5">
+        <span class="icon">🚀</span> Tech Stack
+      </div>
+      <div class="nav-item" data-slide="6">
+        <span class="icon">📊</span> Workflow
+      </div>
+    </nav>
+
+    <div class="slide-container">
+      <!-- Slide 0: Overview -->
+      <div class="slide active" id="slide-0">
+        <h1 class="slide-title">What is PIV Spec-Kit?</h1>
+        <p class="slide-subtitle">A methodology for AI-assisted software development</p>
+
+        <div class="card">
+          <h3>🎯 Core Concept</h3>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            <strong>PIV (Prime-Implement-Validate)</strong> is a Claude Code plugin that provides structured development with zero-setup context loading and strict Test-Driven Development enforcement.
+          </p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Methodology Phases</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Minimum Test Coverage</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Setup Required</div>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <div class="highlight-title">💡 Key Insight</div>
+          <div class="highlight-text">
+            PIV Spec-Kit automates context loading, enforces TDD compliance, and validates quality — so you can focus on writing great code.
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 1: PIV Methodology -->
+      <div class="slide" id="slide-1">
+        <h1 class="slide-title">The PIV Methodology</h1>
+        <p class="slide-subtitle">Three phases that ensure quality delivery</p>
+
+        <div class="piv-cycle">
+          <div class="piv-phase prime" onclick="showPhaseInfo('prime')">
+            <div class="phase-icon">🔵</div>
+            <div class="phase-name">PRIME</div>
+            <div class="phase-desc">Auto-load context</div>
+          </div>
+          <div class="piv-arrow">→</div>
+          <div class="piv-phase implement" onclick="showPhaseInfo('implement')">
+            <div class="phase-icon">🟢</div>
+            <div class="phase-name">IMPLEMENT</div>
+            <div class="phase-desc">Plan & Execute</div>
+          </div>
+          <div class="piv-arrow">→</div>
+          <div class="piv-phase validate" onclick="showPhaseInfo('validate')">
+            <div class="phase-icon">🟣</div>
+            <div class="phase-name">VALIDATE</div>
+            <div class="phase-desc">Quality checks</div>
+          </div>
+        </div>
+
+        <div class="card" id="phase-info">
+          <h3 id="phase-title">🔵 Prime Phase</h3>
+          <div id="phase-content">
+            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Automatic context loading</strong></p>
+            <ul style="color: var(--text-secondary); font-size: 0.85rem; padding-left: 1.2rem;">
+              <li>Scans project structure and tech stack</li>
+              <li>Identifies existing patterns and conventions</li>
+              <li>Loads efficiently (~15KB, not entire codebase)</li>
+              <li>Happens automatically — no manual setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: TDD Cycle -->
+      <div class="slide" id="slide-2">
+        <h1 class="slide-title">Strict TDD Enforcement</h1>
+        <p class="slide-subtitle">RED → GREEN → REFACTOR — No exceptions</p>
+
+        <div class="tdd-cycle">
+          <div class="tdd-step red">
+            <span class="step-label">🔴 RED</span>
+            <span class="step-desc">Write failing test first</span>
+          </div>
+          <div class="tdd-arrow">→</div>
+          <div class="tdd-step green">
+            <span class="step-label">🟢 GREEN</span>
+            <span class="step-desc">Minimal code to pass</span>
+          </div>
+          <div class="tdd-arrow">→</div>
+          <div class="tdd-step refactor">
+            <span class="step-label">🟡 REFACTOR</span>
+            <span class="step-desc">Improve while green</span>
+          </div>
+        </div>
+
+        <div class="highlight" style="border-left-color: var(--danger);">
+          <div class="highlight-title">🚨 Zero Tolerance Policy</div>
+          <div class="highlight-text">
+            Code written before tests WILL BE DELETED. Validation FAILS without TDD compliance. No "I'll add tests later" — tests first, always.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>✅ Given-When-Then Test Structure</h3>
+          <pre style="font-family: 'SF Mono', Monaco, monospace; font-size: 0.75rem; color: var(--text-secondary); overflow-x: auto;"><span style="color: var(--purple);">GIVEN</span> Set up test data and preconditions
+<span style="color: var(--purple);">WHEN</span>  Execute the code being tested
+<span style="color: var(--purple);">THEN</span>  Verify expected outcomes</pre>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <span class="skill-tag auto">✓ Auto-enforcing skill</span>
+          <span class="skill-tag auto">✓ Validation required</span>
+        </div>
+      </div>
+
+      <!-- Slide 3: Commands -->
+      <div class="slide" id="slide-3">
+        <h1 class="slide-title">Core Commands</h1>
+        <p class="slide-subtitle">Everything you need to build features</p>
+
+        <div class="command-list">
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:plan-feature</span>
+            <span class="command-desc">Plan a feature with auto-context loading (creates spec, plan, tasks, quickstart artifacts)</span>
+          </div>
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:execute</span>
+            <span class="command-desc">Implement the plan following strict TDD cycle</span>
+          </div>
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:validate</span>
+            <span class="command-desc">Run comprehensive validation (compilation, tests, coverage, quality)</span>
+          </div>
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:prime</span>
+            <span class="command-desc">Manual context refresh (optional — auto-prime happens on plan-feature)</span>
+          </div>
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:code-review</span>
+            <span class="command-desc">Technical code review for quality and bugs</span>
+          </div>
+          <div class="command-item">
+            <span class="command-code">/piv-speckit:learn</span>
+            <span class="command-desc">Extract learnings from code reviews to improve future implementations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Features -->
+      <div class="slide" id="slide-4">
+        <h1 class="slide-title">Key Features</h1>
+        <p class="slide-subtitle">What makes PIV Spec-Kit powerful</p>
+
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">Zero-Setup Context</div>
+            <div class="feature-desc">Auto-prime loads project context silently</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Strict TDD</div>
+            <div class="feature-desc">Mandatory RED-GREEN-REFACTOR cycle</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">Structured Artifacts</div>
+            <div class="feature-desc">Split specs: spec.md, plan.md, tasks.md, quickstart.md</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✅</div>
+            <div class="feature-title">Auto-Validation</div>
+            <div class="feature-desc">Comprehensive quality checks after every implementation</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-title">Adaptive Learning</div>
+            <div class="feature-desc">Framework gets smarter with each feature</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Phase-Based Commits</div>
+            <div class="feature-desc">Logical commit points for better git history</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">Security Skills</div>
+            <div class="feature-desc">Auto-enforces security best practices</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🌐</div>
+            <div class="feature-title">API Design</div>
+            <div class="feature-desc">Ensures RESTful patterns automatically</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Tech Stack -->
+      <div class="slide" id="slide-5">
+        <h1 class="slide-title">Supported Stack</h1>
+        <p class="slide-subtitle">Technology-agnostic with smart defaults</p>
+
+        <div class="card">
+          <h3>Backend</h3>
+          <div class="stack-pills">
+            <span class="stack-pill backend">Spring Boot</span>
+            <span class="stack-pill backend">Node.js / Express</span>
+            <span class="stack-pill backend">FastAPI / Python</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Frontend</h3>
+          <div class="stack-pills">
+            <span class="stack-pill frontend">React</span>
+            <span class="stack-pill frontend">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Database</h3>
+          <div class="stack-pills">
+            <span class="stack-pill database">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <div class="highlight-title">💡 Extensibility</div>
+          <div class="highlight-text">
+            The framework uses pattern recognition and reference-based context loading, making it adaptable to various tech stacks while maintaining consistent quality standards.
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Workflow -->
+      <div class="slide" id="slide-6">
+        <h1 class="slide-title">Complete Workflow</h1>
+        <p class="slide-subtitle">From idea to production-quality code</p>
+
+        <div class="card" style="border-left: 3px solid var(--prime);">
+          <h3>1️⃣ Plan Phase</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">
+            Run <code style="background: var(--bg-primary); padding: 0.2rem 0.4rem; border-radius: 4px;">/piv-speckit:plan-feature "Feature name"</code><br>
+            Auto-prime loads context → Creates structured artifacts → You review and approve
+          </p>
+        </div>
+
+        <div class="card" style="border-left: 3px solid var(--implement);">
+          <h3>2️⃣ Implement Phase</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">
+            Run <code style="background: var(--bg-primary); padding: 0.2rem 0.4rem; border-radius: 4px;">/piv-speckit:execute</code><br>
+            Write test (RED) → Write code (GREEN) → Refactor (REFACTOR) → Commit
+          </p>
+        </div>
+
+        <div class="card" style="border-left: 3px solid var(--validate);">
+          <h3>3️⃣ Validate Phase</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">
+            Validation runs automatically after execute<br>
+            Checks: compilation ✓ tests ✓ coverage (≥80%) ✓ code quality ✓ TDD compliance ✓
+          </p>
+        </div>
+
+        <div class="highlight">
+          <div class="highlight-title">🎯 Result</div>
+          <div class="highlight-text">
+            Production-ready code with comprehensive tests, proper documentation, and validated quality — all while maintaining a clean git history.
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🚀 Ready to build?</div>
+          <div style="color: var(--text-secondary); font-size: 0.85rem;">
+            Install PIV Spec-Kit and start your first feature today
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn" onclick="navigateSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="navigateSlide(1)">Next →</button>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-counter">
+    <span id="currentSlide">1</span> / <span id="totalSlides">7</span>
+  </div>
+
+  <section class="prompt-section">
+    <div class="prompt-header">
+      <span class="prompt-label">📋 Presentation Prompt (copy to ask Claude about this topic)</span>
+      <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy</button>
+    </div>
+    <div class="prompt-content" id="promptContent"></div>
+  </section>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 7;
+
+    const slidePrompts = {
+      0: "Tell me more about PIV Spec-Kit — what problem does it solve and how does it work?",
+      1: "Explain the PIV methodology phases in detail: Prime, Implement, and Validate",
+      2: "How does PIV Spec-Kit enforce Test-Driven Development? What happens if someone writes code before tests?",
+      3: "What are all the available commands in PIV Spec-Kit and when should I use each one?",
+      4: "What are the key features and benefits of using PIV Spec-Kit for AI-assisted development?",
+      5: "What technologies and frameworks does PIV Spec-Kit support? Can it be extended?",
+      6: "Walk me through the complete PIV Spec-Kit workflow from planning to validation"
+    };
+
+    const phaseInfo = {
+      prime: {
+        title: "🔵 Prime Phase",
+        content: `
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Automatic context loading</strong></p>
+          <ul style="color: var(--text-secondary); font-size: 0.85rem; padding-left: 1.2rem;">
+            <li>Scans project structure and tech stack</li>
+            <li>Identifies existing patterns and conventions</li>
+            <li>Loads efficiently (~15KB, not entire codebase)</li>
+            <li>Happens automatically — no manual setup</li>
+          </ul>
+        `
+      },
+      implement: {
+        title: "🟢 Implement Phase",
+        content: `
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Plan & Execute with TDD</strong></p>
+          <ul style="color: var(--text-secondary); font-size: 0.85rem; padding-left: 1.2rem;">
+            <li><strong>Plan:</strong> Creates spec.md, plan.md, tasks.md, quickstart.md</li>
+            <li><strong>Execute:</strong> Follows RED-GREEN-REFACTOR cycle</li>
+            <li>Tests MUST be written first (RED)</li>
+            <li>Minimal code to pass tests (GREEN)</li>
+            <li>Refactor while tests stay green</li>
+          </ul>
+        `
+      },
+      validate: {
+        title: "🟣 Validate Phase",
+        content: `
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Comprehensive quality checks</strong></p>
+          <ul style="color: var(--text-secondary); font-size: 0.85rem; padding-left: 1.2rem;">
+            <li>✓ Compilation checks</li>
+            <li>✓ All tests must pass (100%)</li>
+            <li>✓ Coverage ≥80% required</li>
+            <li>✓ Code quality validation</li>
+            <li>✓ TDD compliance enforced</li>
+            <li>Generates validation and execution reports</li>
+          </ul>
+        `
+      }
+    };
+
+    function updatePrompt() {
+      document.getElementById('promptContent').textContent = slidePrompts[currentSlide];
+    }
+
+    function updateSlide() {
+      // Update slides
+      document.querySelectorAll('.slide').forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update nav items
+      document.querySelectorAll('.nav-item').forEach((item, index) => {
+        item.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update counter
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+
+      // Update progress
+      document.getElementById('progressFill').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+
+      // Update buttons
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+      // Update prompt
+      updatePrompt();
+    }
+
+    function navigateSlide(direction) {
+      const newSlide = currentSlide + direction;
+      if (newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlide();
+    }
+
+    function showPhaseInfo(phase) {
+      const info = phaseInfo[phase];
+      document.getElementById('phase-title').textContent = info.title;
+      document.getElementById('phase-content').innerHTML = info.content;
+
+      // Update active state
+      document.querySelectorAll('.piv-phase').forEach(p => p.classList.remove('active'));
+      document.querySelector(`.piv-phase.${phase}`).classList.add('active');
+    }
+
+    function copyPrompt() {
+      const prompt = document.getElementById('promptContent').textContent;
+      navigator.clipboard.writeText(prompt).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    // Initialize
+    document.querySelectorAll('.nav-item').forEach((item, index) => {
+      item.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigateSlide(1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigateSlide(-1);
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>

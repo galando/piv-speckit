@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIV Spec-Kit — Pitch Deck</title>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=libre-baskerville@700&f[]=satoshi@400,500,600,700">
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES (THEME)
+           Modify these to change the entire look
+           =========================================== */
+        :root {
+            /* Colors */
+            --bg-primary: #0a0f1c;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.8);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #00ffcc;
+            --accent-glow: rgba(0, 255, 204, 0.4);
+            --accent-dim: rgba(0, 255, 204, 0.1);
+            --gold: #fbbf24;
+            --gold-dim: rgba(251, 191, 36, 0.15);
+            --border: rgba(255, 255, 255, 0.08);
+
+            /* Typography */
+            --font-display: 'Libre Baskerville', serif;
+            --font-body: 'Satoshi', sans-serif;
+
+            /* Spacing */
+            --slide-padding: clamp(2rem, 5vw, 4rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+            --duration-slow: 0.9s;
+        }
+
+        /* ===========================================
+           BASE STYLES & RESET
+           =========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* ===========================================
+           BACKGROUND EFFECTS
+           =========================================== */
+
+        /* Subtle grid pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Gradient mesh overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 85%, rgba(0, 255, 204, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(251, 191, 36, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transform-origin: left;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        /* ===========================================
+           NAVIGATION DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-dot:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* ===========================================
+           SLIDE CONTAINER
+           Each section is one slide
+           =========================================== */
+        .slide {
+            min-height: 100vh;
+            padding: var(--slide-padding);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           Trigger via .visible class (added by JS)
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+        /* Scale reveal for titles */
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity var(--duration-slow) var(--ease-out-expo),
+                        transform var(--duration-slow) var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal-scale {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 .accent {
+            color: var(--accent);
+            text-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===========================================
+           COMPONENTS
+           =========================================== */
+
+        /* Version badge */
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-dim);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .version-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Section label */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Card */
+        .card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* PIV diagram */
+        .piv-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .piv-step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 180px;
+            position: relative;
+        }
+
+        .piv-step h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .piv-step p {
+            font-size: 0.9rem;
+        }
+
+        .piv-arrow {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* Feature list */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-radius: 50%;
+            font-size: 0.8rem;
+        }
+
+        /* Big number */
+        .big-number {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .big-number small {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+        }
+
+        /* Code block */
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .code-block .comment {
+            color: var(--text-muted);
+        }
+
+        /* Quote */
+        .quote {
+            border-left: 3px solid var(--gold);
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* CTA buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* Slide number */
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* ===========================================
+           KEYBOARD HINT
+           =========================================== */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            z-index: 100;
+        }
+
+        .key {
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        /* ===========================================
+           RESPONSIVE
+           =========================================== */
+        @media (max-width: 768px) {
+            .nav-dots,
+            .keyboard-hint,
+            .slide-number {
+                display: none;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .piv-flow {
+                flex-direction: column;
+            }
+
+            .piv-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* ===========================================
+           ACCESSIBILITY
+           =========================================== */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-scale {
+                transition: opacity 0.3s ease;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progress"></div>
+
+    <!-- Navigation dots -->
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- Keyboard hint -->
+    <div class="keyboard-hint">
+        <span class="key">←</span>
+        <span class="key">→</span>
+        to navigate
+    </div>
+
+    <!-- ===========================================
+         SLIDE 1: TITLE
+         =========================================== -->
+    <section class="slide title-slide">
+        <div class="slide-content">
+            <span class="version-badge reveal">v4.4.0</span>
+            <h1 class="reveal-scale">PIV <span class="accent">Spec-Kit</span></h1>
+            <p class="reveal">Structured AI-assisted development for teams who demand quality, speed, and confidence.</p>
+            <div class="divider reveal"></div>
+            <p class="reveal" style="font-size: 0.95rem;">Prime → Implement → Validate</p>
+        </div>
+        <div class="slide-number">01 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 2: THE PROBLEM
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">The Problem</span>
+            <h2 class="reveal">AI-Assisted Development is Broken</h2>
+            <p class="reveal">Current approaches have fundamental flaws that slow teams down and reduce quality.</p>
+
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card reveal">
+                    <div class="card-icon">📚</div>
+                    <h3>Context Chaos</h3>
+                    <p>AI tools either know nothing about your codebase or hallucinate wildly.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🎲</div>
+                    <h3>Inconsistent Quality</h3>
+                    <p>No enforcement of best practices. Every PR is a gamble.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🔄</div>
+                    <h3>No Memory</h3>
+                    <p>Mistakes repeat. Learnings evaporate. Each feature starts from zero.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">02 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3: THE SOLUTION
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">The Solution</span>
+            <h2 class="reveal">Enter PIV Spec-Kit</h2>
+            <p class="reveal">A complete methodology and toolset for structured, disciplined AI-assisted development.</p>
+
+            <div class="piv-flow reveal">
+                <div class="piv-step">
+                    <h3>Prime</h3>
+                    <p>Auto-load relevant context</p>
+                </div>
+                <span class="piv-arrow">→</span>
+                <div class="piv-step">
+                    <h3>Implement</h3>
+                    <p>Strict TDD cycle</p>
+                </div>
+                <span class="piv-arrow">→</span>
+                <div class="piv-step">
+                    <h3>Validate</h3>
+                    <p>Auto-verification</p>
+                </div>
+            </div>
+
+            <p class="reveal" style="margin-top: 2rem;">Plus: <strong>Adaptive Learning</strong> — the framework captures patterns from every feature and applies them automatically to future work.</p>
+        </div>
+        <div class="slide-number">03 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 4: PRIME
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Step 1</span>
+            <h2 class="reveal">Prime: Context That Actually Works</h2>
+            <p class="reveal">No more manual context gathering. PIV automatically loads exactly what's needed—nothing more, nothing less.</p>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="reveal">
+                    <h3 style="color: var(--gold);">Before</h3>
+                    <ul class="feature-list">
+                        <li>Manually copy-paste code</li>
+                        <li>Forgetting critical files</li>
+                        <li>Context window bloat</li>
+                        <li>Irrelevant information</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <h3 style="color: var(--accent);">After PIV</h3>
+                    <ul class="feature-list">
+                        <li>Auto-scans architecture</li>
+                        <li>Reference-based mapping</li>
+                        <li>Layered context (~15KB)</li>
+                        <li>Technology-aware patterns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">04 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 5: IMPLEMENT
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Step 2</span>
+            <h2 class="reveal">Implement: Strict TDD, Enforced</h2>
+            <p class="reveal">The test-driven-development skill <strong>auto-activates</strong> during implementation. Code written before tests is rejected.</p>
+
+            <div style="margin: 2rem 0;">
+                <div class="grid-3">
+                    <div class="card reveal" style="border-left: 3px solid #ef4444;">
+                        <h3>🔴 RED</h3>
+                        <p>Write <em>failing</em> test first. See it fail. Understand requirements.</p>
+                    </div>
+                    <div class="card reveal" style="border-left: 3px solid #22c55e;">
+                        <h3>🟢 GREEN</h3>
+                        <p>Write <em>minimal</em> code to pass. No extras, no "I'll add tests later."</p>
+                    </div>
+                    <div class="card reveal" style="border-left: 3px solid #3b82f6;">
+                        <h3>🔵 REFACTOR</h3>
+                        <p>Improve while green. Clean code, confident changes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="reveal"><strong>Zero tolerance.</strong> The framework enforces TDD at the AI level—before code reaches your repo.</p>
+        </div>
+        <div class="slide-number">05 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 6: SKILLS
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Quality Enforcement</span>
+            <h2 class="reveal">Skills: Auto-Activating Quality Guards</h2>
+            <p class="reveal">Six specialized skills activate automatically based on context, enforcing best practices in real-time.</p>
+
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card reveal">
+                    <h3>🚨 TDD</h3>
+                    <p>Enforces RED-GREEN-REFACTOR. Blocks code-first development.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>📝 Test Writing</h3>
+                    <p>Given-When-Then structure. Clear, maintainable tests.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>🔒 Security</h3>
+                    <p>OWASP Top 10 awareness. Secure by default patterns.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>🌐 API Design</h3>
+                    <p>REST best practices. Consistent, sensible endpoints.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>👀 Code Review</h3>
+                    <p>Pre-commit quality checks. Bugs caught early.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>🧠 Learning</h3>
+                    <p>Captures patterns. Gets smarter with every feature.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">06 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 7: ARTIFACTS
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Structured Specs</span>
+            <h2 class="reveal">Split What, How, and Do</h2>
+            <p class="reveal">Every feature generates four structured artifacts—clear, version-controlled, and human-readable.</p>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card reveal">
+                    <h3>📋 spec.md</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">The WHAT. Functional requirements, user stories, acceptance criteria, edge cases.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>🏗️ plan.md</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">The HOW. Architecture decisions, data models, API contracts, file structure.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>✅ tasks.md</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">The DO. Step-by-step implementation guide. Each task follows TDD.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>⚡ quickstart.md</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">The TL;DR. Quick reference for humans to understand the feature at a glance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">07 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 8: VALIDATE
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Step 3</span>
+            <h2 class="reveal">Validate: Automatic Quality Gates</h2>
+            <p class="reveal">After implementation, validation runs automatically. No manual checks required.</p>
+
+            <div class="grid-4" style="margin-top: 2rem;">
+                <div class="card reveal" style="text-align: center;">
+                    <div class="big-number">80%+</div>
+                    <p style="font-size: 0.85rem;">Test coverage required</p>
+                </div>
+                <div class="card reveal" style="text-align: center;">
+                    <div class="big-number">0</div>
+                    <p style="font-size: 0.85rem;">Security vulnerabilities</p>
+                </div>
+                <div class="card reveal" style="text-align: center;">
+                    <div class="big-number">100%</div>
+                    <p style="font-size: 0.85rem;">TDD compliance</p>
+                </div>
+                <div class="card reveal" style="text-align: center;">
+                    <div class="big-number">✓</div>
+                    <p style="font-size: 0.85rem;">All tests passing</p>
+                </div>
+            </div>
+
+            <p class="reveal" style="margin-top: 2rem;">Validation <strong>fails</strong> if any gate isn't met. No broken code reaches main.</p>
+        </div>
+        <div class="slide-number">08 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 9: TECH AGNOSTIC
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Flexibility</span>
+            <h2 class="reveal">Works With Your Stack</h2>
+            <p class="reveal">PIV Spec-Kit adapts to your technology. Patterns load dynamically based on your project.</p>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="reveal">
+                    <h3 style="margin-bottom: 1rem;">Backend</h3>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <span class="version-badge" style="margin: 0;">Spring Boot</span>
+                        <span class="version-badge" style="margin: 0;">Node.js</span>
+                        <span class="version-badge" style="margin: 0;">Express</span>
+                        <span class="version-badge" style="margin: 0;">FastAPI</span>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h3 style="margin-bottom: 1rem;">Frontend</h3>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <span class="version-badge" style="margin: 0;">React</span>
+                        <span class="version-badge" style="margin: 0;">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="reveal" style="margin-top: 2rem;">Adding a new technology? Drop in a template. PIV learns the patterns.</p>
+        </div>
+        <div class="slide-number">09 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 10: ADAPTIVE LEARNING
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">The Secret Sauce</span>
+            <h2 class="reveal">Adaptive Learning: It Gets Smarter</h2>
+            <p class="reveal">Every code review extracts patterns. Every feature teaches the framework. Your development assistant evolves.</p>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card reveal">
+                    <h3>First Feature</h3>
+                    <p class="quote">"Use bcrypt for password hashing..."</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Framework learns the pattern.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Tenth Feature</h3>
+                    <p class="quote">"Based on past learnings, using bcrypt with 1-hour expiration..."</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Pattern automatically applied.</p>
+                </div>
+            </div>
+
+            <p class="reveal" style="margin-top: 2rem;"><strong>The compounding effect:</strong> Your team's expertise becomes encoded in the framework itself.</p>
+        </div>
+        <div class="slide-number">10 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 11: GET STARTED
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content">
+            <span class="section-label reveal">Installation</span>
+            <h2 class="reveal">Get Started in 30 Seconds</h2>
+            <p class="reveal">Zero configuration. Just install and start building.</p>
+
+            <div class="code-block reveal">
+                <code>
+                    <span class="comment"># Add marketplace</span><br>
+                    /plugin marketplace add galando/piv-speckit<br><br>
+                    <span class="comment"># Install PIV + Spec-Kit</span><br>
+                    /plugin install piv-speckit<br><br>
+                    <span class="comment"># Plan your first feature (auto-primes context)</span><br>
+                    /piv-speckit:plan-feature "user authentication"
+                </code>
+            </div>
+
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card reveal">
+                    <h3>📖 Documentation</h3>
+                    <p style="font-size: 0.9rem;">Complete guides, API reference, and examples.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>🌐 Interactive Demo</h3>
+                    <p style="font-size: 0.9rem;">See PIV in action at galando.github.io/piv-speckit</p>
+                </div>
+                <div class="card reveal">
+                    <h3>💬 Community</h3>
+                    <p style="font-size: 0.9rem;">Open source. Contributions welcome.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">11 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 12: CALL TO ACTION
+         =========================================== -->
+    <section class="slide">
+        <div class="slide-content" style="text-align: center;">
+            <span class="version-badge reveal">v4.4.0</span>
+            <h1 class="reveal-scale" style="font-size: clamp(2rem, 5vw, 4rem);">Build Better.<br><span class="accent">Ship Faster.</span></h1>
+            <p class="reveal" style="max-width: 600px; margin: 0 auto 2rem;">
+                PIV Spec-Kit transforms AI-assisted development with structure, discipline, and continuous learning.
+            </p>
+
+            <div class="reveal" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/galando/piv-speckit" class="btn btn-primary">
+                    Star on GitHub ★
+                </a>
+                <a href="https://galando.github.io/piv-speckit/" class="btn" style="background: var(--bg-card); border: 1px solid var(--border); color: var(--text-primary);">
+                    View Interactive Guide
+                </a>
+            </div>
+
+            <p class="reveal" style="margin-top: 3rem; font-size: 0.85rem; color: var(--text-muted);">
+                PIV Methodology by Cole Medin • Enhanced with Spec-Kit patterns • MIT License
+            </p>
+        </div>
+        <div class="slide-number">12 / 12</div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE PRESENTATION CONTROLLER
+         =========================================== -->
+    <script>
+        /* ===========================================
+           SLIDE PRESENTATION CONTROLLER
+           Handles navigation, animations, and interactions
+           =========================================== */
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.navDotsContainer = document.getElementById('navDots');
+                this.progressBar = document.getElementById('progress');
+                this.currentIndex = 0;
+
+                this.init();
+            }
+
+            init() {
+                // Create navigation dots
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'nav-dot';
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                    this.navDotsContainer.appendChild(dot);
+                });
+
+                this.navDots = this.navDotsContainer.querySelectorAll('.nav-dot');
+
+                // Set up intersection observer for scroll-based navigation
+                this.setupObserver();
+
+                // Set up keyboard navigation
+                this.setupKeyboard();
+
+                // Set up touch/swipe support
+                this.setupTouch();
+
+                // Set up wheel navigation with throttle
+                this.setupWheel();
+
+                // Initial update
+                this.updateUI();
+            }
+
+            setupObserver() {
+                const options = {
+                    root: null,
+                    rootMargin: '-50% 0px -50% 0px',
+                    threshold: 0
+                };
+
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(this.slides).indexOf(entry.target);
+                            if (index !== this.currentIndex) {
+                                this.currentIndex = index;
+                                this.updateUI();
+                            }
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, options);
+
+                this.slides.forEach(slide => this.observer.observe(slide));
+            }
+
+            setupKeyboard() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    }
+                });
+            }
+
+            setupTouch() {
+                let touchStartY = 0;
+                let touchEndY = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    touchEndY = e.changedTouches[0].screenY;
+                    this.handleSwipe();
+                }, { passive: true });
+
+                this.handleSwipe = () => {
+                    const diff = touchStartY - touchEndY;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                };
+            }
+
+            setupWheel() {
+                let wheelTimeout;
+                let wheelCount = 0;
+                const threshold = 3; // Number of wheel events before triggering
+
+                document.addEventListener('wheel', (e) => {
+                    wheelCount++;
+                    clearTimeout(wheelTimeout);
+
+                    wheelTimeout = setTimeout(() => {
+                        if (wheelCount >= threshold) {
+                            if (e.deltaY > 0) {
+                                this.nextSlide();
+                            } else {
+                                this.prevSlide();
+                            }
+                        }
+                        wheelCount = 0;
+                    }, 50);
+                }, { passive: true });
+            }
+
+            goToSlide(index) {
+                if (index >= 0 && index < this.slides.length) {
+                    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            nextSlide() {
+                if (this.currentIndex < this.slides.length - 1) {
+                    this.goToSlide(this.currentIndex + 1);
+                }
+            }
+
+            prevSlide() {
+                if (this.currentIndex > 0) {
+                    this.goToSlide(this.currentIndex - 1);
+                }
+            }
+
+            updateUI() {
+                // Update progress bar
+                const progress = (this.currentIndex + 1) / this.slides.length;
+                this.progressBar.style.transform = `scaleX(${progress})`;
+
+                // Update nav dots
+                this.navDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+        } else {
+            new SlidePresentation();
+        }
+    </script>
+</body>
+</html>
